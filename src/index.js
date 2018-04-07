@@ -7,7 +7,6 @@ import { Currently } from './Currently.js';
 import { Weekly } from './Weekly.js';
 import { Hourly } from './Hourly.js';
 
-// TODO: validate searchBoxInput
 class App extends React.Component {
    constructor(props) {
       super(props);
@@ -15,26 +14,27 @@ class App extends React.Component {
          locatedAndData: false,
          searchBoxInput: '',
          location: '',
+         weatherData: '',
          coords: {
             latitude: '',
             longitude: ''
          },
-         weatherData: '',
       }
-
+      
       this.handleChange = this.handleChange.bind(this);
       this.searchLocate = this.searchLocate.bind(this);
+      this.handleGeo = this.handleGeo.bind(this);
    }
-
+   
    handleChange(event) {
       this.setState({
          searchBoxInput: event.target.value
       })
    }
-
+   
+   // TODO: validate searchBoxInput
    searchLocate() {
       let value = this.state.searchBoxInput;
-      console.log(value);
       let google = `https://maps.googleapis.com/maps/api/geocode/json?address=${value}&key=${keys.google}`;
 
       fetch(google)
@@ -44,7 +44,6 @@ class App extends React.Component {
             }
          })
          .then(data => {
-            console.log(data);
 
             this.setState({
                location: data.results[0].formatted_address,
@@ -61,7 +60,6 @@ class App extends React.Component {
    fetchWeather() {
       let lat = this.state.coords.latitude;
       let long = this.state.coords.longitude;
-      console.log(lat, long);
       let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags,alerts,minutely`;
 
       fetch(darksky)
@@ -71,12 +69,35 @@ class App extends React.Component {
             }
          })
          .then(data => {
-            console.log(data);
             this.setState({
                weatherData: data,
                locatedAndData: true
             })
          })
+   }
+
+   handleGeo() {
+      let self = this;
+      function success(pos) {
+         self.setState({
+            coords: {
+               latitude: pos.coords.latitude,
+               longitude: pos.coords.longitude
+            }
+         })
+
+         self.fetchWeather();
+      }
+
+      function fail(error) {
+         console.log(error);
+      }
+
+      let options = {
+         timeout: 7500
+      }
+
+      navigator.geolocation.getCurrentPosition(success, fail, options);
    }
    
    render() {
@@ -85,7 +106,7 @@ class App extends React.Component {
             <Header location={this.state.location} />
 
             <div className="controls">
-               <button name="locater">
+               <button name="locater" onClick={this.handleGeo}>
                   <i className="fas fa-location-arrow"></i>
                </button>
                <input onChange={this.handleChange} id="pac-input" className="controls" type="text" placeholder="Search Box" autoFocus="autofocus" />

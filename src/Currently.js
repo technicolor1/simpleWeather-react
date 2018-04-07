@@ -14,9 +14,9 @@ export class Currently extends React.Component {
          const apparentTemp = this.props.weatherData.apparentTemperature;
          const humidity = this.props.weatherData.humidity;
          const precipProbability = this.props.weatherData.precipProbability;
-         const nearStorm = this.props.weatherData.nearestStormDistance;
          const windSpeed = this.props.weatherData.windSpeed;
 
+         // TODO: if chance of rain is zero, conditionally invoke a different h2
          return (
             <div className="currently">
                   <h2>As of {time}...</h2>
@@ -24,7 +24,6 @@ export class Currently extends React.Component {
                   <h2>Feels like {Math.round(apparentTemp)}°F</h2>
                   <h2>Humidity {this.percent(humidity)}%</h2>
                   <h2>Chance of rain {this.percent(precipProbability)}%</h2>
-                  <h2>Nearest storm {nearStorm} miles<sup>*</sup></h2>
                   <h2>Wind speed {Math.round(windSpeed)} mph</h2>
             </div>
          )

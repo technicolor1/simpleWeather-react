@@ -7,7 +7,7 @@ body {
 #root {
    display: flex;
    flex-direction: column;
-   font: 14px "Century Gothic", Futura, sans-serif;
+   font: 14px "Open Sans", Futura, sans-serif;
 }
 
 .main {

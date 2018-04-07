@@ -1,0 +1,17 @@
+.dailys {
+   white-space: nowrap;
+   width: 80vw;
+   height: 22vh;
+   overflow-x: scroll;
+   border: 1px solid blue;
+}
+
+.dailys > * {
+   display: inline-block;
+   width: 200px;
+   height: 190px;
+   border: 1px solid red;
+   text-align: center;
+   font-size: 1.3em;
+   overflow: scroll;
+}
