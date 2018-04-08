@@ -1,4 +1,4 @@
-.dailys {
+.hourlys {
    white-space: nowrap;
    width: 80vw;
    height: 22vh;
@@ -6,7 +6,7 @@
    border: 1px solid blue;
 }
 
-.dailys > * {
+.hourlys > * {
    display: inline-block;
    width: 200px;
    height: 190px;

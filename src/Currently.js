@@ -1,10 +1,8 @@
 import React from 'react';
+import { percent, round } from './logic.js';
 const Moment = window.moment;
 
 export class Currently extends React.Component {
-   percent(val) {
-      return (val * 100).toFixed(0);
-   }
    render() {
       if (this.props.locatedAndData === false) {
          return <div></div>
@@ -21,10 +19,10 @@ export class Currently extends React.Component {
             <div className="currently">
                   <h2>As of {time}...</h2>
                   <h2>{summary}</h2>
-                  <h2>Feels like {Math.round(apparentTemp)}°F</h2>
-                  <h2>Humidity {this.percent(humidity)}%</h2>
-                  <h2>Chance of rain {this.percent(precipProbability)}%</h2>
-                  <h2>Wind speed {Math.round(windSpeed)} mph</h2>
+                  <h2>Feels like {round(apparentTemp)}°F</h2>
+                  <h2>Humidity {percent(humidity)}%</h2>
+                  <h2>Chance of rain {percent(precipProbability)}%</h2>
+                  <h2>Wind speed {round(windSpeed)} mph</h2>
             </div>
          )
       }

@@ -118,7 +118,7 @@ class App extends React.Component {
             {/* weatherData = data > daily > array */ }
             <Weekly locatedAndData={this.state.locatedAndData} weatherData={this.state.weatherData.daily} />
             {/* weatherData = data > hourly > array  */}
-            {/* <Hourly locatedAndData={this.state.locatedAndData} weatherData={this.state.weatherData} /> */}
+            <Hourly locatedAndData={this.state.locatedAndData} weatherData={this.state.weatherData.hourly} />
          </div>
       )
    }
