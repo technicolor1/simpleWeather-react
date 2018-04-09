@@ -69,6 +69,7 @@ class App extends React.Component {
             }
          })
          .then(data => {
+            console.log(data);
             this.setState({
                weatherData: data,
                locatedAndData: true

@@ -1,15 +1,15 @@
 .dailys {
    white-space: nowrap;
    width: 80vw;
-   height: 22vh;
+   height: 30vh;
    overflow-x: scroll;
    border: 1px solid blue;
 }
 
 .dailys > * {
    display: inline-block;
-   width: 200px;
-   height: 190px;
+   width:30%;
+   height: 95%;
    border: 1px solid red;
    text-align: center;
    font-size: 1.3em;

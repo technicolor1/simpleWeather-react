@@ -23,8 +23,7 @@ export class Weekly extends React.Component {
             <h5>{time}</h5>
             <h5>{highTemp}°F / {lowTemp}°F</h5>
             <h5>Humidity {percent(day.humidity)}%</h5>
-            <h5>Sunrise {sunrise}</h5>
-            <h5>Sunset {sunset}</h5>
+            <h5>{sunrise} / {sunset}</h5>
          </div>
          )
          id++;

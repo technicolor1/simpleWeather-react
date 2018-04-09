@@ -13,6 +13,7 @@ export class Currently extends React.Component {
          const humidity = this.props.weatherData.humidity;
          const precipProbability = this.props.weatherData.precipProbability;
          const windSpeed = this.props.weatherData.windSpeed;
+         const precipType = this.props.weatherData.precipType;
 
          // TODO: if chance of rain is zero, conditionally invoke a different h2
          return (
@@ -21,7 +22,7 @@ export class Currently extends React.Component {
                   <h2>{summary}</h2>
                   <h2>Feels like {round(apparentTemp)}°F</h2>
                   <h2>Humidity {percent(humidity)}%</h2>
-                  <h2>Chance of rain {percent(precipProbability)}%</h2>
+                  <h2>Chance of {precipType} {percent(precipProbability)}%</h2>
                   <h2>Wind speed {round(windSpeed)} mph</h2>
             </div>
          )

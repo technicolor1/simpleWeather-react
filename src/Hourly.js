@@ -20,7 +20,7 @@ export class Hourly extends React.Component {
             <div key={i} className="hourly">
                <h5>{time}</h5>
                <h5>{hour.summary}</h5>
-               <h5>{temp}</h5>
+               <h5>{temp}°F</h5>
                <h5>Chance of {hour.precipType} {precipProb}%</h5>
                <h5>Wind speed {round(hour.windSpeed)} mph</h5>
             </div>
