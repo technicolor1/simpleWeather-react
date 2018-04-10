@@ -34,7 +34,7 @@ export class Hourly extends React.Component {
          return <div></div>
       } else {
          return (
-            <div className="hourlys">
+            <div className="scrollables">
                {this.handleHour(this.props.weatherData.data)}
             </div>
          )

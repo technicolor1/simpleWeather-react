@@ -34,3 +34,20 @@ body {
 .controls > button {
    font-size: 22px;
 }
+
+.scrollables {
+   display: flex;
+   width: 80vw;
+   height: 30vh;
+   overflow-x: scroll;
+   border: 1px solid blue;
+}
+
+.scrollables > * {
+   min-width: 200px;
+   height: 95%;
+   border: 1px solid red;
+   text-align: center;
+   font-size: 1.3em;
+   overflow: scroll;
+}
