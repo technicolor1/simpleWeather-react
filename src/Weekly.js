@@ -4,6 +4,11 @@ import './Weekly.css';
 const Moment = window.moment;
 
 export class Weekly extends React.Component {
+   constructor(props) {
+      super(props)
+
+      this.weeklyDiv = React.createRef();
+   }
    handleDaily(data) {
       let id = 0;
       let main = [];
@@ -32,6 +37,16 @@ export class Weekly extends React.Component {
       return main;
    }
 
+   componentDidUpdate() {
+      const weeklyComp = this.weeklyDiv.current;
+      console.log(weeklyComp);
+      if (weeklyComp !== null) {
+         if (weeklyComp.scrollLeft !== 0) {
+            weeklyComp.scrollLeft = 0;
+         }
+      }
+   }
+
    render() {
       if (typeof this.props.weatherData === 'undefined') {
          return <div></div>
@@ -39,7 +54,7 @@ export class Weekly extends React.Component {
          return (
             <div>
                <h2>Week at a Glance</h2>
-               <div className="scrollables">
+               <div className="scrollables" ref={this.weeklyDiv}>
                   {this.handleDaily(this.props.weatherData.data)}
                </div>
             </div>

@@ -11,7 +11,13 @@ export class Hourly extends React.Component {
    }
 
    componentDidUpdate() {
-      console.log(this.hourlyDiv.current === null);
+      const hourlyComp = this.hourlyDiv.current;
+
+      if (hourlyComp !== null) {
+         if (hourlyComp.scrollLeft !== 0) {
+            hourlyComp.scrollLeft = 0;
+         }
+      }
    }
 
    handleHour(data) {
