@@ -35,7 +35,7 @@ export class Hourly extends React.Component {
       return main;
    }
    render() {
-      if (this.props.locatedAndData === false) {
+      if (typeof this.props.weatherData === 'undefined') {
          return <div></div>
       } else {
          return (

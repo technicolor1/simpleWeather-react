@@ -5,7 +5,7 @@ const Moment = window.moment;
 
 export class Currently extends React.Component {
    render() {
-      if (this.props.locatedAndData === false) {
+      if (typeof this.props.weatherData === 'undefined') {
          return <div></div>
       } else {
          const time = Moment.unix(this.props.weatherData.time).format("MMMM Do h:mm a");
@@ -18,12 +18,12 @@ export class Currently extends React.Component {
 
          return (
             <div className="currently">
-                  <h2>As of {time}...</h2>
-                  <h2>{summary}</h2>
-                  <h2>Feels like {round(apparentTemp)}°F</h2>
-                  <h2>Humidity {percent(humidity)}%</h2>
-                  <h2>{determineRain(precipProbability, precipType)}</h2>
-                  <h2>Wind speed {round(windSpeed)} mph</h2>
+               <h2>As of {time}...</h2>
+               <h2>{summary}</h2>
+               <h2>Feels like {round(apparentTemp)}°F</h2>
+               <h2>Humidity {percent(humidity)}%</h2>
+               <h2>{determineRain(precipProbability, precipType)}</h2>
+               <h2>Wind speed {round(windSpeed)} mph</h2>
             </div>
          )
       }

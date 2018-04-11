@@ -33,7 +33,7 @@ export class Weekly extends React.Component {
    }
 
    render() {
-      if (this.props.locatedAndData === false) {
+      if (typeof this.props.weatherData === 'undefined') {
          return <div></div>
       } else {
          return (

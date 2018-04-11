@@ -71,8 +71,7 @@ class App extends React.Component {
          .then(data => {
             console.log(data);
             this.setState({
-               weatherData: data,
-               locatedAndData: true
+               weatherData: data
             })
          })
    }
@@ -100,7 +99,7 @@ class App extends React.Component {
 
       navigator.geolocation.getCurrentPosition(success, fail, options);
    }
-   
+
    render() {
       return (
          <div className="main">
@@ -110,16 +109,25 @@ class App extends React.Component {
                <button name="locater" onClick={this.handleGeo}>
                   <i className="fas fa-location-arrow"></i>
                </button>
-               <input onChange={this.handleChange} id="pac-input" className="controls" type="text" placeholder="City, Zip, Locale" autoFocus="autofocus" />
+
+               <input 
+               autoFocus
+               onChange={this.handleChange} 
+               id="pac-input" 
+               className="controls" 
+               type="text" 
+               placeholder="City, Zip, Locale" 
+               />
+               
                <button name="submit-location" onClick={this.searchLocate}><i className="fas fa-chevron-right"></i></button>
             </div>
 
             {/* weatherData = data > currently */}
-            <Currently locatedAndData={this.state.locatedAndData} weatherData={this.state.weatherData.currently} />
+            <Currently weatherData={this.state.weatherData.currently} />
             {/* weatherData = data > daily > array */ }
-            <Weekly locatedAndData={this.state.locatedAndData} weatherData={this.state.weatherData.daily} />
+            <Weekly weatherData={this.state.weatherData.daily} />
             {/* weatherData = data > hourly > array  */}
-            <Hourly locatedAndData={this.state.locatedAndData} weatherData={this.state.weatherData.hourly} />
+            <Hourly weatherData={this.state.weatherData.hourly} />
          </div>
       )
    }

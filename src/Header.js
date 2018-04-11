@@ -4,7 +4,6 @@ import React from 'react';
 export class Header extends React.Component {
    render() {
       if (typeof this.props.location === undefined || this.props.location === '') {
-         console.log(this.props.locationData);
          return (
             <div>
                <h1>Weather</h1>
