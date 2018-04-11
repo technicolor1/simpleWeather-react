@@ -1,5 +1,6 @@
 import React from 'react';
-import { percent, round } from './logic.js';
+import { percent, round, determineRain } from './logic.js';
+import './Currently.css';
 const Moment = window.moment;
 
 export class Currently extends React.Component {
@@ -15,14 +16,13 @@ export class Currently extends React.Component {
          const windSpeed = this.props.weatherData.windSpeed;
          const precipType = this.props.weatherData.precipType;
 
-         // TODO: if chance of rain is zero, conditionally invoke a different h2
          return (
             <div className="currently">
                   <h2>As of {time}...</h2>
                   <h2>{summary}</h2>
                   <h2>Feels like {round(apparentTemp)}°F</h2>
                   <h2>Humidity {percent(humidity)}%</h2>
-                  <h2>Chance of {precipType} {percent(precipProbability)}%</h2>
+                  <h2>{determineRain(precipProbability, precipType)}</h2>
                   <h2>Wind speed {round(windSpeed)} mph</h2>
             </div>
          )

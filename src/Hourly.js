@@ -1,32 +1,37 @@
 import React from 'react';
-import { percent, round } from './logic.js';
+import { percent, round, determineRain } from './logic.js';
 import './Hourly.css';
 const Moment = window.moment;
 
 export class Hourly extends React.Component {
    handleHour(data) {
       let i = 10;
+      let counter = 0;
       let main = [];
-      data.forEach(hour => {
+      for (let hour of data) {
          // skip 0th hour
-         if (i === 10) {
-            i++;
-            return;
+         if (counter === 0) {
+            counter++;
+            continue;
+         }
+         // end at 25th hr
+         if (counter === 25) {
+            break;
          }
          const time = Moment.unix(hour.time).format("MMMM Do h a");
          const temp = round(hour.apparentTemperature);
-         const precipProb = percent(hour.precipProbability);
          main.push(
             <div key={i} className="hourly">
                <h5>{time}</h5>
                <h5>{hour.summary}</h5>
                <h5>{temp}°F</h5>
-               <h5>Chance of {hour.precipType} {precipProb}%</h5>
+               <h5>{determineRain(hour.precipProbability, hour.precipType)}</h5>
                <h5>Wind speed {round(hour.windSpeed)} mph</h5>
             </div>
          )
          i++;
-      })
+         counter++;
+      }
       return main;
    }
    render() {
@@ -34,8 +39,11 @@ export class Hourly extends React.Component {
          return <div></div>
       } else {
          return (
-            <div className="scrollables">
-               {this.handleHour(this.props.weatherData.data)}
+            <div className="hourlies">
+               <h2>By the Hour</h2>
+               <div className="scrollables">
+                  {this.handleHour(this.props.weatherData.data)}
+               </div>
             </div>
          )
       }

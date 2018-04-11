@@ -1,5 +1,5 @@
 import React from 'react';
-import { percent,round } from './logic.js';
+import { percent,round, determineRain } from './logic.js';
 import './Weekly.css';
 const Moment = window.moment;
 
@@ -22,6 +22,7 @@ export class Weekly extends React.Component {
          <div key={id} className="daily">
             <h5>{time}</h5>
             <h5>{highTemp}°F / {lowTemp}°F</h5>
+            <h5>{determineRain(day.precipProbability, day.precipType)}</h5>
             <h5>Humidity {percent(day.humidity)}%</h5>
             <h5>{sunrise} / {sunset}</h5>
          </div>
@@ -36,8 +37,11 @@ export class Weekly extends React.Component {
          return <div></div>
       } else {
          return (
-            <div className="scrollables">
-               {this.handleDaily(this.props.weatherData.data)}
+            <div>
+               <h2>Week at a Glance</h2>
+               <div className="scrollables">
+                  {this.handleDaily(this.props.weatherData.data)}
+               </div>
             </div>
          )
       }
