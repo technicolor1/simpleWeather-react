@@ -4,6 +4,16 @@ import './Hourly.css';
 const Moment = window.moment;
 
 export class Hourly extends React.Component {
+   constructor(props) {
+      super(props)
+
+      this.hourlyDiv = React.createRef();
+   }
+
+   componentDidUpdate() {
+      console.log(this.hourlyDiv.current === null);
+   }
+
    handleHour(data) {
       let i = 10;
       let counter = 0;
@@ -27,6 +37,7 @@ export class Hourly extends React.Component {
                <h5>{temp}°F</h5>
                <h5>{determineRain(hour.precipProbability, hour.precipType)}</h5>
                <h5>Wind speed {round(hour.windSpeed)} mph</h5>
+               <h5>Humidity {percent(hour.humidity)}%</h5>
             </div>
          )
          i++;
@@ -41,7 +52,7 @@ export class Hourly extends React.Component {
          return (
             <div className="hourlies">
                <h2>By the Hour</h2>
-               <div className="scrollables">
+               <div className="scrollables" ref={this.hourlyDiv}>
                   {this.handleHour(this.props.weatherData.data)}
                </div>
             </div>

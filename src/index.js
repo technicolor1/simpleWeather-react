@@ -6,6 +6,7 @@ import { keys } from './config/config.js';
 import { Currently } from './Currently.js';
 import { Weekly } from './Weekly.js';
 import { Hourly } from './Hourly.js';
+import { SearchBox } from './SearchBox.js';
 
 class App extends React.Component {
    constructor(props) {
@@ -20,22 +21,21 @@ class App extends React.Component {
             longitude: ''
          },
       }
-      
+
       this.handleChange = this.handleChange.bind(this);
       this.searchLocate = this.searchLocate.bind(this);
       this.handleGeo = this.handleGeo.bind(this);
    }
-   
+
    handleChange(event) {
       this.setState({
          searchBoxInput: event.target.value
       })
    }
-   
+
    // TODO: validate searchBoxInput
-   searchLocate() {
-      let value = this.state.searchBoxInput;
-      let google = `https://maps.googleapis.com/maps/api/geocode/json?address=${value}&key=${keys.google}`;
+   searchLocate(val) {
+      let google = `https://maps.googleapis.com/maps/api/geocode/json?address=${val}&key=${keys.google}`;
 
       fetch(google)
          .then(response => {
@@ -44,10 +44,12 @@ class App extends React.Component {
             }
          })
          .then(data => {
-
+            // TODO: loop through data to identify an appropriate locale
+            // discard too specific addresses
+            // if none, return to user to try a different query
             this.setState({
                location: data.results[0].formatted_address,
-               coords: { 
+               coords: {
                   latitude: data.results[0].geometry.location.lat,
                   longitude: data.results[0].geometry.location.lng
                }
@@ -76,6 +78,7 @@ class App extends React.Component {
          })
    }
 
+   // TODO: re-render header with location
    handleGeo() {
       let self = this;
       function success(pos) {
@@ -105,26 +108,11 @@ class App extends React.Component {
          <div className="main">
             <Header location={this.state.location} />
 
-            <div className="controls">
-               <button name="locater" onClick={this.handleGeo}>
-                  <i className="fas fa-location-arrow"></i>
-               </button>
-
-               <input 
-               autoFocus
-               onChange={this.handleChange} 
-               id="pac-input" 
-               className="controls" 
-               type="text" 
-               placeholder="City, Zip, Locale" 
-               />
-               
-               <button name="submit-location" onClick={this.searchLocate}><i className="fas fa-chevron-right"></i></button>
-            </div>
+            <SearchBox locateCall={this.searchLocate} geoCall={this.handleGeo}/>
 
             {/* weatherData = data > currently */}
             <Currently weatherData={this.state.weatherData.currently} />
-            {/* weatherData = data > daily > array */ }
+            {/* weatherData = data > daily > array */}
             <Weekly weatherData={this.state.weatherData.daily} />
             {/* weatherData = data > hourly > array  */}
             <Hourly weatherData={this.state.weatherData.hourly} />
