@@ -18,14 +18,15 @@ export class Weekly extends React.Component {
             id++;
             return;
          }
-         const time = Moment.unix(day.time).format("dddd");
+         const time = Moment.unix(day.time).format("ddd");
          const sunrise = Moment.unix(day.sunriseTime).format("h:mm a");
          const sunset = Moment.unix(day.sunsetTime).format("h:mm a");
          const highTemp = round(day.apparentTemperatureHigh);
          const lowTemp = round(day.apparentTemperatureLow);
          main.push(
          <div key={id} className="daily">
-            <h5>{time}</h5>
+            <h5 id="time">{time}</h5>
+            <h5 id="summary">{day.summary}</h5>
             <h5>{highTemp}°F / {lowTemp}°F</h5>
             <h5>{determineRain(day.precipProbability, day.precipType)}</h5>
             <h5>Humidity {percent(day.humidity)}%</h5>
@@ -52,7 +53,7 @@ export class Weekly extends React.Component {
          return <div></div>
       } else {
          return (
-            <div>
+            <div className="dailies">
                <h2>Week at a Glance</h2>
                <div className="scrollables" ref={this.weeklyDiv}>
                   {this.handleDaily(this.props.weatherData.data)}

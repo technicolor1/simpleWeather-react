@@ -38,17 +38,43 @@ body {
 
 .scrollables {
    display: flex;
-   width: 80vw;
-   height: 30vh;
+   width: 90vw;
+   height: 35vh;
    overflow-x: scroll;
    border: 1px solid blue;
 }
 
-.scrollables > * {
+.scrollables > .daily {
+   min-width: 250px;
+   border: 1px solid red;
+   text-align: center;
+   font-size: 1.3em;
+   overflow: scroll;
+   margin: 5px;
+}
+
+.scrollables > .hourly {
    min-width: 200px;
    height: 95%;
    border: 1px solid red;
    text-align: center;
    font-size: 1.3em;
    overflow: scroll;
+}
+
+.daily > h5 {
+   margin: 5% 0;
+   font-size: 15px;
+}
+
+.hourly > h5 {
+   margin: 5% 0;
+   font-size: 15px;
+}
+
+#time {
+   font-style: italic;
+   font-size: 25px;
+   margin: 0 0 5% 0;
+   background: cadetblue;
 }

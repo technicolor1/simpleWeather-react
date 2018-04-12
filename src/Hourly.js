@@ -38,7 +38,7 @@ export class Hourly extends React.Component {
          const temp = round(hour.apparentTemperature);
          main.push(
             <div key={i} className="hourly">
-               <h5>{time}</h5>
+               <h5 id="time">{time}</h5>
                <h5>{hour.summary}</h5>
                <h5>{temp}°F</h5>
                <h5>{determineRain(hour.precipProbability, hour.precipType)}</h5>
