@@ -58,6 +58,7 @@ export class Hourly extends React.Component {
          return (
             <div className="hourlies">
                <h2>By the Hour</h2>
+               <h3 id="day-summary">{this.props.weatherData.summary}</h3>
                <div className="scrollables" ref={this.hourlyDiv}>
                   {this.handleHour(this.props.weatherData.data)}
                </div>

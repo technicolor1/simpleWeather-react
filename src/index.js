@@ -15,11 +15,7 @@ class App extends React.Component {
          locatedAndData: false,
          searchBoxInput: '',
          location: '',
-         weatherData: '',
-         coords: {
-            latitude: '',
-            longitude: ''
-         },
+         weatherData: ''
       }
 
       this.handleChange = this.handleChange.bind(this);
@@ -48,21 +44,16 @@ class App extends React.Component {
             // TODO: loop through data to identify an appropriate locale
             // discard too specific addresses
             // if none, return to user to try a different query
+            console.log(data);
             this.setState({
-               location: data.results[0].formatted_address,
-               coords: {
-                  latitude: data.results[0].geometry.location.lat,
-                  longitude: data.results[0].geometry.location.lng
-               }
+               location: data.results[0].formatted_address
             })
-            this.fetchWeather();
+            this.fetchWeather(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng);
          })
 
    }
 
-   fetchWeather() {
-      let lat = this.state.coords.latitude;
-      let long = this.state.coords.longitude;
+   fetchWeather(lat, long) {
       let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags,alerts,minutely`;
 
       fetch(darksky)
@@ -105,6 +96,7 @@ class App extends React.Component {
    }
 
    // weathersample
+   // Remove this near production
    testFunc() {
       this.setState({
          weatherData: weatherSample,
@@ -117,9 +109,7 @@ class App extends React.Component {
          <div className="main">
             <Header location={this.state.location} />
 
-            <SearchBox locateCall={this.searchLocate} geoCall={this.handleGeo}/>
-            <button name="tester" onClick={this.testFunc}>Test</button>
-
+            <SearchBox locateCall={this.searchLocate} geoCall={this.handleGeo} testerCall={this.testFunc}/>
             {/* weatherData = data > currently */}
             <Currently weatherData={this.state.weatherData.currently} />
             {/* weatherData = data > daily > array */}
@@ -136,6 +126,7 @@ ReactDOM.render(
    document.querySelector("#root")
 );
 
+// Remove this near production
 const weatherSample = {
    "latitude": 37.8267,
    "longitude": -122.4233,

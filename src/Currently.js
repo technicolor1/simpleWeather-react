@@ -20,7 +20,7 @@ export class Currently extends React.Component {
             <div className="currently">
                <h2>As of {time}...</h2>
                <h2>{summary}</h2>
-               <h2>Feels like {round(apparentTemp)}°F</h2>
+               <h2>{round(apparentTemp)}°F</h2>
                <h2>Humidity {percent(humidity)}%</h2>
                <h2>{determineRain(precipProbability, precipType)}</h2>
                <h2>Wind speed {round(windSpeed)} mph</h2>

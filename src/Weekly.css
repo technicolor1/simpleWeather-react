@@ -1,5 +1,26 @@
+.dailies {
+   margin: 5vh 0;
+}
+
 #summary {
    margin: 0 5% 15% 5%;
-   font-size: 20px;
+   font-size: 18px;
    color: rgb(40, 112, 114);
+}
+
+#week-summary {
+   font-style: italic;
+}
+
+.scrollables > .daily {
+   min-width: 250px;
+   border: 1px solid red;
+   text-align: center;
+   font-size: 1.3em;
+   overflow: scroll;
+   margin: 5px;
+}
+.daily > h5 {
+   margin: 5% 0;
+   font-size: 15px;
 }

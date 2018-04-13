@@ -25,17 +25,6 @@ body {
    margin-top: 5vh;
 }
 
-#pac-input {
-   width: 30vw;
-   font-size: 22px;
-   padding: 1vh;
-   border-radius: 10px;
-}
-
-.controls > button {
-   font-size: 22px;
-}
-
 .scrollables {
    display: flex;
    width: 90vw;
@@ -44,37 +33,9 @@ body {
    border: 1px solid blue;
 }
 
-.scrollables > .daily {
-   min-width: 250px;
-   border: 1px solid red;
-   text-align: center;
-   font-size: 1.3em;
-   overflow: scroll;
-   margin: 5px;
-}
-
-.scrollables > .hourly {
-   min-width: 200px;
-   height: 95%;
-   border: 1px solid red;
-   text-align: center;
-   font-size: 1.3em;
-   overflow: scroll;
-}
-
-.daily > h5 {
-   margin: 5% 0;
-   font-size: 15px;
-}
-
-.hourly > h5 {
-   margin: 5% 0;
-   font-size: 15px;
-}
-
 #time {
    font-style: italic;
-   font-size: 25px;
+   font-size: 22px;
    margin: 0 0 5% 0;
    background: cadetblue;
 }

@@ -1,18 +1,19 @@
 import React from 'react';
+import './Header.css';
 
 // Header Component: 
 export class Header extends React.Component {
    render() {
       if (typeof this.props.location === undefined || this.props.location === '') {
          return (
-            <div>
-               <h1>Weather</h1>
+            <div className="header">
+               <h1 id="header">Weather</h1>
             </div>
          )
       } else {
          return (
-            <div>
-               <h1>Weather for {this.props.location}</h1>
+            <div className="header">
+               <h1 id="header">{this.props.location}</h1>
             </div>
          )
       }

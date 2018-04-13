@@ -40,7 +40,6 @@ export class Weekly extends React.Component {
 
    componentDidUpdate() {
       const weeklyComp = this.weeklyDiv.current;
-      console.log(weeklyComp);
       if (weeklyComp !== null) {
          if (weeklyComp.scrollLeft !== 0) {
             weeklyComp.scrollLeft = 0;
@@ -55,6 +54,7 @@ export class Weekly extends React.Component {
          return (
             <div className="dailies">
                <h2>Week at a Glance</h2>
+               <h3 id="week-summary">{this.props.weatherData.summary}</h3>
                <div className="scrollables" ref={this.weeklyDiv}>
                   {this.handleDaily(this.props.weatherData.data)}
                </div>

@@ -1,0 +1,10 @@
+#pac-input {
+   width: 30vw;
+   font-size: 22px;
+   padding: 1vh;
+   border-radius: 10px;
+}
+
+.controls > button {
+   font-size: 22px;
+}
