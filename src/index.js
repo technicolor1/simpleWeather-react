@@ -41,23 +41,7 @@ class App extends React.Component {
          })
          .then(data => {
             console.log(data);
-
-            if (data.status === "ZERO_RESULTS") {
-               console.log("Can't find anything...");
-               return;
-            }
-
-            const foundItem = this.validateGoogle(data);
-            if (foundItem === null) {
-               console.log("Try a different query");
-               return;
-            }
-            console.log(foundItem);
-
-            this.setState({
-               location: foundItem.formatted_address
-            })
-            this.fetchWeather(foundItem.geometry.location.lat, foundItem.geometry.location.lng);
+            this.validateGoogle(data);
          })
 
    }
@@ -70,19 +54,38 @@ class App extends React.Component {
          locality: ["locality", "political"],
          zip: ["postal_code"]
       }
-      let found = null;
+      let mainStatus = {
+         found: null,
+         status: null
+      }
+
+      if (data.status === "ZERO_RESULTS") {
+         console.log("Location can't be found");
+         return;
+      }
 
       for (let i = 0; i < data.results.length; i++) {
          if ((data.results[i].types).includes(validObj.locality[0]) && (data.results[i].types).includes(validObj.locality[1])) {
-            found = data.results[i];
+            mainStatus.found = data.results[i];
+            break;
 
          } else if ((data.results[i].types).includes(validObj.zip[0])) {
-            found = data.results[i];
+            mainStatus.found = data.results[i];
+            break;
 
          }
       }
 
-      return found;
+      if (mainStatus.found !== null) {
+         this.setState({
+            location: mainStatus.found.formatted_address
+         })
+
+         this.fetchWeather(mainStatus.found.geometry.location.lat, mainStatus.found.geometry.location.lng);
+      } else {
+         console.log("Try a different query");
+         return;
+      }
    }
 
    fetchWeather(lat, long) {
@@ -115,18 +118,7 @@ class App extends React.Component {
             })
             .then(data => {
                console.log(data);
-
-               let foundItem = App.validateGoogle(data);
-               if (foundItem === null) {
-                  console.log("Try a different query");
-                  return;
-               }
-
-               App.setState({
-                  location: foundItem.formatted_address
-               })
-
-               App.fetchWeather(foundItem.geometry.location.lat, foundItem.geometry.location.lng);
+               App.validateGoogle(data);
             })
       }
 
@@ -155,7 +147,7 @@ class App extends React.Component {
          <div className="main">
             <Header location={this.state.location} />
 
-            <SearchBox locateCall={this.searchLocate} geoCall={this.handleGeo} testerCall={this.testFunc}/>
+            <SearchBox locateCall={this.searchLocate} geoCall={this.handleGeo} testerCall={this.testFunc} />
             {/* weatherData = data > currently */}
             <Currently weatherData={this.state.weatherData.currently} />
             {/* weatherData = data > daily > array */}
