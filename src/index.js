@@ -59,6 +59,10 @@ class App extends React.Component {
          status: null
       }
 
+      if (typeof data === 'undefined') {
+         console.log("Searchbox can't be empty");
+      }
+
       if (data.status === "ZERO_RESULTS") {
          console.log("Location can't be found");
          return;
