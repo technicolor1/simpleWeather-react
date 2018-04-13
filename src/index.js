@@ -12,7 +12,6 @@ class App extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
-         locatedAndData: false,
          searchBoxInput: '',
          location: '',
          weatherData: ''
@@ -41,15 +40,49 @@ class App extends React.Component {
             }
          })
          .then(data => {
-            // TODO: loop through data to identify an appropriate locale
-            // discard too specific addresses
-            // if none, return to user to try a different query
+            console.log(data);
+
+            if (data.status === "ZERO_RESULTS") {
+               console.log("Can't find anything...");
+               return;
+            }
+
+            const foundItem = this.validateGoogle(data);
+            if (foundItem === null) {
+               console.log("Try a different query");
+               return;
+            }
+            console.log(foundItem);
+
             this.setState({
-               location: data.results[0].formatted_address
+               location: foundItem.formatted_address
             })
-            this.fetchWeather(data.results[0].geometry.location.lat, data.results[0].geometry.location.lng);
+            this.fetchWeather(foundItem.geometry.location.lat, foundItem.geometry.location.lng);
          })
 
+   }
+
+   // validate data from fetched google,
+   // output is the valid place or null
+   validateGoogle(data) {
+      // results must be a city or zipcode
+      let validObj = {
+         locality: ["locality", "political"],
+         zip: ["postal_code"]
+      }
+      let found = null;
+
+      for (let i = 0; i < data.results.length; i++) {
+         if ((data.results[i].types).includes(validObj.locality[0]) && (data.results[i].types).includes(validObj.locality[1])) {
+            found = data.results[i];
+
+         } else if ((data.results[i].types).includes(validObj.zip[0])) {
+            found = data.results[i];
+
+         }
+      }
+
+      return found;
    }
 
    fetchWeather(lat, long) {
@@ -71,9 +104,30 @@ class App extends React.Component {
 
    // TODO: update header with location
    handleGeo() {
-      let self = this;
+      let App = this;
       function success(pos) {
-         self.fetchWeather(pos.coords.latitude, pos.coords.longitude);
+         let google = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${pos.coords.latitude},${pos.coords.longitude}&key=${keys.google}`;
+         fetch(google)
+            .then(response => {
+               if (response.ok) {
+                  return response.json();
+               }
+            })
+            .then(data => {
+               console.log(data);
+
+               let foundItem = App.validateGoogle(data);
+               if (foundItem === null) {
+                  console.log("Try a different query");
+                  return;
+               }
+
+               App.setState({
+                  location: foundItem.formatted_address
+               })
+
+               App.fetchWeather(foundItem.geometry.location.lat, foundItem.geometry.location.lng);
+            })
       }
 
       function fail(error) {
@@ -88,7 +142,7 @@ class App extends React.Component {
    }
 
    // weathersample
-   // Remove this near production
+   // TODO: Remove this near production
    testFunc() {
       this.setState({
          weatherData: weatherSample,
