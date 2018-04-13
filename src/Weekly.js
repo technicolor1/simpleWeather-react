@@ -30,7 +30,7 @@ export class Weekly extends React.Component {
             <h5>{highTemp}°F / {lowTemp}°F</h5>
             <h5>{determineRain(day.precipProbability, day.precipType)}</h5>
             <h5>Humidity {percent(day.humidity)}%</h5>
-            <h5>{sunrise} / {sunset}</h5>
+            <h5><i className="wi wi-sunrise"></i>{sunrise} <i className="wi wi-sunset"></i>{sunset}</h5>
          </div>
          )
          id++;

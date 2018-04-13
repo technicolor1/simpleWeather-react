@@ -44,7 +44,6 @@ class App extends React.Component {
             // TODO: loop through data to identify an appropriate locale
             // discard too specific addresses
             // if none, return to user to try a different query
-            console.log(data);
             this.setState({
                location: data.results[0].formatted_address
             })
@@ -74,14 +73,7 @@ class App extends React.Component {
    handleGeo() {
       let self = this;
       function success(pos) {
-         self.setState({
-            coords: {
-               latitude: pos.coords.latitude,
-               longitude: pos.coords.longitude
-            }
-         })
-
-         self.fetchWeather();
+         self.fetchWeather(pos.coords.latitude, pos.coords.longitude);
       }
 
       function fail(error) {

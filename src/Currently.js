@@ -1,5 +1,5 @@
 import React from 'react';
-import { percent, round, determineRain } from './logic.js';
+import { percent, round, determineRain, weatherIcon } from './logic.js';
 import './Currently.css';
 const Moment = window.moment;
 
@@ -20,8 +20,9 @@ export class Currently extends React.Component {
             <div className="currently">
                <h2>As of {time}...</h2>
                <h2>{summary}</h2>
+               <h2>{weatherIcon(this.props.weatherData.icon)}</h2>
                <h2>{round(apparentTemp)}°F</h2>
-               <h2>Humidity {percent(humidity)}%</h2>
+               <h2><i className="wi wi-humidity"></i> {percent(humidity)}%</h2>
                <h2>{determineRain(precipProbability, precipType)}</h2>
                <h2>Wind speed {round(windSpeed)} mph</h2>
             </div>

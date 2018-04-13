@@ -16,4 +16,26 @@ function determineRain(precipProb, precipType) {
    return `Chance of ${precipType} ${percent(precipProb)}%`
 }
 
-export { percent, round, determineRain };
+function weatherIcon(icon) {
+   switch (icon) {
+      case 'clear-day':
+         return <i className="wi wi-day-sunny"></i>
+
+      case 'clear-night':
+         return <i className="wi wi-night-clear"></i>
+
+      case 'rain':
+         return <i className="wi wi-rain"></i>
+      
+      case 'partly-cloudy-day':
+         return <i className="wi wi-cloud"></i>
+
+      case 'cloudy':
+         return <i className="wi wi-cloudy"></i>
+         
+      default:
+         return;
+   }
+}
+
+export { percent, round, determineRain, weatherIcon };
