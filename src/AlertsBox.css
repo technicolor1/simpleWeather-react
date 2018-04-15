@@ -1,0 +1,23 @@
+.alerts {
+   background-color: red;
+   color: whitesmoke;
+   border: 1px solid black;
+   width: 80%;
+}
+
+.alerts > p {
+   background-color: hsl(0, 51%, 56%);
+   color: whitesmoke;
+   padding: 3%;
+   text-indent: 5%;
+}
+
+.alerts > h4 {
+   margin: 0 0 14px 20px;
+}
+
+h3 > span {
+   float: right;
+   margin: 0 20px 0 0;
+   font-size: 20px;
+}
