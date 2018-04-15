@@ -7,6 +7,7 @@ import { Currently } from './Currently.js';
 import { Weekly } from './Weekly.js';
 import { Hourly } from './Hourly.js';
 import { SearchBox } from './SearchBox.js';
+import { AlertsBox } from './AlertsBox.js';
 
 class App extends React.Component {
    constructor(props) {
@@ -86,6 +87,7 @@ class App extends React.Component {
          })
 
          this.fetchWeather(mainStatus.found.geometry.location.lat, mainStatus.found.geometry.location.lng);
+      // TODO: friendlier alert
       } else {
          console.log("Try a different query");
          return;
@@ -93,7 +95,7 @@ class App extends React.Component {
    }
 
    fetchWeather(lat, long) {
-      let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags,alerts,minutely`;
+      let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags`;
 
       fetch(darksky)
          .then(response => {
@@ -157,6 +159,8 @@ class App extends React.Component {
             <Header location={this.state.location} />
 
             <SearchBox locateCall={this.searchLocate} geoCall={this.handleGeo} testerCall={this.testFunc} />
+
+            <AlertsBox alertData={this.state.weatherData.alerts}/>
             {/* weatherData = data > currently */}
             <Currently weatherData={this.state.weatherData.currently} />
             {/* weatherData = data > daily > array */}
@@ -180,6 +184,93 @@ const weatherSample = {
    "latitude": 37.8267,
    "longitude": -122.4233,
    "timezone": "America/Los_Angeles",
+   "alerts": [
+      {
+        "title": "Tornado Watch",
+        "regions": [
+          "DeSoto",
+          "Hardee",
+          "Hernando",
+          "Highlands",
+          "Hillsborough",
+          "Manatee",
+          "Pasco",
+          "Pinellas",
+          "Polk",
+          "Sarasota",
+          "Sumter"
+        ],
+        "severity": "warning",
+        "time": 1523820660,
+        "expires": 1523829600,
+        "description": "TORNADO WATCH 51 REMAINS VALID UNTIL 6 PM EDT THIS EVENING FOR THE FOLLOWING AREAS IN FLORIDA THIS WATCH INCLUDES 11 COUNTIES IN CENTRAL FLORIDA HARDEE POLK SUMTER IN SOUTH CENTRAL FLORIDA DESOTO HIGHLANDS IN WEST CENTRAL FLORIDA HERNANDO HILLSBOROUGH MANATEE PASCO PINELLAS SARASOTA THIS INCLUDES THE CITIES OF ARCADIA, AVON PARK, BAYSHORE GARDENS, BOWLING GREEN, BRADENTON, BRANDON, BROOKSVILLE, BUSHNELL, CLEARWATER, DADE CITY, ENGLEWOOD, HOLIDAY, HUDSON, JASMINE ESTATES, LAKE PANASOFFKEE, LAKELAND, LAND O LAKES, LARGO, NEW PORT RICHEY, NORTH PORT, PALMETTO, PLACID LAKES, SARASOTA, SEBRING, SOUTH VENICE, SPRING HILL, ST. PETERSBURG, TAMPA, THE VILLAGES, VENICE, WAUCHULA, WILDWOOD, WINTER HAVEN, ZEPHYRHILLS, AND ZOLFO SPRINGS.\n",
+        "uri": "https://alerts.weather.gov/cap/wwacapget.php?x=FL125A9E7AA00C.TornadoWatch.125A9E7B0920FL.TBWWCNTBW.d4955ea95a6b73a025ec3a07c450081a"
+      },
+      {
+        "title": "Rip Current Statement",
+        "regions": [
+          "Coastal Charlotte",
+          "Coastal Hillsborough",
+          "Coastal Lee",
+          "Coastal Manatee",
+          "Coastal Sarasota"
+        ],
+        "severity": "watch",
+        "time": 1523819340,
+        "expires": 1523998800,
+        "description": "...HIGH RIP CURRENT RISK REMAINS IN EFFECT THROUGH TUESDAY AFTERNOON... ...HIGH SURF ADVISORY IN EFFECT FROM 8 PM THIS EVENING TO 8 PM EDT MONDAY... The National Weather Service in Tampa Bay Ruskin has issued a High Surf Advisory, which is in effect from 8 PM this evening to 8 PM EDT Monday. * HIGH SURF...Increasing northwest winds in the wake of a cold front will cause surf to build to 3 to 5 feet at area beaches. * HIGH SURF TIMING...Tonight through Monday night. * HIGH SURF IMPACTS...High surf may produce localized beach erosion and dangerous swimming conditions. * RIP CURRENT TIMING...Breezy winds and increasing wave action will create rip currents today, Monday, and Tuesday * RIP CURRENT IMPACTS...Strong rip currents will be hazardous for those in the surf zone along area beaches.\n",
+        "uri": "https://alerts.weather.gov/cap/wwacapget.php?x=FL125A9E7A9774.RipCurrentStatement.125A9E996690FL.TBWCFWTBW.50bf33596c0e033b977e5e6e1070d300"
+      },
+      {
+        "title": "Lake Wind Advisory",
+        "regions": [
+          "Coastal Charlotte",
+          "Coastal Citrus",
+          "Coastal Hernando",
+          "Coastal Hillsborough",
+          "Coastal Lee",
+          "Coastal Levy",
+          "Coastal Manatee",
+          "Coastal Pasco",
+          "Coastal Sarasota",
+          "DeSoto",
+          "Hardee",
+          "Highlands",
+          "Inland Charlotte",
+          "Inland Citrus",
+          "Inland Hernando",
+          "Inland Hillsborough",
+          "Inland Lee",
+          "Inland Levy",
+          "Inland Manatee",
+          "Inland Pasco",
+          "Inland Sarasota",
+          "Pinellas",
+          "Polk",
+          "Sumter"
+        ],
+        "severity": "advisory",
+        "time": 1523821020,
+        "expires": 1523836800,
+        "description": "...STRONG AND GUSTY WINDS WILL CONTINUE TO CREATE HAZARDOUS BOATING CONDITIONS ON AREA LAKES TODAY... ...LAKE WIND ADVISORY REMAINS IN EFFECT UNTIL 8 PM EDT THIS EVENING... * TIMING...Through 8 PM * WINDS...South to southwest 20 to 25 mph with higher gusts. * IMPACTS...Hazardous boating conditions on area lakes.\n",
+        "uri": "https://alerts.weather.gov/cap/wwacapget.php?x=FL125A9E7AA264.LakeWindAdvisory.125A9E86F000FL.TBWNPWTBW.82497fff87003218cb987348621a0fe4"
+      },
+      {
+        "title": "High Surf Advisory",
+        "regions": [
+          "Coastal Charlotte",
+          "Coastal Hillsborough",
+          "Coastal Lee",
+          "Coastal Manatee",
+          "Coastal Sarasota"
+        ],
+        "severity": "advisory",
+        "time": 1523836800,
+        "expires": 1523923200,
+        "description": "...HIGH RIP CURRENT RISK REMAINS IN EFFECT THROUGH TUESDAY AFTERNOON... ...HIGH SURF ADVISORY IN EFFECT FROM 8 PM THIS EVENING TO 8 PM EDT MONDAY... The National Weather Service in Tampa Bay Ruskin has issued a High Surf Advisory, which is in effect from 8 PM this evening to 8 PM EDT Monday. * HIGH SURF...Increasing northwest winds in the wake of a cold front will cause surf to build to 3 to 5 feet at area beaches. * HIGH SURF TIMING...Tonight through Monday night. * HIGH SURF IMPACTS...High surf may produce localized beach erosion and dangerous swimming conditions. * RIP CURRENT TIMING...Breezy winds and increasing wave action will create rip currents today, Monday, and Tuesday * RIP CURRENT IMPACTS...Strong rip currents will be hazardous for those in the surf zone along area beaches.\n",
+        "uri": "https://alerts.weather.gov/cap/wwacapget.php?x=FL125A9E7A9774.HighSurfAdvisory.125A9E963240FL.TBWCFWTBW.28379c5171a2d75af0436d73dc5f1038"
+      }
+    ],
    "currently": {
       "time": 1523061480,
       "summary": "Light Rain",
