@@ -32,6 +32,9 @@ function weatherIcon(icon) {
 
       case 'cloudy':
          return <i className="wi wi-cloudy"></i>
+
+      case 'wind':
+         return <i className="wi wi-strong-wind"></i>
          
       default:
          return;

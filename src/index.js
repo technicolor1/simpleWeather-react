@@ -173,6 +173,8 @@ ReactDOM.render(
    document.querySelector("#root")
 );
 
+// export default App;
+
 // Remove this near production
 const weatherSample = {
    "latitude": 37.8267,
