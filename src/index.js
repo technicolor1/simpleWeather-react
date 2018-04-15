@@ -31,6 +31,10 @@ class App extends React.Component {
 
    // TODO: validate searchBoxInput
    searchLocate(val) {
+      if (val === "") {
+         console.log("Searchbox can't be empty");
+         return;
+      }
       let google = `https://maps.googleapis.com/maps/api/geocode/json?address=${val}&key=${keys.google}`;
 
       fetch(google)
@@ -57,10 +61,6 @@ class App extends React.Component {
       let mainStatus = {
          found: null,
          status: null
-      }
-
-      if (typeof data === 'undefined') {
-         console.log("Searchbox can't be empty");
       }
 
       if (data.status === "ZERO_RESULTS") {
@@ -135,6 +135,11 @@ class App extends React.Component {
       }
 
       navigator.geolocation.getCurrentPosition(success, fail, options);
+   }
+
+   shouldComponentUpdate() {
+      console.log("index.js re-rendered");
+      return true;
    }
 
    // weathersample

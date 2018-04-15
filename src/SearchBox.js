@@ -32,7 +32,7 @@ export class SearchBox extends React.Component {
                autoFocus
                onChange={this.handleChange}
                id="pac-input"
-               className="controls"
+               className="searchbox"
                type="text"
                placeholder="City, Zip, Locale"
             />

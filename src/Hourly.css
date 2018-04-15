@@ -1,5 +1,5 @@
 .hourlies {
-   margin: 5vh 0;
+   margin: 5vh 5%;
 }
 
 #day-summary {
@@ -11,12 +11,11 @@
    height: 95%;
    border: 1px solid red;
    text-align: center;
-   font-size: 1.3em;
    overflow: scroll;
    margin: 5px;
 }
 
 .hourly > h5 {
    margin: 5% 0;
-   font-size: 15px;
+   font-size: 20px;
 }
