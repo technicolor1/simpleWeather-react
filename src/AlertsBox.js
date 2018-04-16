@@ -52,24 +52,28 @@ export class AlertsBox extends React.Component {
          return "red";
       }
    }
+
+   componentWillUpdate() {
+      if (this.state.displayDiv === "flex") {
+         this.setState({
+            displayDiv: "none"
+         })
+      }
+   }
    
    handleAlerts(alerts) {
       let id = 0;
       let main = [];
 
+      let alertsArr = alerts.map(alert => 
+         <div key={id++}
+         style={ this.handleColorSeverity(alert.severity) }
+         className="alert">
+            <h3>{alert.title} · Until {Moment.unix(alert.expires).format("dddd h:hh a")}</h3>
+         </div>
+      );
 
-      alerts.forEach(alert => {
-         main.push(
-            <div key={id}
-            style={ this.handleColorSeverity(alert.severity) }
-            className="alert">
-               <h3>{alert.title} · Until {Moment.unix(alert.expires).format("dddd h:hh a")}</h3>
-            </div>
-         )
-         id++;
-      })
-
-      return main;
+      return alertsArr;
    }
 
    render() {
