@@ -12,16 +12,64 @@ export class AlertsBox extends React.Component {
       this.handleDesc = this.handleDesc.bind(this);
    }
 
+   
    handleDesc(event) {
       if (this.state.displayDiv === "none") {
          this.setState({
-            displayDiv: "block"
+            displayDiv: "flex"
          })
       } else {
          this.setState({
             displayDiv: "none"
          })
       }
+   }
+   
+   handleColorSeverity(severity) {
+      switch (severity) {
+         case "advisory":
+         return {
+            color: '#6d6d6d',
+            backgroundColor: '#ffeb3b',
+            display: this.state.displayDiv
+         };
+         
+         case "watch":
+         return {
+            color: '#6d6d6d',
+            backgroundColor: '#ffeb3b',
+            display: this.state.displayDiv
+         };
+         
+         case "warning":
+         return {
+            color: 'whitesmoke',
+            backgroundColor: "#f44336",
+            display: this.state.displayDiv
+         };
+         
+         default:
+         return "red";
+      }
+   }
+   
+   handleAlerts(alerts) {
+      let id = 0;
+      let main = [];
+
+
+      alerts.forEach(alert => {
+         main.push(
+            <div key={id}
+            style={ this.handleColorSeverity(alert.severity) }
+            className="alert">
+               <h3>{alert.title} · Until {Moment.unix(alert.expires).format("dddd h:hh a")}</h3>
+            </div>
+         )
+         id++;
+      })
+
+      return main;
    }
 
    render() {
@@ -34,12 +82,16 @@ export class AlertsBox extends React.Component {
       } else {
          return (
             <div className="alerts">
-               <h3>{this.props.alertData[0].title} <span onClick={this.handleDesc}><i className="fas fa-chevron-down"></i></span></h3>
-               <div style={{ display: this.state.displayDiv }}>
-                  <p>{this.props.alertData[0].description}</p>
-                  <h4>EXPIRES {Moment.unix(this.props.alertData[0].expires).format("h:hh a")}</h4>
+               <h3>
+                  <span><i className="fas fa-exclamation-triangle"></i></span>
+                  There are warnings or advisories in your area 
+                  <span onClick={this.handleDesc}><i className="fas fa-chevron-down"></i></span>
+               </h3>
+               <div 
+               id="collapsed-alerts"
+               style={{ display: this.state.displayDiv }}>
+                  {this.handleAlerts(this.props.alertData)}                                 
                </div>
-
             </div>
          )
       }
