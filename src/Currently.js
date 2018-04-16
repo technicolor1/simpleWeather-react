@@ -1,5 +1,5 @@
 import React from 'react';
-import { percent, round, determineRain, weatherIcon } from './logic.js';
+import { round, determineRain, weatherIcon, rotateWindBearing } from './logic.js';
 import './Currently.css';
 const Moment = window.moment;
 
@@ -15,17 +15,34 @@ export class Currently extends React.Component {
          const precipProbability = this.props.weatherData.precipProbability;
          const windSpeed = this.props.weatherData.windSpeed;
          const precipType = this.props.weatherData.precipType;
+         const UV = this.props.weatherData.uvIndex;
 
          return (
             <div className="currently">
-               <h2>As of {time}...</h2>
-               <h2>{summary}</h2>
-               <div className="icon">
+               <div id="as-of">
+                  <h5>As of {time}</h5>
+               </div>
+
+               <div id="sum">
+                  <h2>{summary}</h2>
+               </div>
+
+               <div id="icon">
                   {weatherIcon(this.props.weatherData.icon)}
                </div>
-               <h2>{round(apparentTemp)}°F · <i className="wi wi-humidity" title="humidity"></i> {percent(humidity)}%</h2>
-               <h2>{determineRain(precipProbability, precipType)}</h2>
-               <h2>Wind speed {round(windSpeed)} mph</h2>
+
+               <div id="temp">
+                  <h1>{round(apparentTemp)}°F</h1>
+               </div>
+
+               <div id="precip">
+                  {determineRain(precipProbability, precipType)}
+                  <span>{rotateWindBearing(this.props.weatherData.windBearing)} {round(windSpeed)} mph</span>
+               </div>
+
+               <div id="uv">
+                  <h3>UV Index {UV}</h3>
+               </div>
             </div>
          )
       }

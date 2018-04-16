@@ -10,10 +10,21 @@ function round(val) {
 
 function determineRain(precipProb, precipType) {
    if (precipProb <= 0.10) {
-      return;
+      return <span></span>;
    }
 
-   return `Chance of ${precipType} ${percent(precipProb)}%`
+   switch (precipType) {
+      case "rain":
+         return <span><i className="wi wi-raindrop" /> {percent(precipProb)}%</span>;
+
+      case "snow":
+         return <span><i className="wi wi-snowflake-cold" /> {percent(precipProb)}%</span>;
+   
+      default:
+         return <span><i className="wi wi-raindrop" /> {percent(precipProb)}%</span>;         
+   }
+
+   // return `${precipType} ${percent(precipProb)}%`
 }
 
 function weatherIcon(icon) {
@@ -41,4 +52,14 @@ function weatherIcon(icon) {
    }
 }
 
-export { percent, round, determineRain, weatherIcon };
+function rotateWindBearing(bearing) {
+   let rotate = {
+      transform: `rotate(${bearing}deg)`
+   };
+
+   return (
+      <i style={rotate} className="wi wi-wind-direction" />
+   )
+}
+
+export { percent, round, determineRain, weatherIcon, rotateWindBearing };

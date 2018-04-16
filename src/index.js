@@ -45,7 +45,6 @@ class App extends React.Component {
             }
          })
          .then(data => {
-            console.log(data);
             this.validateGoogle(data);
          })
 

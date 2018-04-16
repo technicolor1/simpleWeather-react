@@ -1,11 +1,29 @@
 .currently {
-   width: 50vw;
+   min-width: 40vw;
    border: 1px solid green;
    text-align: center;
    margin: 5vh 0;
    font-size: 20px;
+   display: flex;
+   flex-direction: column;
+	box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14),0 6px 30px 5px rgba(0,0,0,0.12),0 8px 10px -7px rgba(0,0,0,0.2);   
 }
 
-.icon {
-   font-size: 3.5em;
+#icon {
+   font-size: 5em;
+}
+
+#as-of > * {
+   margin: 0;
+   font-style: italic;
+}
+
+#precip > span:first-child {
+   margin-left: 25px;
+   float: left;
+}
+
+#precip > span:last-child {
+   margin-right: 25px;   
+   float: right;
 }
