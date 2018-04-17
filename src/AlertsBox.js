@@ -63,8 +63,7 @@ export class AlertsBox extends React.Component {
    
    handleAlerts(alerts) {
       let id = 0;
-      let main = [];
-
+      
       let alertsArr = alerts.map(alert => 
          <div key={id++}
          style={ this.handleColorSeverity(alert.severity) }

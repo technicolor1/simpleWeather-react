@@ -39,6 +39,7 @@ export class Weekly extends React.Component {
    }
 
    componentDidUpdate() {
+      // the user will not need to scroll to start 
       const weeklyComp = this.weeklyDiv.current;
       if (weeklyComp !== null) {
          if (weeklyComp.scrollLeft !== 0) {

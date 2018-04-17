@@ -1,5 +1,5 @@
 import React from 'react';
-import { round, determineRain, weatherIcon, rotateWindBearing } from './logic.js';
+import { round, determineRain, weatherIcon, rotateWindBearing, percent } from './logic.js';
 import './Currently.css';
 const Moment = window.moment;
 
@@ -25,6 +25,7 @@ export class Currently extends React.Component {
 
                <div id="sum">
                   <h2>{summary}</h2>
+                  {determineRain(precipProbability, precipType)}
                </div>
 
                <div id="icon">
@@ -35,13 +36,13 @@ export class Currently extends React.Component {
                   <h1>{round(apparentTemp)}°F</h1>
                </div>
 
-               <div id="precip">
-                  {determineRain(precipProbability, precipType)}
+               <div id="other">
+                  <span>UV Index {UV}</span>
                   <span>{rotateWindBearing(this.props.weatherData.windBearing)} {round(windSpeed)} mph</span>
                </div>
 
-               <div id="uv">
-                  <h3>UV Index {UV}</h3>
+               <div id="other2">
+                  <span><i className="wi wi-humidity" title="humidity"/> {percent(humidity)}%</span>                  
                </div>
             </div>
          )

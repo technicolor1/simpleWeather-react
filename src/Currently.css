@@ -1,5 +1,6 @@
 .currently {
    min-width: 40vw;
+   padding: 15px;
    border: 1px solid green;
    text-align: center;
    margin: 5vh 0;
@@ -10,20 +11,28 @@
 }
 
 #icon {
-   font-size: 5em;
+   font-size: 6em;
 }
 
 #as-of > * {
    margin: 0;
    font-style: italic;
+   color: #757575;
 }
 
-#precip > span:first-child {
-   margin-left: 25px;
+#other {
+   display: flex;
+   justify-content: space-between;
+}
+
+#other > span:first-child {
    float: left;
 }
 
-#precip > span:last-child {
-   margin-right: 25px;   
+#other > span:last-child {
    float: right;
+}
+
+#other2 > span:first-child {
+   float: left;
 }
