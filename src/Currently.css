@@ -1,5 +1,5 @@
 .currently {
-   min-width: 40vw;
+   min-width: 400px;
    padding: 15px;
    border: 1px solid green;
    text-align: center;
@@ -35,4 +35,10 @@
 
 #other2 > span:first-child {
    float: left;
+}
+
+@media (max-width: 500px) {
+   .currently {
+      min-width: 250px;
+   }
 }

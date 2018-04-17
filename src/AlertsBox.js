@@ -29,14 +29,14 @@ export class AlertsBox extends React.Component {
       switch (severity) {
          case "advisory":
          return {
-            color: '#6d6d6d',
+            color: '#444',
             backgroundColor: '#ffeb3b',
             display: this.state.displayDiv
          };
          
          case "watch":
          return {
-            color: '#6d6d6d',
+            color: '#444',
             backgroundColor: '#ffeb3b',
             display: this.state.displayDiv
          };

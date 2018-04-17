@@ -2,6 +2,7 @@ body {
    margin: 0;
    padding: 0;
    height: 100%;
+   color: #444;
 }
 
 #root {
@@ -28,6 +29,7 @@ body {
 }
 
 .scrollables {
+   padding: 5px;
    display: flex;
    width: 90vw;
    height: 35vh;

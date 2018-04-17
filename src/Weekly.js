@@ -25,12 +25,31 @@ export class Weekly extends React.Component {
          const lowTemp = round(day.apparentTemperatureLow);
          main.push(
          <div key={id} className="daily">
-            <h5 id="time">{time}</h5>
-            <h5 id="summary">{day.summary}</h5>
-            <h5>{highTemp}°F / {lowTemp}°F</h5>
-            <h5>{determineRain(day.precipProbability, day.precipType)}</h5>
-            <h5>Humidity {percent(day.humidity)}%</h5>
-            <h5><i className="wi wi-sunrise"></i>{sunrise} <i className="wi wi-sunset"></i>{sunset}</h5>
+            <div id="time">
+               <h5>{time}</h5>
+            </div>
+
+            <div id="summary">
+               <h5>{day.summary}</h5>
+            </div>
+
+            <div id="hl_temp">
+               <h5>{highTemp}°F / {lowTemp}°F</h5>               
+            </div>
+
+            <div id="precip">
+               <h5>{determineRain(day.precipProbability, day.precipType)}</h5>            
+            </div>
+
+            <div className="extras">
+               <div id="humidity">
+                  <h5><i className="wi wi-humidity" title="humidity"/> {percent(day.humidity)}%</h5>            
+               </div>
+
+               <div id="rise-set">
+                  <h5><i className="wi wi-sunrise"></i>{sunrise} <i className="wi wi-sunset"></i>{sunset}</h5>            
+               </div>            
+            </div>
          </div>
          )
          id++;

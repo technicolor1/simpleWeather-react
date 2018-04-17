@@ -13,13 +13,14 @@
 }
 
 .scrollables > .daily {
-   min-width: 250px;
-   border: 1px solid red;
+   min-width: 300px;
+   border: 1px solid rgba(0, 0, 0, 0.3);
    text-align: center;
    font-size: 1.3em;
    overflow: scroll;
    margin: 5px;
 }
+
 .daily > h5 {
    margin: 5% 0;
    font-size: 20px;
