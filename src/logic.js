@@ -62,4 +62,31 @@ function rotateWindBearing(bearing) {
    )
 }
 
-export { percent, round, determineRain, weatherIcon, rotateWindBearing };
+function uvIndexColor(index) {
+   if (index <= 2) {
+      return {
+         backgroundColor: "green",
+         color: "whitesmoke"
+      }
+   } if (index <= 5) {
+      return {
+         backgroundColor: "yellow"
+      }
+   } else if (index <= 7) {
+      return {
+         backgroundColor: "orange"
+      }
+   } else if (index <= 10) {
+      return {
+         backgroundColor: "red",
+         color: "whitesmoke"
+      }
+   } else {
+      return {
+         backgroundColor: "purple",
+         color: "whitesmoke"
+      }
+   }
+}
+
+export { percent, round, determineRain, weatherIcon, rotateWindBearing, uvIndexColor };

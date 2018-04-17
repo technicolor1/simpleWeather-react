@@ -1,5 +1,5 @@
 import React from 'react';
-import { round, determineRain, weatherIcon, rotateWindBearing, percent } from './logic.js';
+import { round, determineRain, weatherIcon, rotateWindBearing, percent, uvIndexColor } from './logic.js';
 import './Currently.css';
 const Moment = window.moment;
 
@@ -37,7 +37,7 @@ export class Currently extends React.Component {
                </div>
 
                <div id="other">
-                  <span>UV Index {UV}</span>
+                  <span>UV Index <span style={uvIndexColor(UV)}>{UV}</span></span>
                   <span>{rotateWindBearing(this.props.weatherData.windBearing)} {round(windSpeed)} mph</span>
                </div>
 
