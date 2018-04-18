@@ -146,6 +146,7 @@ class App extends React.Component {
    // weathersample
    // TODO: Remove this near production
    testFunc() {
+      console.log(weatherSample);
       this.setState({
          weatherData: weatherSample,
          location: '*Test* Los Angeles, CA'

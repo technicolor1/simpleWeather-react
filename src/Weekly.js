@@ -1,5 +1,5 @@
 import React from 'react';
-import { percent,round, determineRain } from './logic.js';
+import { percent,round, determineRain, weatherIcon } from './logic.js';
 import './Weekly.css';
 const Moment = window.moment;
 
@@ -13,20 +13,21 @@ export class Weekly extends React.Component {
       let id = 0;
       let main = [];
       data.forEach(day => {
-         // skip 0th day
-         if (id === 0) {
-            id++;
-            return;
-         }
          const time = Moment.unix(day.time).format("ddd");
          const sunrise = Moment.unix(day.sunriseTime).format("h:mm a");
          const sunset = Moment.unix(day.sunsetTime).format("h:mm a");
          const highTemp = round(day.apparentTemperatureHigh);
          const lowTemp = round(day.apparentTemperatureLow);
+
+         // skip 0th day
+         if (id === 0) {
+            id++;
+            return;
+         }
          main.push(
          <div key={id} className="daily">
             <div id="time">
-               <h5>{time}</h5>
+               <span>{weatherIcon(day.icon)} </span><h5>{time}</h5>
             </div>
 
             <div id="summary">

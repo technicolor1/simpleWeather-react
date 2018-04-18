@@ -30,22 +30,25 @@ function determineRain(precipProb, precipType) {
 function weatherIcon(icon) {
    switch (icon) {
       case 'clear-day':
-         return <i className="wi wi-day-sunny"></i>
+         return <i className="wi wi-day-sunny" />
 
       case 'clear-night':
-         return <i className="wi wi-night-clear"></i>
+         return <i className="wi wi-night-clear" />
 
       case 'rain':
-         return <i className="wi wi-rain"></i>
+         return <i className="wi wi-rain" />
+
+      case 'partly-cloudy-night':
+         return <i className="wi wi-night-partly-cloudy" />
       
       case 'partly-cloudy-day':
-         return <i className="wi wi-day-cloudy"></i>
+         return <i className="wi wi-day-cloudy" />
 
       case 'cloudy':
-         return <i className="wi wi-cloudy"></i>
+         return <i className="wi wi-cloudy" />
 
       case 'wind':
-         return <i className="wi wi-strong-wind"></i>
+         return <i className="wi wi-strong-wind" />
          
       default:
          return;
