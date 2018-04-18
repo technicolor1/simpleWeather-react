@@ -1,19 +1,5 @@
-.dailies {
-   margin: 5vh 5%;
-}
-
-#summary {
-   margin: 0 5% 15% 5%;
-   font-size: 18px;
-   color: rgb(40, 112, 114);
-}
-
-#week-summary {
-   font-style: italic;
-}
-
 .scrollables > .daily {
-   min-width: 300px;
+   min-width: 400px;
    border: 1px solid rgba(0, 0, 0, 0.3);
    text-align: center;
    font-size: 1.3em;
@@ -21,11 +7,45 @@
    margin: 5px;
 }
 
-.daily > h5 {
-   margin: 5% 0;
-   font-size: 20px;
+.daily > #time {
+   border: 1px solid rebeccapurple;
+   padding: 5%;
+   display: flex;
+   flex-direction: row;
+   white-space: nowrap;
+   align-items: center;
 }
 
-h2 {
-   font-size: 2em;
+.daily > #time > h5 {
+   margin: 0 0 0 10%;
+   font-size: 2rem;
+}
+
+.daily > #time > span {
+   font-size: 4rem;
+}
+
+.daily > #summary > h5 {
+   border: 1px solid salmon;
+   margin: 0;
+   font-size: 1.5rem;
+}
+
+.daily > #primary-info {
+   border: 1px solid aquamarine;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   padding: 0 5%;
+   font-size: 1.5rem;
+}
+
+#primary-info > #precip {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+}
+
+#precip > h5 {
+   margin: 0;
 }

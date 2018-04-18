@@ -30,7 +30,6 @@ class App extends React.Component {
       })
    }
 
-   // TODO: validate searchBoxInput
    searchLocate(val) {
       if (val === "") {
          console.log("Searchbox can't be empty");

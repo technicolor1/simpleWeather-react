@@ -1,5 +1,5 @@
 import React from 'react';
-import { percent,round, determineRain, weatherIcon } from './logic.js';
+import { percent, round, determineRain, weatherIcon, betterPrecipIntensity  } from './logic.js';
 import './Weekly.css';
 const Moment = window.moment;
 
@@ -13,7 +13,7 @@ export class Weekly extends React.Component {
       let id = 0;
       let main = [];
       data.forEach(day => {
-         const time = Moment.unix(day.time).format("ddd");
+         const time = Moment.unix(day.time).format("dddd");
          const sunrise = Moment.unix(day.sunriseTime).format("h:mm a");
          const sunset = Moment.unix(day.sunsetTime).format("h:mm a");
          const highTemp = round(day.apparentTemperatureHigh);
@@ -25,33 +25,33 @@ export class Weekly extends React.Component {
             return;
          }
          main.push(
-         <div key={id} className="daily">
-            <div id="time">
-               <span>{weatherIcon(day.icon)} </span><h5>{time}</h5>
-            </div>
-
-            <div id="summary">
-               <h5>{day.summary}</h5>
-            </div>
-
-            <div id="hl_temp">
-               <h5>{highTemp}°F / {lowTemp}°F</h5>               
-            </div>
-
-            <div id="precip">
-               <h5>{determineRain(day.precipProbability, day.precipType)}</h5>            
-            </div>
-
-            <div className="extras">
-               <div id="humidity">
-                  <h5><i className="wi wi-humidity" title="humidity"/> {percent(day.humidity)}%</h5>            
+            <div key={id} className="daily">
+               <div id="time">
+                  <span>{weatherIcon(day.icon)} </span><h5>{time}</h5>
                </div>
 
-               <div id="rise-set">
-                  <h5><i className="wi wi-sunrise"></i>{sunrise} <i className="wi wi-sunset"></i>{sunset}</h5>            
-               </div>            
+               <div id="summary">
+                  <h5>{day.summary}</h5>
+               </div>
+
+               <div id="primary-info">
+                  <h5>{highTemp}°F / {lowTemp}°F</h5>
+                  <div id="precip">
+                     {betterPrecipIntensity(day.precipIntensityMax)}
+                     <h5>{determineRain(day.precipProbability, day.precipType)}</h5>
+                  </div>
+               </div>
+
+               <div style={{ display: "none" }} className="extras">
+                  <div id="humidity">
+                     <h5><i className="wi wi-humidity" title="humidity" /> {percent(day.humidity)}%</h5>
+                  </div>
+
+                  <div id="rise-set">
+                     <h5><i className="wi wi-sunrise"></i>{sunrise} <i className="wi wi-sunset"></i>{sunset}</h5>
+                  </div>
+               </div>
             </div>
-         </div>
          )
          id++;
       })

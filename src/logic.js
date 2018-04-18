@@ -19,12 +19,10 @@ function determineRain(precipProb, precipType) {
 
       case "snow":
          return <span><i className="wi wi-snowflake-cold" /> {percent(precipProb)}%</span>;
-   
-      default:
-         return <span><i className="wi wi-raindrop" /> {percent(precipProb)}%</span>;         
-   }
 
-   // return `${precipType} ${percent(precipProb)}%`
+      default:
+         return <span><i className="wi wi-raindrop" /> {percent(precipProb)}%</span>;
+   }
 }
 
 function weatherIcon(icon) {
@@ -40,7 +38,7 @@ function weatherIcon(icon) {
 
       case 'partly-cloudy-night':
          return <i className="wi wi-night-partly-cloudy" />
-      
+
       case 'partly-cloudy-day':
          return <i className="wi wi-day-cloudy" />
 
@@ -49,7 +47,7 @@ function weatherIcon(icon) {
 
       case 'wind':
          return <i className="wi wi-strong-wind" />
-         
+
       default:
          return;
    }
@@ -92,4 +90,20 @@ function uvIndexColor(index) {
    }
 }
 
-export { percent, round, determineRain, weatherIcon, rotateWindBearing, uvIndexColor };
+function betterPrecipIntensity(val) {
+   if (val < 0.1) {
+      return;
+   }
+
+   return <h5>{val}</h5>
+}
+
+export {
+   percent,
+   round,
+   determineRain,
+   weatherIcon,
+   rotateWindBearing,
+   uvIndexColor,
+   betterPrecipIntensity
+};
