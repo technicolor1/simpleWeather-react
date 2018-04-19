@@ -57,10 +57,12 @@ class App extends React.Component {
          locality: ["locality", "political"],
          zip: ["postal_code"]
       }
-      let mainStatus = {
-         found: null,
-         status: null
-      }
+      // let = {
+      //    found: null,
+      //    status: null
+      // }
+
+      let found = null;
 
       if (data.status === "ZERO_RESULTS") {
          console.log("Location can't be found");
@@ -69,22 +71,22 @@ class App extends React.Component {
 
       for (let i = 0; i < data.results.length; i++) {
          if ((data.results[i].types).includes(validObj.locality[0]) && (data.results[i].types).includes(validObj.locality[1])) {
-            mainStatus.found = data.results[i];
+            found = data.results[i];
             break;
 
          } else if ((data.results[i].types).includes(validObj.zip[0])) {
-            mainStatus.found = data.results[i];
+            found = data.results[i];
             break;
 
          }
       }
 
-      if (mainStatus.found !== null) {
+      if (found !== null) {
          this.setState({
-            location: mainStatus.found.formatted_address
+            location: found.formatted_address
          })
 
-         this.fetchWeather(mainStatus.found.geometry.location.lat, mainStatus.found.geometry.location.lng);
+         this.fetchWeather(found.geometry.location.lat, found.geometry.location.lng);
       // TODO: friendlier alert
       } else {
          console.log("Try a different query");
@@ -106,6 +108,9 @@ class App extends React.Component {
             this.setState({
                weatherData: data
             })
+         })
+         .catch(error => {
+            console.log(error);
          })
    }
 
