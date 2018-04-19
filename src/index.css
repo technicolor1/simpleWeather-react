@@ -31,6 +31,7 @@ body {
 .scrollables {
    padding: 5px;
    display: flex;
+   flex-direction: column;
    width: 90vw;
    overflow-x: scroll;
    border: 1px solid blue;

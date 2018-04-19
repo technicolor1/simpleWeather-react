@@ -1,72 +1,59 @@
 .scrollables > .daily {
-   min-width: 400px;
-   min-height: 300px;
+   height: 150px;
    border: 1px solid rgba(0, 0, 0, 0.3);
    text-align: center;
    font-size: 1.3em;
-   overflow: hidden;
+   overflow: auto;
    margin: 5px;
    display: grid;
-   /* grid-template-rows: 1fr; */
+   grid-row: 1;
+   grid-template-columns: 1fr 2fr 1fr;
+}
+
+.daily > #icon {
+   grid-column: 1 / 2;
+   grid-row: 1 / 2;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin: 0;
+}
+
+.daily > #icon > span {
+   font-size: 3rem;
 }
 
 .daily > #time {
-   /* border: 1px solid rebeccapurple; */
-   padding: 3%;
-   display: flex;
-   flex-direction: row;
-   white-space: nowrap;
-   align-items: center;
+   grid-column: 2 / 3;
+   grid-row: 1 / 2;
+   text-align: left;
+   margin-left: 25px;
 }
 
 .daily > #time > h5 {
-   margin: 0 0 0 10%;
-   font-size: 1.5rem;
+   margin: 30px 0 0 0;
+   font-size: 1.2em;
 }
 
-.daily > #time > span {
-   font-size: 4rem;
+.daily > #other {
+   grid-column: 3 / 4;
+   grid-row: 1 / 2;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+}
+
+.daily > #other > h5 {
+   margin: 0;
 }
 
 .daily > #summary {
-   padding: 0 5%;
-   height: 50px;
+   grid-row: 2 / 3;
+   grid-column: 1 / 4;
+   text-align: left;
+   margin: 0 0 0 2%;
 }
 
-.daily > #summary > h5 {
-   /* border: 1px solid salmon; */
+.daily > #summary > p {
    margin: 0;
-   font-size: 1.1rem;
-}
-
-.daily > #primary-info {
-   /* border: 1px solid blueviolet; */
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   padding: 0 5%;
-   font-size: 1.5rem;
-}
-
-#primary-info > #highlow {
-   font-size: 2rem;
-}
-
-#primary-info > #precip {
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-}
-
-#precip > h5 {
-   margin: 0;
-}
-
-#morebox {
-   /* border: 1px solid saddlebrown; */
-   margin-top: auto;
-}
-
-#morebox > * {
-   margin: 5%;
 }

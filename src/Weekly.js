@@ -26,15 +26,25 @@ export class Weekly extends React.Component {
          }
          main.push(
             <div key={id} className="daily">
+               <div id="icon">
+                  <span>{weatherIcon(day.icon)} </span>
+               </div>
+
                <div id="time">
-                  <span>{weatherIcon(day.icon)} </span><h5>{time}</h5>
+                  <h5>{time}</h5>
                </div>
 
                <div id="summary">
-                  <h5>{day.summary}</h5>
+                  <p>{day.summary}</p>
                </div>
 
-               <div id="primary-info">
+               <div id="other">
+                  <h5>{highTemp}° · {lowTemp}°</h5>
+                  <h5>{determineRain(day.precipProbability, day.precipType)}</h5>
+                  {betterPrecipIntensity(day.precipIntensityMax)}
+               </div>
+
+               {/* <div id="primary-info">
                   <div id="highlow">
                      <h5>{highTemp}°F / {lowTemp}°F</h5>
                   </div>
@@ -46,7 +56,7 @@ export class Weekly extends React.Component {
 
                <div id="morebox">
                   <h5>More ></h5>
-               </div>
+               </div> */}
 
                <div style={{ display: "none" }} className="extras">
                   <div id="humidity">
