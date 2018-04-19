@@ -35,11 +35,17 @@ export class Weekly extends React.Component {
                </div>
 
                <div id="primary-info">
-                  <h5>{highTemp}°F / {lowTemp}°F</h5>
+                  <div id="highlow">
+                     <h5>{highTemp}°F / {lowTemp}°F</h5>
+                  </div>
                   <div id="precip">
                      {betterPrecipIntensity(day.precipIntensityMax)}
                      <h5>{determineRain(day.precipProbability, day.precipType)}</h5>
                   </div>
+               </div>
+
+               <div id="morebox">
+                  <h5>More ></h5>
                </div>
 
                <div style={{ display: "none" }} className="extras">

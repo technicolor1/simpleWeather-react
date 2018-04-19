@@ -37,7 +37,7 @@ function weatherIcon(icon) {
          return <i className="wi wi-rain" />
 
       case 'partly-cloudy-night':
-         return <i className="wi wi-night-partly-cloudy" />
+         return <i className="wi wi-night-alt-cloudy" />
 
       case 'partly-cloudy-day':
          return <i className="wi wi-day-cloudy" />

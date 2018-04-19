@@ -1,15 +1,18 @@
 .scrollables > .daily {
    min-width: 400px;
+   min-height: 300px;
    border: 1px solid rgba(0, 0, 0, 0.3);
    text-align: center;
    font-size: 1.3em;
-   overflow: scroll;
+   overflow: hidden;
    margin: 5px;
+   display: grid;
+   /* grid-template-rows: 1fr; */
 }
 
 .daily > #time {
-   border: 1px solid rebeccapurple;
-   padding: 5%;
+   /* border: 1px solid rebeccapurple; */
+   padding: 3%;
    display: flex;
    flex-direction: row;
    white-space: nowrap;
@@ -18,26 +21,35 @@
 
 .daily > #time > h5 {
    margin: 0 0 0 10%;
-   font-size: 2rem;
+   font-size: 1.5rem;
 }
 
 .daily > #time > span {
    font-size: 4rem;
 }
 
+.daily > #summary {
+   padding: 0 5%;
+   height: 50px;
+}
+
 .daily > #summary > h5 {
-   border: 1px solid salmon;
+   /* border: 1px solid salmon; */
    margin: 0;
-   font-size: 1.5rem;
+   font-size: 1.1rem;
 }
 
 .daily > #primary-info {
-   border: 1px solid aquamarine;
+   /* border: 1px solid blueviolet; */
    display: flex;
    flex-direction: row;
    justify-content: space-between;
    padding: 0 5%;
    font-size: 1.5rem;
+}
+
+#primary-info > #highlow {
+   font-size: 2rem;
 }
 
 #primary-info > #precip {
@@ -48,4 +60,13 @@
 
 #precip > h5 {
    margin: 0;
+}
+
+#morebox {
+   /* border: 1px solid saddlebrown; */
+   margin-top: auto;
+}
+
+#morebox > * {
+   margin: 5%;
 }
