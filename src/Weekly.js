@@ -43,21 +43,7 @@ export class Weekly extends React.Component {
                   <h5>{determineRain(day.precipProbability, day.precipType)}</h5>
                   {betterPrecipIntensity(day.precipIntensityMax)}
                </div>
-
-               {/* <div id="primary-info">
-                  <div id="highlow">
-                     <h5>{highTemp}°F / {lowTemp}°F</h5>
-                  </div>
-                  <div id="precip">
-                     {betterPrecipIntensity(day.precipIntensityMax)}
-                     <h5>{determineRain(day.precipProbability, day.precipType)}</h5>
-                  </div>
-               </div>
-
-               <div id="morebox">
-                  <h5>More ></h5>
-               </div> */}
-
+               
                <div style={{ display: "none" }} className="extras">
                   <div id="humidity">
                      <h5><i className="wi wi-humidity" title="humidity" /> {percent(day.humidity)}%</h5>
