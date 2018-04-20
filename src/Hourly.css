@@ -1,5 +1,8 @@
 .hourlies {
    margin: 5vh 5%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
 
 

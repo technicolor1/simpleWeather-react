@@ -33,12 +33,16 @@
    float: right;
 }
 
+#sum {
+   margin-bottom: 20px;
+}
+
 #other2 > span:first-child {
    float: left;
 }
 
 @media (max-width: 500px) {
    .currently {
-      min-width: 250px;
+      min-width: 325px;
    }
 }

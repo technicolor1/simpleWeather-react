@@ -51,14 +51,6 @@ export class Hourly extends React.Component {
                   <h5>{temp}°</h5>
                   <h5>{determineRain(hour.precipProbability, hour.precipType)}</h5>   
                </div>
-
-
-               {/* <h5 id="time">{time}</h5>
-               <h5>{hour.summary}</h5>
-               <h5>{temp}°F</h5>
-               <h5>{determineRain(hour.precipProbability, hour.precipType)}</h5>
-               <h5>Wind speed {round(hour.windSpeed)} mph</h5>
-               <h5>Humidity {percent(hour.humidity)}%</h5> */}
             </div>
          )
          i++;

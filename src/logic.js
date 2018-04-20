@@ -10,7 +10,17 @@ function round(val) {
 
 function determineRain(precipProb, precipType) {
    if (precipProb <= 0.10) {
-      return <span></span>;
+      switch (precipType) {
+         case "rain":
+            return <span><i className="wi wi-raindrop" /> 0%</span>;
+         
+         case "snow":
+            return <span><i className="wi wi-snowflake-cold" /> 0%</span>;
+         
+         default:
+            return <span><i className="wi wi-raindrop" /> 0%</span>;
+         
+      }
    }
 
    switch (precipType) {
@@ -95,7 +105,7 @@ function betterPrecipIntensity(val) {
       return;
    }
 
-   return <h5>{val}</h5>
+   return <h5>{val.toPrecision(2)}</h5>
 }
 
 export {
