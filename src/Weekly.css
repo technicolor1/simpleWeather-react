@@ -11,6 +11,7 @@
    font-size: 1.3em;
    overflow: auto;
    margin: 5px;
+   padding: 10px;
    display: grid;
    grid-template-columns: 1fr 2fr 1fr;
 }
@@ -56,9 +57,19 @@
    grid-row: 2 / 3;
    grid-column: 1 / 4;
    text-align: left;
-   margin: 0 0 0 2%;
+   margin: 0;
 }
 
 .daily > #summary > p {
    margin: 0;
+}
+
+@media (min-width: 500px) {
+   .daily > #other > h5 {
+      font-size: 1.15em;
+   }
+
+   .daily > #time > h5 {
+      font-size: 1.2em;
+   }
 }

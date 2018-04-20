@@ -46,3 +46,9 @@ button:hover {
    cursor: pointer;
    background-color: rgb(62, 99, 146);
 }
+
+@media (min-width: 700px) {
+   .scrollables {
+      width: 575px;
+   }
+}

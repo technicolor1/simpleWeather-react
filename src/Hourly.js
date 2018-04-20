@@ -44,10 +44,7 @@ export class Hourly extends React.Component {
 
                <div id="time">
                   <h5>{time}</h5>
-               </div>
-               
-               <div id="summary">
-                  <p>{hour.summary}</p>
+                  <h5>{hour.summary}</h5>
                </div>
 
                <div id="other">
