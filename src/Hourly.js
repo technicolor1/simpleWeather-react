@@ -1,5 +1,5 @@
 import React from 'react';
-import { percent, round, determineRain } from './logic.js';
+import { percent, round, determineRain, weatherIcon } from './logic.js';
 import './Hourly.css';
 const Moment = window.moment;
 
@@ -38,12 +38,30 @@ export class Hourly extends React.Component {
          const temp = round(hour.apparentTemperature);
          main.push(
             <div key={i} className="hourly">
-               <h5 id="time">{time}</h5>
+               <div id="icon">
+                  <span>{weatherIcon(hour.icon)}</span>
+               </div>
+
+               <div id="time">
+                  <h5>{time}</h5>
+               </div>
+               
+               <div id="summary">
+                  <p>{hour.summary}</p>
+               </div>
+
+               <div id="other">
+                  <h5>{temp}°</h5>
+                  <h5>{determineRain(hour.precipProbability, hour.precipType)}</h5>   
+               </div>
+
+
+               {/* <h5 id="time">{time}</h5>
                <h5>{hour.summary}</h5>
                <h5>{temp}°F</h5>
                <h5>{determineRain(hour.precipProbability, hour.precipType)}</h5>
                <h5>Wind speed {round(hour.windSpeed)} mph</h5>
-               <h5>Humidity {percent(hour.humidity)}%</h5>
+               <h5>Humidity {percent(hour.humidity)}%</h5> */}
             </div>
          )
          i++;

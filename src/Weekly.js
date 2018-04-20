@@ -13,7 +13,7 @@ export class Weekly extends React.Component {
       let id = 0;
       let main = [];
       data.forEach(day => {
-         const time = Moment.unix(day.time).format("dddd");
+         const time = Moment.unix(day.time).format("ddd");
          const sunrise = Moment.unix(day.sunriseTime).format("h:mm a");
          const sunset = Moment.unix(day.sunsetTime).format("h:mm a");
          const highTemp = round(day.apparentTemperatureHigh);
@@ -27,7 +27,7 @@ export class Weekly extends React.Component {
          main.push(
             <div key={id} className="daily">
                <div id="icon">
-                  <span>{weatherIcon(day.icon)} </span>
+                  <span>{weatherIcon(day.icon)}</span>
                </div>
 
                <div id="time">

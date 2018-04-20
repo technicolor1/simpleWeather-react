@@ -2,20 +2,64 @@
    margin: 5vh 5%;
 }
 
-#day-summary {
-   font-style: italic;
-}
 
 .scrollables > .hourly {
-   min-width: 250px;
-   height: 95%;
-   border: 1px solid red;
+   height: 125px;
+   border: 1px solid rgba(0, 0, 0, 0.3);
    text-align: center;
-   overflow: scroll;
    margin: 5px;
+   display: grid;
+   grid-template-columns: 1fr 2fr 1fr;
 }
 
 .hourly > h5 {
    margin: 5% 0;
    font-size: 20px;
+}
+
+.hourly > #icon {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   margin: 0;
+   grid-column: 1 / 2;
+   grid-row: 1 / 3;
+}
+
+.hourly > #icon > span {
+   font-size: 3rem;
+}
+
+.hourly > #time {
+   grid-column: 2 / 3;
+   grid-row: 1 / 2;
+   text-align: left;
+}
+
+.hourly > #time > h5 {
+   margin: 10px 0 0 0;
+   font-size: 1.15em;
+}
+
+.hourly > #other {
+   grid-column: 3 / 4;
+   grid-row: 1 / 3;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+}
+
+.hourly > #other > h5 {
+   font-size: 1.15em;
+   margin: 0;
+}
+
+.hourly > #summary {
+   grid-column: 2 / 3;
+   grid-row: 2 / 3;
+}
+
+.hourly > #summary > p {
+   margin: 0;
+   text-align: left;
 }
