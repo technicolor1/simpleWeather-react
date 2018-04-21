@@ -1,5 +1,5 @@
 import React from 'react';
-import { percent, round, determineRain, weatherIcon } from './logic.js';
+import { round, determineRain, weatherIcon } from './logic.js';
 import './Hourly.css';
 const Moment = window.moment;
 
@@ -8,16 +8,6 @@ export class Hourly extends React.Component {
       super(props)
 
       this.hourlyDiv = React.createRef();
-   }
-
-   componentDidUpdate() {
-      const hourlyComp = this.hourlyDiv.current;
-
-      if (hourlyComp !== null) {
-         if (hourlyComp.scrollLeft !== 0) {
-            hourlyComp.scrollLeft = 0;
-         }
-      }
    }
 
    handleHour(data) {

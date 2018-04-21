@@ -60,16 +60,6 @@ export class Weekly extends React.Component {
       return main;
    }
 
-   componentDidUpdate() {
-      // the user will not need to scroll to start 
-      const weeklyComp = this.weeklyDiv.current;
-      if (weeklyComp !== null) {
-         if (weeklyComp.scrollLeft !== 0) {
-            weeklyComp.scrollLeft = 0;
-         }
-      }
-   }
-
    render() {
       if (typeof this.props.weatherData === 'undefined') {
          return <div></div>
