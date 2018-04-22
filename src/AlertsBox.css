@@ -10,9 +10,26 @@
    flex-direction: column;
 }
 
-#desc > p {
-   padding: 3%;
-   text-indent: 5%;
+#infobox {
+   display: flex;
+   align-items: center;
+   padding: 1em;
+}
+
+#infobox > h3 {
+   margin: 0 0 0 1em;
+}
+
+#infobox > span {
+   font-size: 2em;
+}
+
+#infobox > span:first-child {
+   margin-right: auto;
+}
+
+#infobox > span:last-child {
+   margin-left: auto;
 }
 
 h3 > span {

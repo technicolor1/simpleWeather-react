@@ -10,12 +10,21 @@ export class SearchBox extends React.Component {
       }
 
       this.handleChange = this.handleChange.bind(this);
+      this.handleKeyPress = this.handleKeyPress.bind(this);
    }
 
    handleChange(event) {
       this.setState({
          searchBoxInput: event.target.value
       })
+   }
+
+   handleKeyPress(event) {
+      console.log(event.key === "Enter");
+
+      if (event.key === "Enter") {
+         this.props.locateCall(this.state.searchBoxInput);
+      }
    }
 
    render() {
@@ -31,6 +40,7 @@ export class SearchBox extends React.Component {
             <input
                autoFocus
                onChange={this.handleChange}
+               onKeyPress={this.handleKeyPress}
                id="pac-input"
                className="searchbox"
                type="text"
