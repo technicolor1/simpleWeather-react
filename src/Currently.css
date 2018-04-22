@@ -3,15 +3,23 @@
    padding: 15px;
    border: 1px solid green;
    text-align: center;
-   margin: 5vh 0;
-   font-size: 20px;
+   margin: 2.5em 0;
+   font-size: 1.5em;
    display: flex;
    flex-direction: column;
 	box-shadow: 0 16px 24px 2px rgba(0,0,0,0.14),0 6px 30px 5px rgba(0,0,0,0.12),0 8px 10px -7px rgba(0,0,0,0.2);   
 }
 
-#icon {
+.currently > #icon {
+   height: 10em;
+}
+
+#icon > span {
    font-size: 6em;
+}
+
+.currently > #icon > span > .wi {
+   line-height: 2;
 }
 
 #as-of > * {

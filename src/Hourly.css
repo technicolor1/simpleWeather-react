@@ -5,6 +5,9 @@
    align-items: center;
 }
 
+.hourlies > h2 {
+   font-size: 3em;
+}
 
 .scrollables > .hourly {
    height: 125px;

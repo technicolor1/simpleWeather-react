@@ -29,7 +29,7 @@ export class Currently extends React.Component {
                </div>
 
                <div id="icon">
-                  {weatherIcon(this.props.weatherData.icon)}
+                  <span>{weatherIcon(this.props.weatherData.icon)}</span>
                </div>
 
                <div id="temp">

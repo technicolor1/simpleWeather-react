@@ -66,7 +66,7 @@ export class Weekly extends React.Component {
       } else {
          return (
             <div className="dailies">
-               <h2>Week at a Glance</h2>
+               <h2>Weekly</h2>
                <h3 id="week-summary">{this.props.weatherData.summary}</h3>
                <div className="scrollables" ref={this.weeklyDiv}>
                   {this.handleDaily(this.props.weatherData.data)}

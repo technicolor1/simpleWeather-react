@@ -57,7 +57,7 @@ class App extends React.Component {
          locality: ["locality", "political"],
          zip: ["postal_code"]
       }
-      
+
       let found = null;
 
       if (data.status === "ZERO_RESULTS") {
@@ -274,7 +274,7 @@ const weatherSample = {
    "currently": {
       "time": 1523061480,
       "summary": "Light Rain",
-      "icon": "rain",
+      "icon": "partly-cloudy-day",
       "nearestStormDistance": 0,
       "precipIntensity": 0.012,
       "precipIntensityError": 0.005,

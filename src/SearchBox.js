@@ -20,8 +20,6 @@ export class SearchBox extends React.Component {
    }
 
    handleKeyPress(event) {
-      console.log(event.key === "Enter");
-
       if (event.key === "Enter") {
          this.props.locateCall(this.state.searchBoxInput);
       }
