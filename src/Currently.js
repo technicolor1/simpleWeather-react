@@ -4,15 +4,6 @@ import './Currently.css';
 const Moment = window.moment;
 
 export class Currently extends React.Component {
-   // ignore 0% chance
-   alternativeRain(val) {
-      if (val === "0%") {
-         return;
-      }
-
-      return val;
-   }
-
    render() {
       if (typeof this.props.weatherData === 'undefined') {
          return <div></div>
@@ -34,7 +25,7 @@ export class Currently extends React.Component {
 
                <div id="sum">
                   <h2>{summary}</h2>
-                  {this.alternativeRain(determineRain(precipProbability, precipType))}
+                  {determineRain(precipProbability, precipType)}
                </div>
 
                <div id="icon">

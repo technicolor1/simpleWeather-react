@@ -65,6 +65,14 @@
    margin: 0;
 }
 
+/* very small devices (iphone se) */
+@media (max-width: 400px) {
+   .daily > #summary > p {
+      font-size: 0.9em;
+   }
+}
+
+/* everything else */
 @media (min-width: 500px) {
    .daily > #other > h5 {
       font-size: 1.15em;
@@ -72,5 +80,9 @@
 
    .daily > #time > h5 {
       font-size: 1.2em;
+   }
+
+   .daily > #summary > p {
+      margin: 10px 0;
    }
 }
