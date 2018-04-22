@@ -31,5 +31,5 @@ h3 > span:first-child {
 }
 
 .alert > h3 {
-   margin-left: 20px;
+   margin: 20px;
 }

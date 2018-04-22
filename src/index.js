@@ -57,11 +57,7 @@ class App extends React.Component {
          locality: ["locality", "political"],
          zip: ["postal_code"]
       }
-      // let = {
-      //    found: null,
-      //    status: null
-      // }
-
+      
       let found = null;
 
       if (data.status === "ZERO_RESULTS") {
