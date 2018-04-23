@@ -9,6 +9,10 @@
    font-size: 3em;
 }
 
+.hourlies > .hourly-summary-box {
+   font-size: 1.2em;
+}
+
 .scrollables > .hourly {
    height: 125px;
    border: 1px solid rgba(0, 0, 0, 0.3);
@@ -69,5 +73,11 @@
 @media (max-width: 400px) {
    .hourly > #time > h5 {
       margin-left: 7%;
+   }
+}
+
+@media (min-width: 500px) {
+   .hourlies > .hourly-summary-box {
+      width: 575px;
    }
 }

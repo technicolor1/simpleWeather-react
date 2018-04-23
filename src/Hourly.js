@@ -4,12 +4,6 @@ import './Hourly.css';
 const Moment = window.moment;
 
 export class Hourly extends React.Component {
-   constructor(props) {
-      super(props)
-
-      this.hourlyDiv = React.createRef();
-   }
-
    handleHour(data) {
       let i = 10;
       let counter = 0;
@@ -55,8 +49,10 @@ export class Hourly extends React.Component {
          return (
             <div className="hourlies">
                <h2>By the Hour</h2>
-               <h3 id="day-summary">{this.props.weatherData.summary}</h3>
-               <div className="scrollables" ref={this.hourlyDiv}>
+               <div className="hourly-summary-box">
+                  <h3 id="day-summary">{this.props.weatherData.summary}</h3>
+               </div>
+               <div className="scrollables">
                   {this.handleHour(this.props.weatherData.data)}
                </div>
             </div>

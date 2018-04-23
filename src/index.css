@@ -3,13 +3,12 @@ body {
    padding: 0;
    height: 100%;
    color: #444;
+   font: 14px "Open Sans", Futura, sans-serif;
 }
 
 #root {
    display: flex;
    flex-direction: column;
-   font: 14px "Open Sans", Futura, sans-serif;
-   margin: 0 1%;
 }
 
 .main {

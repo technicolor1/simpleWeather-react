@@ -9,6 +9,11 @@
    font-size: 3em;
 }
 
+.dailies > .week-summary-box {
+   padding: 5px;
+   font-size: 1.2em;
+}
+
 .scrollables > .daily {
    height: 150px;
    border: 1px solid rgba(0, 0, 0, 0.3);
@@ -78,6 +83,10 @@
 
 /* everything else */
 @media (min-width: 500px) {
+   .dailies > .week-summary-box {
+      width: 550px;
+   }
+
    .daily > #other > h5 {
       font-size: 1.15em;
    }
