@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { percent } from './logic.js';
+import './Minutely.css';
 
 // chartjs
 let Chart = window.Chart;
@@ -10,10 +11,20 @@ export class Minutely extends React.Component {
       super(props)
 
    }
-   
+
+   componentWillReceiveProps(nextProps) {
+      if (typeof this.props.weatherData === "undefined") {
+         return;
+      }
+   }
+
    render() {
       return (
          <div className="minutely">
+            <h2>Next 60 minutes</h2>
+            <div className="minute-summary-box">
+               <h3 id="minute-summary">{this.props.weatherData.summary}</h3>
+            </div>
             <MinutelyChart weatherData={this.props.weatherData} />
          </div>
       )
@@ -23,34 +34,59 @@ export class Minutely extends React.Component {
 class MinutelyChart extends React.Component {
    constructor(props) {
       super(props)
-      
+
       this.state = {
          lineChart: null
       }
+
+      this.chartContainerRef = React.createRef();
+      this.createXArr = this.createXArr.bind(this);
    }
-   
+
+   createXArr() {
+      let Arr = [];
+      let counter = 0;
+
+      for (let i = 0; i <= 60; i++) {
+         if (i === 0) {
+            Arr[i] = '1min';
+            continue;
+         }
+
+         if (i % 10 === 0) {
+            counter += 10;
+            Arr[i] = counter + "min";
+            continue;
+         }
+
+         Arr[i] = "";
+      }
+
+      return Arr;
+   }
+
    componentWillReceiveProps(nextProps) {
       // catch react 'just checking in'
       if (typeof nextProps.weatherData === "undefined") {
          console.log("no data, react checking in");
          return;
       }
-   
+
       if (this.state.lineChart != null) {
          this.state.lineChart.destroy();
       }
-      
+
       const minutes = nextProps.weatherData.data;
-   
+
       const precipProbArr = minutes.map(minute => percent(minute.precipProbability));
       precipProbArr.splice(0, 1);
-   
+
       let lineChart = new Chart('chart', {
          type: 'line',
          data: {
-            labels: [...Array(60 + 1).keys()].slice(1),
+            labels: this.createXArr(),
             datasets: [{
-               backgroundColor: "rgb(62, 99, 146)",               
+               backgroundColor: "rgb(62, 99, 146)",
                data: precipProbArr
             }]
          },
@@ -72,7 +108,7 @@ class MinutelyChart extends React.Component {
                   scaleLabel: {
                      display: true,
                      labelString: "Chance"
-                  },   
+                  },
                   gridLines: {
                      display: true,
                      color: "rgba(0, 0, 0, 0.3)"
@@ -83,18 +119,11 @@ class MinutelyChart extends React.Component {
                   }
                }],
                xAxes: [{
-                  scaleLabel: {
-                     display: true,
-                     labelString: "mins"
-                  },
                   gridLines: {
                      display: false
                   },
                   ticks: {
-                     min: 1,
-                     max: 60,
-                     autoSkip: true,
-                     autoSkipPadding: 100
+                     autoSkip: false
                   }
                }]
             }
@@ -103,11 +132,12 @@ class MinutelyChart extends React.Component {
       this.setState({
          lineChart: lineChart
       })
+      this.chartContainerRef.current.style.display = "block";
    }
 
    render() {
       return (
-         <div className="chart-container" style={{ width: "50vw", height: "35vh"}}>
+         <div className="chart-container" ref={this.chartContainerRef}>
             <canvas id="chart" />
          </div>
       )
