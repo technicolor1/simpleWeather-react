@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { percent } from './logic.js';
 
 // chartjs
 let Chart = window.Chart;
@@ -8,51 +9,106 @@ export class Minutely extends React.Component {
    constructor(props) {
       super(props)
 
+   }
+   
+   render() {
+      return (
+         <div className="minutely">
+            <MinutelyChart weatherData={this.props.weatherData} />
+         </div>
+      )
+   }
+}
+
+class MinutelyChart extends React.Component {
+   constructor(props) {
+      super(props)
+      
       this.state = {
+         lineChart: null
+      }
+   }
+   
+   componentWillReceiveProps(nextProps) {
+      // catch react 'just checking in'
+      if (typeof nextProps.weatherData === "undefined") {
+         console.log("no data, react checking in");
+         return;
+      }
+   
+      if (this.state.lineChart != null) {
+         this.state.lineChart.destroy();
+      }
+      
+      const minutes = nextProps.weatherData.data;
+   
+      const precipProbArr = minutes.map(minute => percent(minute.precipProbability));
+      precipProbArr.splice(0, 1);
+   
+      let lineChart = new Chart('chart', {
+         type: 'line',
          data: {
-            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+            labels: [...Array(60 + 1).keys()].slice(1),
             datasets: [{
-               label: "Dataset #1",
-               backgroundColor: "rgba(255,99,132,0.2)",
-               borderColor: "rgba(255,99,132,1)",
-               borderWidth: 2,
-               hoverBackgroundColor: "rgba(255,99,132,0.4)",
-               hoverBorderColor: "rgba(255,99,132,1)",
-               data: [65, 59, 20, 81, 56, 55, 40],
+               backgroundColor: "rgb(62, 99, 146)",               
+               data: precipProbArr
             }]
          },
          options: {
             maintainAspectRatio: false,
+            tooltips: {
+               enabled: false
+            },
+            legend: {
+               display: false
+            },
+            elements: {
+               point: {
+                  radius: 0
+               }
+            },
             scales: {
                yAxes: [{
-                  stacked: true,
+                  scaleLabel: {
+                     display: true,
+                     labelString: "Chance"
+                  },   
                   gridLines: {
                      display: true,
-                     color: "rgba(255,99,132,0.2)"
+                     color: "rgba(0, 0, 0, 0.3)"
+                  },
+                  ticks: {
+                     min: 0,
+                     max: 100
                   }
                }],
                xAxes: [{
+                  scaleLabel: {
+                     display: true,
+                     labelString: "mins"
+                  },
                   gridLines: {
                      display: false
+                  },
+                  ticks: {
+                     min: 1,
+                     max: 60,
+                     autoSkip: true,
+                     autoSkipPadding: 100
                   }
                }]
             }
          }
-      }
-   }
-
-   componentDidMount() {
-      Chart.Bar('chart', {
-         data: this.state.data
       })
-      
+      this.setState({
+         lineChart: lineChart
+      })
    }
 
    render() {
       return (
-         <div className="chart-container">
-            <canvas id="chart">
-            </canvas>
+         <div className="chart-container" style={{ width: "50vw", height: "35vh"}}>
+            <canvas id="chart" />
          </div>
       )
    }
