@@ -98,7 +98,7 @@ class App extends React.Component {
       let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags&callback=?`;
 
       jquery.getJSON(darksky, (data) => {
-         console.log("sucess");
+         console.log("retrieving");
       })
          .done(data => {
             console.log(data);
@@ -109,23 +109,6 @@ class App extends React.Component {
          .fail((error) => {
             console.log(error);
          })
-
-      // fetch(darksky)
-      //    .then(response => {
-      //       console.log(response);
-      //       if (response.ok) {
-      //          return response.json();
-      //       }
-      //    })
-      //    .then(data => {
-      //       console.log(data);
-      //       this.setState({
-      //          weatherData: data
-      //       })
-      //    })
-      //    .catch(error => {
-      //       console.log(error);
-      //    })
    }
 
    handleGeo() {
