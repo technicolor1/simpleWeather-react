@@ -1,5 +1,5 @@
 import React from 'react';
-import { percent, round, determineRain, weatherIcon, betterPrecipIntensity  } from './logic.js';
+import { percent, round, determineRain, weatherIcon, betterPrecipIntensity, uvIndexColor, rotateWindBearing } from './logic.js';
 import './Weekly.css';
 const Moment = window.moment;
 
@@ -44,13 +44,25 @@ export class Weekly extends React.Component {
                   {betterPrecipIntensity(day.precipIntensityMax)}
                </div>
                
-               <div style={{ display: "none" }} className="extras">
-                  <div id="humidity">
-                     <h5><i className="wi wi-humidity" title="humidity" /> {percent(day.humidity)}%</h5>
+               <div className="extras">
+                  <div className="extras-child" id="humidity">
+                     <i className="wi wi-humidity" title="humidity" /> 
+                     <p>{percent(day.humidity)}%</p>
                   </div>
 
-                  <div id="rise-set">
-                     <h5><i className="wi wi-sunrise"></i>{sunrise} <i className="wi wi-sunset"></i>{sunset}</h5>
+                  <div className="extras-child" id="set">
+                     <i className="wi wi-sunset" />
+                     <p>{sunset}</p>
+                  </div>
+
+                  <div className="extras-child" id="uv">
+                     <p>UV Index</p>
+                     <p><span style={ uvIndexColor(day.uvIndex) }>{day.uvIndex}</span></p>
+                  </div>
+
+                  <div className="extras-child" id="wind">
+                     <p><span>{rotateWindBearing(day.windBearing)}</span></p>
+                     <p>{round(day.windSpeed)} mph</p>
                   </div>
                </div>
             </div>

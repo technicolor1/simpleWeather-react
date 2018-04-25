@@ -8,19 +8,18 @@
 .chart-container {
    display: none;
    width: 50vw;
-   height: 35vh;
+   height: 225px;
 }
 
-/* @media (max-width: 400px) {
+@media (max-width: 400px) {
    .chart-container {
-      width: 280px;
-      height: 280px;
+      width: 75vw;
+      height: 30vh;
    }
 }
 
-@media (min-width: 500px) {
+@media (min-width: 825px) {
    .chart-container {
-      width: 500px;
-      height: 300px;
+      width: 450px;
    }
-} */
+}
