@@ -10,20 +10,23 @@ export class Minutely extends React.Component {
    constructor(props) {
       super(props)
 
+      this.minutelyRef = React.createRef();
    }
 
-   componentWillReceiveProps(nextProps) {
-      if (typeof this.props.weatherData === "undefined") {
-         return;
+   handleSummary() {
+      if (typeof this.props.weatherData !== "undefined") {
+         this.minutelyRef.current.style.display = "flex";
+         return <h3 id="week-summary">{this.props.weatherData.summary}</h3>;
       }
+      return;
    }
 
    render() {
       return (
-         <div className="minutely">
+         <div className="minutely" ref={this.minutelyRef}>
             <h2>Next 60 minutes</h2>
             <div className="minute-summary-box">
-               <h3 id="minute-summary">{this.props.weatherData.summary}</h3>
+               {this.handleSummary()}
             </div>
             <MinutelyChart weatherData={this.props.weatherData} />
          </div>
@@ -43,12 +46,17 @@ class MinutelyChart extends React.Component {
       this.createXArr = this.createXArr.bind(this);
    }
 
+   // x-axis array for line chart
    createXArr() {
       let Arr = [];
       let counter = 0;
 
       for (let i = 0; i <= 60; i++) {
          if (i === 0) {
+            continue;
+         }
+
+         if (i === 1) {
             Arr[i] = '1min';
             continue;
          }
@@ -84,9 +92,10 @@ class MinutelyChart extends React.Component {
       let lineChart = new Chart('chart', {
          type: 'line',
          data: {
-            labels: this.createXArr(),
+            labels: this.createXArr().splice(1),
             datasets: [{
                backgroundColor: "rgb(62, 99, 146)",
+               borderColor: "rgb(62, 99, 146)",
                data: precipProbArr
             }]
          },

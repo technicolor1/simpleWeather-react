@@ -10,6 +10,8 @@ import { SearchBox } from './SearchBox.js';
 import { AlertsBox } from './AlertsBox.js';
 import { Minutely } from './Minutely.js';
 
+const jquery = window.jQuery;
+
 class App extends React.Component {
    constructor(props) {
       super(props);
@@ -92,23 +94,38 @@ class App extends React.Component {
    }
 
    fetchWeather(lat, long) {
-      let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags`;
+      let proxy = "https://cors-anywhere.herokuapp.com/";
+      let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags&callback=?`;
 
-      fetch(darksky)
-         .then(response => {
-            if (response.ok) {
-               return response.json();
-            }
-         })
-         .then(data => {
+      jquery.getJSON(darksky, (data) => {
+         console.log("sucess");
+      })
+         .done(data => {
             console.log(data);
             this.setState({
                weatherData: data
             })
          })
-         .catch(error => {
+         .fail((error) => {
             console.log(error);
          })
+
+      // fetch(darksky)
+      //    .then(response => {
+      //       console.log(response);
+      //       if (response.ok) {
+      //          return response.json();
+      //       }
+      //    })
+      //    .then(data => {
+      //       console.log(data);
+      //       this.setState({
+      //          weatherData: data
+      //       })
+      //    })
+      //    .catch(error => {
+      //       console.log(error);
+      //    })
    }
 
    handleGeo() {
