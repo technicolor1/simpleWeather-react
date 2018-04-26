@@ -74,7 +74,7 @@ export class Weekly extends React.Component {
 
    render() {
       if (typeof this.props.weatherData === 'undefined') {
-         return <div></div>
+         return null;
       } else {
          return (
             <div className="dailies">
