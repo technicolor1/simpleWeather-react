@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { percent } from './logic.js';
-import './Minutely.css';
+import './style/Minutely.css';
 
 // chartjs
 let Chart = window.Chart;
@@ -94,7 +94,7 @@ class MinutelyChart extends React.Component {
          data: {
             labels: this.createXArr().splice(1),
             datasets: [{
-               backgroundColor: "rgb(62, 99, 146)",
+               backgroundColor: "rgba(111, 159, 216, 0.5)",
                borderColor: "rgb(62, 99, 146)",
                data: precipProbArr
             }]
@@ -141,7 +141,6 @@ class MinutelyChart extends React.Component {
       this.setState({
          lineChart: lineChart
       })
-      this.chartContainerRef.current.style.display = "block";
    }
 
    render() {

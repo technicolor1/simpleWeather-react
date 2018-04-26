@@ -6,20 +6,20 @@
 }
 
 .chart-container {
-   display: none;
-   width: 50vw;
+   display: flex;
+   width: 450px;
    height: 225px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
    .chart-container {
       width: 75vw;
-      height: 30vh;
+      height: 25vh;
    }
 }
 
-@media (min-width: 825px) {
+/* @media (min-width: 825px) {
    .chart-container {
       width: 450px;
    }
-}
+} */

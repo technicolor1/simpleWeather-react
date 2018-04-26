@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './style/index.css';
 import { Header } from './Header.js';
 import { keys } from './config/config.js';
 import { Currently } from './Currently.js';

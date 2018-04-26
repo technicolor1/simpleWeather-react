@@ -1,6 +1,6 @@
 import React from 'react';
 import { round, determineRain, weatherIcon, rotateWindBearing, percent, uvIndexColor } from './logic.js';
-import './Currently.css';
+import './style/Currently.css';
 const Moment = window.moment;
 
 export class Currently extends React.Component {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { round, determineRain, weatherIcon } from './logic.js';
-import './Hourly.css';
+import './style/Hourly.css';
 const Moment = window.moment;
 
 export class Hourly extends React.Component {

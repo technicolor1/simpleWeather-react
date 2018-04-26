@@ -1,6 +1,6 @@
 import React from 'react';
 import { percent, round, determineRain, weatherIcon, betterPrecipIntensity, uvIndexColor, rotateWindBearing } from './logic.js';
-import './Weekly.css';
+import './style/Weekly.css';
 const Moment = window.moment;
 
 export class Weekly extends React.Component {

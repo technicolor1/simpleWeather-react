@@ -1,5 +1,5 @@
 import React from 'react';
-import './AlertsBox.css';
+import './style/AlertsBox.css';
 const Moment = window.moment;
 
 export class AlertsBox extends React.Component {
