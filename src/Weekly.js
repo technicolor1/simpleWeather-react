@@ -25,7 +25,7 @@ export class Weekly extends React.Component {
             return;
          }
          main.push(
-            <div key={id} className="daily">
+            <div key={id} className="daily" onClick={() => { console.log("Clicked on daily") }}>
                <div id="icon">
                   <span>{weatherIcon(day.icon)}</span>
                </div>
