@@ -81,12 +81,8 @@ class App extends React.Component {
       }
 
       if (found !== null) {
-         // this.setState({
-         //    location: found.formatted_address
-         // })
-
          this.fetchWeather(found.geometry.location.lat, found.geometry.location.lng, found.formatted_address);
-         // TODO: friendlier alert
+      // TODO: friendlier alert
       } else {
          console.log("Try a different query");
          return;
