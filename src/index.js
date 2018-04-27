@@ -81,11 +81,11 @@ class App extends React.Component {
       }
 
       if (found !== null) {
-         this.setState({
-            location: found.formatted_address
-         })
+         // this.setState({
+         //    location: found.formatted_address
+         // })
 
-         this.fetchWeather(found.geometry.location.lat, found.geometry.location.lng);
+         this.fetchWeather(found.geometry.location.lat, found.geometry.location.lng, found.formatted_address);
          // TODO: friendlier alert
       } else {
          console.log("Try a different query");
@@ -93,7 +93,7 @@ class App extends React.Component {
       }
    }
 
-   fetchWeather(lat, long) {
+   fetchWeather(lat, long, location) {
       let proxy = "https://cors-anywhere.herokuapp.com/";
       let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags&callback=?`;
 
@@ -103,6 +103,7 @@ class App extends React.Component {
          .done(data => {
             console.log(data);
             this.setState({
+               location: location,
                weatherData: data
             })
          })

@@ -13,14 +13,6 @@ export class Minutely extends React.Component {
       this.minutelyRef = React.createRef();
    }
 
-   handleSummary() {
-      if (typeof this.props.weatherData !== "undefined") {
-         this.minutelyRef.current.style.display = "flex";
-         return <h3 id="week-summary">{this.props.weatherData.summary}</h3>;
-      }
-      return;
-   }
-
    render() {
       if (typeof this.props.weatherData === "undefined") {
          return null;
@@ -49,7 +41,7 @@ class MinutelyChart extends React.Component {
       this.createXArr = this.createXArr.bind(this);
       this.lineChart = this.lineChart.bind(this);
    }
-   
+
    lineChart(nextProps) {
       if (this.state.lineChart != null) {
          this.setState({
