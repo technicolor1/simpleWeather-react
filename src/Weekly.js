@@ -11,26 +11,21 @@ export class Weekly extends React.Component {
       this.handleDivClick = this.handleDivClick.bind(this);
    }
 
-   handleDivClick(event) {
+   handleDivClick(event) {      
       // hide extras
-      // set height to normal
       if (event.currentTarget.children[1].style.display === "flex") {
          event.currentTarget.children[1].style.display = "none";
-         event.currentTarget.style.height = "150px";
          return;
       }
       // expand extras
-      // reflow height
       event.currentTarget.children[1].style.display = "flex";
-      event.currentTarget.style.height = "auto";
-
    }
 
    handleDaily(data) {
       let id = 0;
       let main = [];
 
-      let dailyArr = data.forEach(day => {
+      data.forEach(day => {
          const time = Moment.unix(day.time).format("ddd");
          const sunrise = Moment.unix(day.sunriseTime).format("h:mm a");
          const sunset = Moment.unix(day.sunsetTime).format("h:mm a");
@@ -39,7 +34,7 @@ export class Weekly extends React.Component {
 
          id++;
          main.push(
-         <div id={id} className="daily-wrapper" onClick={ this.handleDivClick }>
+         <div key={id} className="daily-wrapper" onClick={ this.handleDivClick }>
             {/* first el is the main div */}
             {/* second el is the extras div (hidden) */}
             <div className="daily">
@@ -80,6 +75,11 @@ export class Weekly extends React.Component {
                <div className="extras-child" id="wind">
                   <p><span>{rotateWindBearing(day.windBearing)}</span></p>
                   <p>{round(day.windSpeed)} mph</p>
+               </div>
+
+               <div className="extras-child" id="pressure">
+                  <p><span><i className="wi wi-barometer" /></span></p>
+                  <p>{day.pressure}</p>
                </div>
             </div>
          </div>
