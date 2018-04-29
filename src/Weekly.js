@@ -11,13 +11,17 @@ export class Weekly extends React.Component {
       this.handleDivClick = this.handleDivClick.bind(this);
    }
 
-   handleDivClick(event) {      
+   handleDivClick(event) {
       // hide extras
-      if (event.currentTarget.children[1].style.display === "flex") {
+      // hide hr
+      if (event.currentTarget.children[2].style.display === "flex") {
+         event.currentTarget.children[2].style.display = "none";
          event.currentTarget.children[1].style.display = "none";
          return;
       }
       // expand extras
+      // expand hr
+      event.currentTarget.children[2].style.display = "flex";
       event.currentTarget.children[1].style.display = "flex";
    }
 
@@ -34,55 +38,56 @@ export class Weekly extends React.Component {
 
          id++;
          main.push(
-         <div key={id} className="daily-wrapper" onClick={ this.handleDivClick }>
-            {/* first el is the main div */}
-            {/* second el is the extras div (hidden) */}
-            <div className="daily">
-               <div id="icon">
-                  <span>{weatherIcon(day.icon)}</span>
-               </div>
+            <div key={`Day-${id}`} className="daily-wrapper" onClick={this.handleDivClick}>
+               {/* first el is the main div */}
+               {/* second el is the extras div (hidden) */}
+               <div className="daily">
+                  <div id="icon">
+                     <span>{weatherIcon(day.icon)}</span>
+                  </div>
 
-               <div id="time">
-                  <h5>{time}</h5>
-               </div>
+                  <div id="time">
+                     <h5>{time}</h5>
+                  </div>
 
-               <div id="summary">
-                  <p>{day.summary}</p>
-               </div>
+                  <div id="summary">
+                     <p>{day.summary}</p>
+                  </div>
 
-               <div id="other">
-                  <h5>{highTemp}° · {lowTemp}°</h5>
-                  <h5>{determineRain(day.precipProbability, day.precipType)}</h5>
-                  {betterPrecipIntensity(day.precipIntensityMax)}
+                  <div id="other">
+                     <h5>{highTemp}° · {lowTemp}°</h5>
+                     <h5>{determineRain(day.precipProbability, day.precipType)}</h5>
+                     {betterPrecipIntensity(day.precipIntensityMax)}
+                  </div>
+               </div>
+               <hr style={{ display: "none" }} />
+               <div style={{ display: "none" }} className="extras">
+                  <div className="extras-child" id="humidity">
+                     <i className="wi wi-humidity" title="humidity" />
+                     <p>{percent(day.humidity)}%</p>
+                  </div>
+
+                  <div className="extras-child" id="set">
+                     <i className="wi wi-sunset" />
+                     <p>{sunset}</p>
+                  </div>
+
+                  <div className="extras-child" id="uv">
+                     <p>UV Index</p>
+                     <p><span style={uvIndexColor(day.uvIndex)}>{day.uvIndex}</span></p>
+                  </div>
+
+                  <div className="extras-child" id="wind">
+                     <p><span>{rotateWindBearing(day.windBearing)}</span></p>
+                     <p>{round(day.windSpeed)} mph</p>
+                  </div>
+
+                  <div className="extras-child" id="pressure">
+                     <p><span><i className="wi wi-barometer" /></span></p>
+                     <p>{day.pressure}</p>
+                  </div>
                </div>
             </div>
-            <div style={{ display: "none" }} className="extras">
-               <div className="extras-child" id="humidity">
-                  <i className="wi wi-humidity" title="humidity" />
-                  <p>{percent(day.humidity)}%</p>
-               </div>
-
-               <div className="extras-child" id="set">
-                  <i className="wi wi-sunset" />
-                  <p>{sunset}</p>
-               </div>
-
-               <div className="extras-child" id="uv">
-                  <p>UV Index</p>
-                  <p><span style={uvIndexColor(day.uvIndex)}>{day.uvIndex}</span></p>
-               </div>
-
-               <div className="extras-child" id="wind">
-                  <p><span>{rotateWindBearing(day.windBearing)}</span></p>
-                  <p>{round(day.windSpeed)} mph</p>
-               </div>
-
-               <div className="extras-child" id="pressure">
-                  <p><span><i className="wi wi-barometer" /></span></p>
-                  <p>{day.pressure}</p>
-               </div>
-            </div>
-         </div>
          )
       })
       return main;
