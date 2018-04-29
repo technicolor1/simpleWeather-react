@@ -14,14 +14,17 @@ export class AlertsBox extends React.Component {
 
 
    handleDesc(event) {
+      // rotate chevron 
       if (this.state.displayDiv === "none") {
          this.setState({
             displayDiv: "flex"
          })
+         event.currentTarget.style.transform = 'rotate(180deg)';
       } else {
          this.setState({
             displayDiv: "none"
          })
+         event.currentTarget.style.transform = '';         
       }
    }
 
@@ -54,6 +57,7 @@ export class AlertsBox extends React.Component {
    }
 
    componentWillUpdate() {
+      // hide all alerts at updates
       if (this.state.displayDiv === "flex") {
          this.setState({
             displayDiv: "none"
@@ -65,7 +69,7 @@ export class AlertsBox extends React.Component {
       let id = 0;
 
       let alertsArr = alerts.map(alert =>
-         <div key={id++}
+         <div key={`alert-${id++}`}
             style={this.handleColorSeverity(alert.severity)}
             className="alert">
             <h3>{alert.title} · Until {Moment.unix(alert.expires).format("dddd h:hh a")}</h3>
@@ -86,7 +90,7 @@ export class AlertsBox extends React.Component {
                   <h3>
                      There are warnings or advisories in your area
                   </h3>
-                  <span onClick={this.handleDesc}><i className="fas fa-chevron-down"></i></span>
+                  <span onClick={this.handleDesc}><i style={{ transform: this.state.displayDiv === "flex" ? "rotate(180deg)" : "" }}className="fas fa-chevron-down"></i></span>
                </div>
                <div id="collapsed-alerts">
                   {this.handleAlerts(this.props.alertData)}

@@ -78,12 +78,12 @@ export class Weekly extends React.Component {
                   </div>
 
                   <div className="extras-child" id="wind">
-                     <p><span>{rotateWindBearing(day.windBearing)}</span></p>
+                     {rotateWindBearing(day.windBearing)}
                      <p>{round(day.windSpeed)} mph</p>
                   </div>
 
                   <div className="extras-child" id="pressure">
-                     <p><span><i className="wi wi-barometer" /></span></p>
+                     <i className="wi wi-barometer" />
                      <p>{day.pressure}</p>
                   </div>
                </div>
