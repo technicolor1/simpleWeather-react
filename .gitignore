@@ -24,3 +24,4 @@ yarn-error.log*
 # api
 src/config/config.js
 src/config/darksky_example.json
+src/weatherSample.js

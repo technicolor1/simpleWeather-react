@@ -31,9 +31,7 @@ export class SearchBox extends React.Component {
             <button name="locater" onClick={() => { this.props.geoCall() }}>
                <i className="fas fa-location-arrow"></i>
             </button>
-            {/* Remove this near production */}
-            <button name="tester" onClick={() => { this.props.testerCall() }}>Test</button>            
-
+            
             {/* // TODO: add google searchbox */}
             <input
                autoFocus
