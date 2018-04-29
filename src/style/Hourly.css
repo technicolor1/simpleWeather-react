@@ -78,6 +78,6 @@
 
 @media (min-width: 500px) {
    .hourlies > .hourly-summary-box {
-      width: 575px;
+      width: 450px;
    }
 }

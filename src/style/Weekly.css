@@ -104,7 +104,7 @@
 /* everything else */
 @media (min-width: 500px) {
    .dailies > .week-summary-box {
-      width: 550px;
+      width: 450px;
    }
 
    .daily > #other > h5 {

@@ -77,7 +77,7 @@ export class AlertsBox extends React.Component {
 
    render() {
       if (this.props.alertData === '' || typeof this.props.alertData === 'undefined') {
-         return <div></div>;
+         return null;
       } else {
          return (
             <div className="alerts">
