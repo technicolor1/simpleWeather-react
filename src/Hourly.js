@@ -9,17 +9,20 @@ export class Hourly extends React.Component {
       let counter = 0;
       let main = [];
       for (let hour of data) {
+         const time = Moment.unix(hour.time).format("MMMM Do h a");
+         const temp = round(hour.apparentTemperature);
+
          // skip 0th hour
          if (counter === 0) {
             counter++;
             continue;
          }
+
          // end at 25th hr
          if (counter === 25) {
             break;
          }
-         const time = Moment.unix(hour.time).format("MMMM Do h a");
-         const temp = round(hour.apparentTemperature);
+         
          main.push(
             <div key={i} className="hourly">
                <div id="icon">

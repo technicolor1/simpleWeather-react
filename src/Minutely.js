@@ -45,10 +45,9 @@ class MinutelyChart extends React.Component {
    }
 
    lineChart(nextProps) {
+      // destroy existing chart
       if (this.state.lineChart != null) {
-         this.setState({
-            lineChart: null
-         })
+         this.state.lineChart.destroy();
       }
 
       let minutes = this.props.weatherData.data;
