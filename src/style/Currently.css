@@ -13,51 +13,48 @@
 	box-shadow: var(--shadow-level1);
 }
 
-#icon {
-   display: flex;
-   align-items: center;
-   justify-content: center;
-}
+   #icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1.5em 0;
+   }
 
-#icon > span {
-   font-size: 6em;
-}
+      .currently > #icon > span > i {
+         font-size: 6em;
+      }
 
-.currently > #icon > span > .wi {
-   line-height: 2;
-}
+   #as-of > * {
+      margin: 0;
+      font-style: italic;
+      color: #757575;
+   }
 
-#as-of > * {
-   margin: 0;
-   font-style: italic;
-   color: #757575;
-}
+   #temp > h1 {
+      margin-top: 0;
+   }
 
-#temp > h1 {
-   margin-top: 0;
-}
+   #other {
+      display: flex;
+      justify-content: space-between;
+   }
 
-#other {
-   display: flex;
-   justify-content: space-between;
-}
+   #other > span:first-child {
+      float: left;
+   }
 
-#other > span:first-child {
-   float: left;
-}
+   #other > span:last-child {
+      float: right;
+   }
 
-#other > span:last-child {
-   float: right;
-}
+   #other2 > span:first-child {
+      float: left;
+   }
 
-#other2 > span:first-child {
-   float: left;
-}
-
-#other > span:nth-child(1) > span {
-   padding: 3px;
-   border-radius: 3px;
-}
+      #other > span:nth-child(1) > span {
+         padding: 3px;
+         border-radius: 3px;
+      }
 
 /* everything else */
 @media (max-width: 500px) {

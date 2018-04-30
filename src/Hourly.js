@@ -9,20 +9,25 @@ export class Hourly extends React.Component {
       let counter = 0;
       let main = [];
       for (let hour of data) {
-         const time = Moment.unix(hour.time).format("MMMM Do h a");
-         const temp = round(hour.apparentTemperature);
-
          // skip 0th hour
          if (counter === 0) {
             counter++;
             continue;
          }
-
-         // end at 25th hr
-         if (counter === 25) {
+         
+         // end at 12th hr
+         if (counter === 13) {
             break;
          }
+
+         let time = Moment.unix(hour.time).format("h a");
          
+         // once 12am is reached, indicate that it is the next day
+         if (time === "12 am") {
+            console.log("It is next day", counter);
+            time = Moment.unix(hour.time).format("MMMM Do");
+         }
+
          main.push(
             <div key={i} className="hourly">
                <div id="icon">
@@ -31,11 +36,11 @@ export class Hourly extends React.Component {
 
                <div id="time">
                   <h5>{time}</h5>
-                  <h5>{hour.summary}</h5>
+                  <p>{hour.summary}</p>
                </div>
 
                <div id="other">
-                  <h5>{temp}°</h5>
+                  <h5>{round(hour.apparentTemperature)}°</h5>
                   <h5>{determineRain(hour.precipProbability, hour.precipType)}</h5>   
                </div>
             </div>

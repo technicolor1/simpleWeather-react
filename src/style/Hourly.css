@@ -58,11 +58,10 @@
       justify-content: space-around;
    }
 
-      .hourly > #time > h5 {
+      .hourly > #time > * {
          margin: 0;
-         font-size: 1.15em;
+         font-size: 1.3em;
       }
-
 
    .hourly > #other {
       grid-column: 3 / 4;
@@ -79,7 +78,7 @@
 
 /* very small devices (iphone se) */
 @media (max-width: 400px) {
-   .hourly > #time > h5 {
+   .hourly > #time > * {
       margin-left: 7%;
    }
 }
