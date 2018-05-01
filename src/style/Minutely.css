@@ -1,29 +1,24 @@
-:root {
-   --shadow-level1: 0 16px 24px 2px rgba(0,0,0,0.14),0 6px 30px 5px rgba(0,0,0,0.12),0 8px 10px -7px rgba(0,0,0,0.2);      
-}
-
 .minutely {
    padding: 1.5em;
    display: flex;
    flex-direction: column;
-   box-shadow: var(--shadow-level1);
 }
 
-.minutely-header > h2 {
-   font-size: 2em;
-   text-align: center;
-}
-
-.minute-summary-box > p {
-   font-size: 1.25em;
-}
-
-.chart-container {
-   display: flex;
-   width: 450px;
-   height: 225px;
-   padding: 0.5em;
-}
+   .minutely-header > h2 {
+      font-size: 2em;
+      text-align: center;
+   }
+   
+   .minute-summary-box > p {
+      font-size: 1.25em;
+   }
+   
+   .chart-container {
+      display: flex;
+      width: 450px;
+      height: 225px;
+      padding: 0.5em;
+   }
 
 @media (max-width: 600px) {
    .chart-container {

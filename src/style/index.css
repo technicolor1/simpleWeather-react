@@ -1,13 +1,18 @@
 :root {
    --shadow-level1: 0 16px 24px 2px rgba(0,0,0,0.14),0 6px 30px 5px rgba(0,0,0,0.12),0 8px 10px -7px rgba(0,0,0,0.2);
    --shadow-level2: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.12),0 1px 5px 0 rgba(0,0,0,0.2);
+   --bodyFontColor: #444;
 }
+
+/*  */
+/* top-level component styling */
+/*  */
 
 body {
    margin: 0;
    padding: 0;
    height: 100%;
-   color: #444;
+   color: var(--bodyFontColor);
    font: 14px "Open Sans", Futura, sans-serif;
 }
 
@@ -24,12 +29,24 @@ body {
    flex: 1;
 }
 
-.footer {
-   padding: 1rem;
-   text-align: center;
-   background-color: #efefef;
-   margin-top: 5vh;
-   font-size: 18px;
+.currently {
+   box-shadow: var(--shadow-level1);
+}
+
+.alerts {
+   box-shadow: var(--shadow-level1);
+}
+
+.minutely {
+   box-shadow: var(--shadow-level1);   
+}
+
+.dailies {
+   box-shadow: var(--shadow-level1);
+}
+
+.hourlies {
+   box-shadow: var(--shadow-level1);   
 }
 
 .scrollables {
@@ -40,13 +57,32 @@ body {
    overflow-x: scroll;
 }
 
+   .hourly {
+      box-shadow: var(--shadow-level2);      
+   }
+
+   .daily-wrapper {
+      box-shadow: var(--shadow-level2);
+   }
+
+.footer {
+   padding: 1rem;
+   text-align: center;
+   background-color: #efefef;
+   margin-top: 5vh;
+   font-size: 18px;
+}
+
 button {
-   border-radius: 10px;
+   border-radius: 7px;
+   font-size: 2em;
+   transition: 0.15s ease-in;
 }
 
 button:hover {
    cursor: pointer;
    background-color: rgb(62, 99, 146);
+   color: whitesmoke;
 }
 
 @media (min-width: 700px) {
