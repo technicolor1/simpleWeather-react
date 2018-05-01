@@ -113,8 +113,7 @@ class MinutelyChart extends React.Component {
    }
 
    componentDidMount() {
-      // render chart once specific element painted
-      console.log("MinutelyChart mounted");      
+      // render chart once container exists in dom
       this.lineChart();
    }
    

@@ -32,10 +32,6 @@
       box-shadow: var(--shadow-level3);
    }
 
-      .daily-wrapper > hr {
-         margin: 1.25em 0;
-      }
-
 /*  */
 /* Grid template for main daily content */
 /*  */
@@ -93,29 +89,32 @@
 /* Extras content */
 /*  */
 
-.daily-wrapper > .extras {
+.daily-wrapper > .extras-wrapper > .extras {
    display: flex;
    flex-direction: row;
    justify-content: space-evenly;
    align-items: center;
    flex-wrap: wrap;
 }
+   .extras-wrapper > hr {
+      margin: 1.25em 0;
+   }
 
    .extras > .extras-child {
       margin: 0.5em;
    }
 
-   .extras > .extras-child > p {
-      font-size: var(--extrasFontSize);
-      margin: 0.25em 0;
-   }
+      .extras > .extras-child > p {
+         font-size: var(--extrasFontSize);
+         margin: 0.25em 0;
+      }
 
-   .extras > .extras-child > i {
-      font-size: 1.3em;
-   }
+      .extras > .extras-child > i {
+         font-size: 1.3em;
+      }
 
    .extras > #uv > p > span {
-      padding: 3px;
+      padding: 0 3px;
       border-radius: 3px;
    }
 

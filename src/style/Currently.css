@@ -52,7 +52,7 @@
    }
 
       #other > span:nth-child(1) > span {
-         padding: 3px;
+         padding: 0 3px;
          border-radius: 3px;
       }
 

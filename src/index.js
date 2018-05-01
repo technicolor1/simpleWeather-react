@@ -136,7 +136,6 @@ class App extends React.Component {
    }
 
    shouldComponentUpdate() {
-      console.log("index.js re-rendered");
       return true;
    }
 
