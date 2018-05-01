@@ -10,7 +10,6 @@ export class Minutely extends React.Component {
    constructor(props) {
       super(props)
 
-      this.minutelyRef = React.createRef();
    }
 
    render() {
@@ -18,7 +17,7 @@ export class Minutely extends React.Component {
          return null;
       }
       return (
-         <div className="minutely" ref={this.minutelyRef}>
+         <div className="minutely">
             <div className="minutely-header">
                <h2>Next 60 minutes</h2>
             </div>
@@ -39,7 +38,6 @@ class MinutelyChart extends React.Component {
          lineChart: null
       }
 
-      this.chartContainerRef = React.createRef();
       this.createXArr = this.createXArr.bind(this);
       this.lineChart = this.lineChart.bind(this);
    }
@@ -156,7 +154,7 @@ class MinutelyChart extends React.Component {
 
    render() {
       return (
-         <div className="chart-container" ref={this.chartContainerRef}>
+         <div className="chart-container">
             <canvas id="chart" />
          </div>
       )
