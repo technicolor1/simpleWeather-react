@@ -25,7 +25,6 @@ export class Currently extends React.Component {
 
                <div id="sum">
                   <h2>{summary}</h2>
-                  {determineRain(precipProbability, precipType)}
                </div>
 
                <div id="icon">

@@ -26,17 +26,26 @@ export class Weekly extends React.Component {
    }
 
    handleDaily(data) {
+      let counter = 0;
       let id = 0;
       let main = [];
 
       data.forEach(day => {
-         const time = Moment.unix(day.time).format("ddd");
-         const sunrise = Moment.unix(day.sunriseTime).format("h:mm a");
+         let time = Moment.unix(day.time).format("ddd");
          const sunset = Moment.unix(day.sunsetTime).format("h:mm a");
-         const highTemp = round(day.apparentTemperatureHigh);
-         const lowTemp = round(day.apparentTemperatureLow);
+
+         // 0th day is today
+         if (counter === 0) {
+            time = "Today";
+         }
+
+         // 1st day is tomorrow
+         if (counter === 1) {
+            time = "Tomorrow";
+         }
 
          id++;
+         counter++;
          main.push(
             <div key={`Day-${id}`} className="daily-wrapper" onClick={this.handleDivClick}>
                {/* first el is the main div */}
@@ -55,7 +64,7 @@ export class Weekly extends React.Component {
                   </div>
 
                   <div id="other">
-                     <h5>{highTemp}° · {lowTemp}°</h5>
+                     <h5>{round(day.apparentTemperatureHigh)}° · {round(day.apparentTemperatureLow)}°</h5>
                      <h5>{determineRain(day.precipProbability, day.precipType)}</h5>
                      {betterPrecipIntensity(day.precipIntensityMax)}
                   </div>

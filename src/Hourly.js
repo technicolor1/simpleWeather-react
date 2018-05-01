@@ -24,7 +24,6 @@ export class Hourly extends React.Component {
          
          // once 12am is reached, indicate that it is the next day
          if (time === "12 am") {
-            console.log("It is next day", counter);
             time = Moment.unix(hour.time).format("MMMM Do");
          }
 
