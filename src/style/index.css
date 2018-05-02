@@ -13,7 +13,7 @@ body {
    padding: 0;
    height: 100%;
    color: var(--bodyFontColor);
-   font: 14px "Open Sans", Futura, sans-serif;
+   font: 15px "Open Sans", Futura, sans-serif;
 }
 
 #root {
@@ -84,6 +84,11 @@ button:hover {
    background-color: rgb(62, 99, 146);
    color: whitesmoke;
 }
+
+/* breakpoints guide= */
+/* min-width 500px */
+/* max-width 500px */
+/* min-width 700px */
 
 @media (min-width: 700px) {
    .scrollables {

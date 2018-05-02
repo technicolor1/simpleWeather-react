@@ -15,14 +15,16 @@
    
    .chart-container {
       display: flex;
-      width: 450px;
-      height: 225px;
+      /* width: 450px;
+      height: 225px; */
+      width: 72vw;
+      height: 25vh;
       padding: 0.5em;
    }
 
-@media (max-width: 600px) {
+@media (min-width: 500px) {
    .chart-container {
-      width: 75vw;
-      height: 25vh;
+      width: 375px;
+      height: 220px;
    }
 }

@@ -40,7 +40,7 @@ export class Hourly extends React.Component {
 
                <div id="other">
                   <h5>{round(hour.apparentTemperature)}°</h5>
-                  <h5>{determineRain(hour.precipProbability, hour.precipType)}</h5>   
+                  {determineRain(hour.precipProbability, hour.precipType)} 
                </div>
             </div>
          )

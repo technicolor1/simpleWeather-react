@@ -61,7 +61,7 @@ export class Weekly extends React.Component {
 
                   <div id="other">
                      <h5>{round(day.apparentTemperatureHigh)}° · {round(day.apparentTemperatureLow)}°</h5>
-                     <h5>{determineRain(day.precipProbability, day.precipType)}</h5>
+                     {determineRain(day.precipProbability, day.precipType)}
                      {betterPrecipIntensity(day.precipIntensityMax)}
                   </div>
                </div>

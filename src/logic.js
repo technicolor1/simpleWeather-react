@@ -15,13 +15,13 @@ function determineRain(precipProb, precipType) {
 
    switch (precipType) {
       case "rain":
-         return <span><i className="wi wi-raindrop" /> {percent(precipProb)}%</span>;
+         return <h5><span><i className="wi wi-raindrop" /> {percent(precipProb)}%</span></h5>;
 
       case "snow":
-         return <span><i className="wi wi-snowflake-cold" /> {percent(precipProb)}%</span>;
+         return <h5><span><i className="wi wi-snowflake-cold" /> {percent(precipProb)}%</span></h5>;
 
       default:
-         return <span><i className="wi wi-raindrop" /> {percent(precipProb)}%</span>;
+         return <h5><span><i className="wi wi-raindrop" /> {percent(precipProb)}%</span></h5>;
    }
 }
 
