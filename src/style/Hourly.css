@@ -68,16 +68,12 @@
       justify-content: space-evenly;
    }
 
-      .hourly > #other > h5 {
-         margin: 0;
-      }
-
       @media (min-width: 1000px) {
          font-size: 22px;
       }
 
 /* very small devices (iphone se) */
-@media (max-width: 400px) {
+/* @media (max-width: 400px) {
    .hourly > #time > * {
       margin-left: 7%;
    }
@@ -87,4 +83,4 @@
    .hourlies > .hourly-summary-box {
       width: 450px;
    }
-}
+} */

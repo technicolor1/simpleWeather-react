@@ -28,7 +28,7 @@ export class Hourly extends React.Component {
          }
 
          main.push(
-            <div key={i} className="hourly">
+            <div key={`Hour-${i}`} className="hourly weather-step">
                <div id="icon">
                   <span>{weatherIcon(hour.icon)}</span>
                </div>

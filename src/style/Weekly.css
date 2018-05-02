@@ -18,7 +18,6 @@
       height: auto;
       border: 1px solid rgba(0, 0, 0, 0.3);
       text-align: center;
-      font-size: 1.3em;
       overflow: auto;
       margin: 5px;
       padding: 10px;
@@ -65,10 +64,6 @@
       flex-direction: column;
       justify-content: space-evenly;
    }
-
-      .daily > #other > h5 {
-         margin: 0;
-      }
 
    .daily > #summary {
       grid-row: 2 / 3;
@@ -122,13 +117,13 @@
       width: 450px;
    }
 
-   .daily > #other > h5 {
+   /* .daily > #other > h5 {
       font-size: 1.15em;
    }
 
    .daily > #time > h5 {
       font-size: 1.2em;
-   }
+   } */
 
    .daily > #summary > p {
       margin: 10px 0;

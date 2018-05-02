@@ -29,6 +29,11 @@ body {
    flex: 1;
 }
 
+.weather-step > #other > h5 {
+   margin: 0;
+   font-size: 1.3em;
+}
+
 .currently {
    box-shadow: var(--shadow-level1);
 }

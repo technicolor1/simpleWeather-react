@@ -28,7 +28,6 @@ export class Weekly extends React.Component {
 
       data.forEach(day => {
          let time = Moment.unix(day.time).format("ddd");
-         const sunset = Moment.unix(day.sunsetTime).format("h:mm a");
 
          // 0th day is today
          if (counter === 0) {
@@ -46,7 +45,7 @@ export class Weekly extends React.Component {
             <div key={`Day-${id}`} className="daily-wrapper" onClick={this.handleDivClick}>
                {/* first el is the main div */}
                {/* second el is the extras div (hidden) */}
-               <div className="daily">
+               <div className="daily weather-step">
                   <div id="icon">
                      <span>{weatherIcon(day.icon)}</span>
                   </div>
@@ -75,7 +74,7 @@ export class Weekly extends React.Component {
 
                      <div className="extras-child" id="set">
                         <i className="wi wi-sunset" />
-                        <p>{sunset}</p>
+                        <p>{Moment.unix(day.sunsetTime).format("h:mm a")}</p>
                      </div>
 
                      <div className="extras-child" id="uv">
