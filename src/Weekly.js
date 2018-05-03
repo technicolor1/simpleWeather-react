@@ -27,16 +27,33 @@ export class Weekly extends React.Component {
       let main = [];
 
       data.forEach(day => {
-         let time = Moment.unix(day.time).format("ddd");
+         const {
+            time,
+            icon,
+            summary,
+            apparentTemperatureHigh,
+            apparentTemperatureLow,
+            precipProbability,
+            precipType,
+            precipIntensityMax,
+            humidity,
+            sunsetTime,
+            uvIndex,
+            windBearing,
+            windSpeed,
+            pressure
+         } = day;
+         
+         let timeFormatted = Moment.unix(time).format("ddd");
 
          // 0th day is today
          if (counter === 0) {
-            time = "Today";
+            timeFormatted = "Today";
          }
 
          // 1st day is tomorrow
          if (counter === 1) {
-            time = "Tomorrow";
+            timeFormatted = "Tomorrow";
          }
 
          id++;
@@ -47,21 +64,21 @@ export class Weekly extends React.Component {
                {/* second el is the extras div (hidden) */}
                <div className="daily weather-step">
                   <div id="icon">
-                     <span>{weatherIcon(day.icon)}</span>
+                     <span>{weatherIcon(icon)}</span>
                   </div>
 
                   <div id="time">
-                     <h5>{time}</h5>
+                     <h5>{timeFormatted}</h5>
                   </div>
 
                   <div id="summary">
-                     <p>{day.summary}</p>
+                     <p>{summary}</p>
                   </div>
 
                   <div id="other">
-                     <h5>{round(day.apparentTemperatureHigh)}° · {round(day.apparentTemperatureLow)}°</h5>
-                     {determineRain(day.precipProbability, day.precipType)}
-                     {betterPrecipIntensity(day.precipIntensityMax)}
+                     <h5>{round(apparentTemperatureHigh)}° · {round(apparentTemperatureLow)}°</h5>
+                     {determineRain(precipProbability, precipType)}
+                     {betterPrecipIntensity(precipIntensityMax)}
                   </div>
                </div>
                <div style={{ display: "none" }} className="extras-wrapper">
@@ -69,27 +86,27 @@ export class Weekly extends React.Component {
                   <div className="extras">
                      <div className="extras-child" id="humidity">
                         <i className="wi wi-humidity" title="humidity" />
-                        <p>{percent(day.humidity)}%</p>
+                        <p>{percent(humidity)}%</p>
                      </div>
 
                      <div className="extras-child" id="set">
                         <i className="wi wi-sunset" />
-                        <p>{Moment.unix(day.sunsetTime).format("h:mm a")}</p>
+                        <p>{Moment.unix(sunsetTime).format("h:mm a")}</p>
                      </div>
 
                      <div className="extras-child" id="uv">
                         <p>UV Index</p>
-                        <p><span style={uvIndexColor(day.uvIndex)}>{day.uvIndex}</span></p>
+                        <p><span style={uvIndexColor(uvIndex)}>{uvIndex}</span></p>
                      </div>
 
                      <div className="extras-child" id="wind">
-                        {rotateWindBearing(day.windBearing)}
-                        <p>{round(day.windSpeed)} mph</p>
+                        {rotateWindBearing(windBearing)}
+                        <p>{round(windSpeed)} mph</p>
                      </div>
 
                      <div className="extras-child" id="pressure">
                         <i className="wi wi-barometer" />
-                        <p>{day.pressure}</p>
+                        <p>{pressure}</p>
                      </div>
                   </div>
                </div>
