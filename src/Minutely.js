@@ -13,7 +13,11 @@ export class Minutely extends React.Component {
    }
 
    render() {
-      if (typeof this.props.weatherData === "undefined") {
+      const {
+         weatherData
+      } = this.props;
+
+      if (typeof weatherData === "undefined") {
          return null;
       }
       return (
@@ -22,9 +26,9 @@ export class Minutely extends React.Component {
                <h2>Next 60 minutes</h2>
             </div>
             <div className="minute-summary-box">
-               <p>{this.props.weatherData.summary}</p>
+               <p>{weatherData.summary}</p>
             </div>
-            <MinutelyChart weatherData={this.props.weatherData} />
+            <MinutelyChart weatherData={weatherData} />
          </div>
       )
    }

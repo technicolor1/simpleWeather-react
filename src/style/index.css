@@ -29,9 +29,15 @@ body {
    flex: 1;
 }
 
-.weather-step > #other > h5 {
+.weather-step #other h5 {
    margin: 0;
-   font-size: 1.3em;
+   font-size: 4.25vw;
+}
+
+@media (min-width: 450px) {
+   .weather-step #other h5 {
+      font-size: 1.25em;
+   }
 }
 
 .currently {
@@ -46,20 +52,23 @@ body {
    box-shadow: var(--shadow-level1);   
 }
 
-.dailies {
+.detail-wrapper {
    box-shadow: var(--shadow-level1);
+   width: 90vw;   
 }
 
-.hourlies {
-   box-shadow: var(--shadow-level1);   
+@media (min-width: 600px) {
+   .detail-wrapper {
+      width: 575px;
+   }
 }
 
 .scrollables {
    padding: 5px;
    display: flex;
    flex-direction: column;
-   width: 85vw;
    overflow-x: scroll;
+   width: 97%;
 }
 
    .hourly {
@@ -94,9 +103,3 @@ button:hover {
 /* min-width 500px */
 /* max-width 500px */
 /* min-width 700px */
-
-@media (min-width: 700px) {
-   .scrollables {
-      width: 575px;
-   }
-}

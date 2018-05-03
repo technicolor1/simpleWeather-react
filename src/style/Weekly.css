@@ -10,7 +10,7 @@
    }
 
    .dailies > .week-summary-box {
-      padding: 0 1em;
+      width: 80%;
       font-size: 1.2em;
    }
 
@@ -46,6 +46,8 @@
       }
 
    .daily > #time {
+      display: flex;
+      align-items: center;
       grid-column: 2 / 3;
       grid-row: 1 / 2;
       text-align: left;
@@ -54,7 +56,13 @@
 
       .daily > #time > h5 {
          margin: 1em 0;
-         font-size: 1.15em;
+         font-size: 4.5vw;
+      }
+
+      @media (min-width: 450px) {
+         .daily #time h5 {
+            font-size: 1.5em;
+         }
       }
 
    .daily > #other {
@@ -103,29 +111,3 @@
       padding: 0 3px;
       border-radius: 3px;
    }
-
-/* very small devices (iphone se) */
-@media (max-width: 400px) {
-   .daily > #summary > p {
-      font-size: 0.9em;
-   }
-}
-
-/* everything else */
-@media (min-width: 500px) {
-   .dailies > .week-summary-box {
-      width: 450px;
-   }
-
-   /* .daily > #other > h5 {
-      font-size: 1.15em;
-   }
-
-   .daily > #time > h5 {
-      font-size: 1.2em;
-   } */
-
-   .daily > #summary > p {
-      margin: 10px 0;
-   }
-}

@@ -100,17 +100,21 @@ export class Weekly extends React.Component {
    }
 
    render() {
-      if (typeof this.props.weatherData === 'undefined') {
+      const {
+         weatherData
+      } = this.props;
+
+      if (typeof weatherData === 'undefined') {
          return null;
       } else {
          return (
-            <div className="dailies">
+            <div className="dailies detail-wrapper">
                <h2>Weekly</h2>
                <div className="week-summary-box">
-                  <h3 id="week-summary">{this.props.weatherData.summary}</h3>
+                  <p id="week-summary">{weatherData.summary}</p>
                </div>
                <div className="scrollables" ref={this.weeklyDiv}>
-                  {this.handleDaily(this.props.weatherData.data)}
+                  {this.handleDaily(weatherData.data)}
                </div>
             </div>
          )

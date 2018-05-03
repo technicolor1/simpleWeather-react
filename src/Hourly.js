@@ -50,17 +50,21 @@ export class Hourly extends React.Component {
       return main;
    }
    render() {
-      if (typeof this.props.weatherData === 'undefined') {
+      const {
+         weatherData
+      } = this.props;
+      
+      if (typeof weatherData === 'undefined') {
          return null;
       } else {
          return (
-            <div className="hourlies">
+            <div className="hourlies detail-wrapper">
                <h2>By the Hour</h2>
                <div className="hourly-summary-box">
-                  <h3 id="day-summary">{this.props.weatherData.summary}</h3>
+                  <p id="day-summary">{weatherData.summary}</p>
                </div>
                <div className="scrollables">
-                  {this.handleHour(this.props.weatherData.data)}
+                  {this.handleHour(weatherData.data)}
                </div>
             </div>
          )

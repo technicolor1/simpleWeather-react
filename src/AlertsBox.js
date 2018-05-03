@@ -80,7 +80,11 @@ export class AlertsBox extends React.Component {
    }
 
    render() {
-      if (this.props.alertData === '' || typeof this.props.alertData === 'undefined') {
+      const {
+         alertData
+      } = this.props;
+
+      if (typeof alertData === 'undefined') {
          return null;
       } else {
          return (
@@ -93,7 +97,7 @@ export class AlertsBox extends React.Component {
                   <span onClick={this.handleDesc}><i style={{ transform: this.state.displayDiv === "flex" ? "rotate(180deg)" : "" }}className="fas fa-chevron-down"></i></span>
                </div>
                <div id="collapsed-alerts">
-                  {this.handleAlerts(this.props.alertData)}
+                  {this.handleAlerts(alertData)}
                </div>
             </div>
          )
