@@ -127,7 +127,7 @@ export class Weekly extends React.Component {
          return (
             <div className="dailies">
                <h2>Weekly</h2>
-               <div className="summary week-summary-box">
+               <div className="main-summary week-summary-box">
                   <p id="week-summary">{weatherData.summary}</p>
                </div>
                <div className="scrollables" ref={this.weeklyDiv}>

@@ -13,7 +13,7 @@ body {
    padding: 0;
    height: 100%;
    color: var(--bodyFontColor);
-   font: 15px "Open Sans", Futura, sans-serif;
+   font: 14px "Open Sans", Futura, sans-serif;
    background: #eeeeee;
 }
 
@@ -28,6 +28,11 @@ body {
    justify-content: center;
    flex-direction: column;
    flex: 1;
+}
+
+.header {
+   font-size: 1.75em;
+   text-align: center;
 }
 
 .weatherCells {
@@ -107,10 +112,20 @@ body {
    width: 97%;
 }
 
-.summary {
-   width: 80%;
-   font-size: 1.2em;
+.main-summary {
+   width: 85%;
+   font-size: 4.5vw;
    margin: 0 1em;
+}
+
+   .minute-summary-box {
+      width: auto;
+   }
+
+@media (min-width: 450px) {
+   .main-summary {
+      font-size: 1.4em;
+   }
 }
 
 .footer {

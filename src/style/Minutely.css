@@ -9,14 +9,8 @@
       text-align: center;
    }
    
-   .minute-summary-box > p {
-      font-size: 1.25em;
-   }
-   
    .chart-container {
       display: flex;
-      /* width: 450px;
-      height: 225px; */
       width: 72vw;
       height: 25vh;
       padding: 0.5em;

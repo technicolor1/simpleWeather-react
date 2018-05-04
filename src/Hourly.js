@@ -69,7 +69,7 @@ export class Hourly extends React.Component {
          return (
             <div className="hourlies">
                <h2>By the Hour</h2>
-               <div className="summary hourly-summary-box">
+               <div className="main-summary hourly-summary-box">
                   <p id="day-summary">{weatherData.summary}</p>
                </div>
                <div className="scrollables">
