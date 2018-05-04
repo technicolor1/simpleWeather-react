@@ -14,6 +14,7 @@ body {
    height: 100%;
    color: var(--bodyFontColor);
    font: 15px "Open Sans", Futura, sans-serif;
+   background: #eeeeee;
 }
 
 #root {
@@ -29,36 +30,71 @@ body {
    flex: 1;
 }
 
-.weather-step #other h5 {
-   margin: 0;
-   font-size: 4.25vw;
+.weatherCells {
+   border: 1px solid rgba(0, 0, 0, 0.2);
+   text-align: center;
+   margin: 5px;
+   padding: 10px;
+   box-shadow: var(--shadow-level2);
 }
 
-@media (min-width: 450px) {
-   .weather-step #other h5 {
-      font-size: 1.25em;
+   .weatherCells #other h5 {
+      margin: 0;
+      font-size: 4.25vw;
    }
-}
+
+   @media (min-width: 450px) {
+      .weatherCells #other h5 {
+         font-size: 1.25em;
+      }
+   }
 
 .currently {
    box-shadow: var(--shadow-level1);
+   background: white;
 }
 
 .alerts {
    box-shadow: var(--shadow-level1);
+   background: white;
 }
 
 .minutely {
-   box-shadow: var(--shadow-level1);   
+   box-shadow: var(--shadow-level1);
+   background: white;   
 }
 
-.detail-wrapper {
+.hourlies {
    box-shadow: var(--shadow-level1);
-   width: 90vw;   
+   background: white;
+   margin: 5vh 5%;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
 }
+
+   .hourlies > h2 {
+      font-size: 2.4em;
+   }
+
+.dailies {
+   box-shadow: var(--shadow-level1);
+   background: white;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin: 5vh 5%;
+}
+
+   .dailies > h2 {
+      font-size: 3em;
+   }
 
 @media (min-width: 600px) {
-   .detail-wrapper {
+   .hourlies {
+      width: 575px;
+   }
+   .dailies {
       width: 575px;
    }
 }
@@ -71,18 +107,16 @@ body {
    width: 97%;
 }
 
-   .hourly {
-      box-shadow: var(--shadow-level2);      
-   }
-
-   .daily-wrapper {
-      box-shadow: var(--shadow-level2);
-   }
+.summary {
+   width: 80%;
+   font-size: 1.2em;
+   margin: 0 1em;
+}
 
 .footer {
    padding: 1rem;
    text-align: center;
-   background-color: #efefef;
+   background-color: #E0E0E0;
    margin-top: 5vh;
    font-size: 18px;
 }
@@ -98,8 +132,3 @@ button:hover {
    background-color: rgb(62, 99, 146);
    color: whitesmoke;
 }
-
-/* breakpoints guide= */
-/* min-width 500px */
-/* max-width 500px */
-/* min-width 700px */

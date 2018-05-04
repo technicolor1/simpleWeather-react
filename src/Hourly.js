@@ -29,7 +29,6 @@ export class Hourly extends React.Component {
             break;
          }
 
-         // let time = Moment.unix(hour.time).format("h a");
          let timeFormatted = Moment.unix(time).format("h a");
          
          // once 12am is reached, indicate that it is the next day
@@ -38,7 +37,7 @@ export class Hourly extends React.Component {
          }
 
          main.push(
-            <div key={`Hour-${i}`} className="hourly weather-step">
+            <div key={`Hour-${i}`} className="hourly-wrapper weatherCells">
                <div id="icon">
                   <span>{weatherIcon(icon)}</span>
                </div>
@@ -68,9 +67,9 @@ export class Hourly extends React.Component {
          return null;
       } else {
          return (
-            <div className="hourlies detail-wrapper">
+            <div className="hourlies">
                <h2>By the Hour</h2>
-               <div className="hourly-summary-box">
+               <div className="summary hourly-summary-box">
                   <p id="day-summary">{weatherData.summary}</p>
                </div>
                <div className="scrollables">
