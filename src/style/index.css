@@ -35,6 +35,8 @@ body {
    text-align: center;
 }
 
+/* all weekly and hourly cells */
+
 .weatherCells {
    border: 1px solid rgba(0, 0, 0, 0.2);
    text-align: center;
@@ -50,7 +52,7 @@ body {
 
    @media (min-width: 450px) {
       .weatherCells #other h5 {
-         font-size: 1.25em;
+         font-size: 1.5em;
       }
    }
 
@@ -62,6 +64,7 @@ body {
 .alerts {
    box-shadow: var(--shadow-level1);
    background: white;
+   position: relative;
 }
 
 .minutely {

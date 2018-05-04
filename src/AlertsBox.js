@@ -29,26 +29,25 @@ export class AlertsBox extends React.Component {
    }
 
    handleColorSeverity(severity) {
+      console.log("handlecolorseverity ran");
+      
       switch (severity) {
          case "advisory":
             return {
                color: '#444',
-               backgroundColor: '#ffeb3b',
-               display: this.state.displayDiv
+               backgroundColor: '#ffeb3b'
             };
 
          case "watch":
             return {
                color: '#444',
-               backgroundColor: '#ffeb3b',
-               display: this.state.displayDiv
+               backgroundColor: '#ffeb3b'
             };
 
          case "warning":
             return {
                color: 'whitesmoke',
-               backgroundColor: "#f44336",
-               display: this.state.displayDiv
+               backgroundColor: "#f44336"
             };
 
          default:
@@ -96,7 +95,7 @@ export class AlertsBox extends React.Component {
                   </h3>
                   <span onClick={this.handleDesc}><i style={{ transform: this.state.displayDiv === "flex" ? "rotate(180deg)" : "" }}className="fas fa-chevron-down"></i></span>
                </div>
-               <div id="collapsed-alerts">
+               <div id="collapsed-alerts" style={{ display: this.state.displayDiv }}>
                   {this.handleAlerts(alertData)}
                </div>
             </div>
