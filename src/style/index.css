@@ -73,6 +73,7 @@ body {
 }
 
 .hourlies {
+   width: 90%;
    box-shadow: var(--shadow-level1);
    background: white;
    margin: 5vh 5%;
@@ -86,6 +87,7 @@ body {
    }
 
 .dailies {
+   width: 90%;
    box-shadow: var(--shadow-level1);
    background: white;
    display: flex;

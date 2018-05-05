@@ -6,7 +6,7 @@ export class AlertsBox extends React.Component {
    constructor(props) {
       super(props)
       this.state = {
-         displayDiv: "none"
+         displayAlerts: false
       }
 
       this.handleDesc = this.handleDesc.bind(this);
@@ -15,22 +15,18 @@ export class AlertsBox extends React.Component {
 
    handleDesc(event) {
       // rotate chevron 
-      if (this.state.displayDiv === "none") {
+      if (this.state.displayAlerts === false) {
          this.setState({
-            displayDiv: "flex"
+            displayAlerts: true
          })
-         event.currentTarget.style.transform = 'rotate(180deg)';
       } else {
          this.setState({
-            displayDiv: "none"
+            displayAlerts: false
          })
-         event.currentTarget.style.transform = '';         
       }
    }
 
    handleColorSeverity(severity) {
-      console.log("handlecolorseverity ran");
-      
       switch (severity) {
          case "advisory":
             return {
@@ -51,15 +47,15 @@ export class AlertsBox extends React.Component {
             };
 
          default:
-            return "red";
+            return null;
       }
    }
 
    componentWillUpdate() {
       // hide all alerts at updates
-      if (this.state.displayDiv === "flex") {
+      if (this.state.displayAlerts === "flex") {
          this.setState({
-            displayDiv: "none"
+            displayAlerts: false
          })
       }
    }
@@ -93,9 +89,17 @@ export class AlertsBox extends React.Component {
                   <h3>
                      There are warnings or advisories in your area
                   </h3>
-                  <span onClick={this.handleDesc}><i style={{ transform: this.state.displayDiv === "flex" ? "rotate(180deg)" : "" }}className="fas fa-chevron-down"></i></span>
+                  <span
+                     className={this.state.displayAlerts === true ? "rotateChevron" : null}
+                     onClick={this.handleDesc}
+                  >
+                     <i className="fas fa-chevron-down" />
+                  </span>
                </div>
-               <div id="collapsed-alerts" style={{ display: this.state.displayDiv }}>
+               <div 
+                  id="collapsed-alerts"
+                  style={this.state.displayAlerts ? { display: "flex" } : { display: "none" }}
+               >
                   {this.handleAlerts(alertData)}
                </div>
             </div>
