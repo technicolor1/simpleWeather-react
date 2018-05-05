@@ -60,8 +60,6 @@ export class Weekly extends React.Component {
          counter++;
          main.push(
             <div key={`Day-${id}`} className="daily-wrapper weatherCells" onClick={this.handleDivClick}>
-               {/* first el is the main div */}
-               {/* second el is the extras div (hidden) */}
                <div className="daily">
                   <div id="icon">
                      <span>{weatherIcon(icon)}</span>
@@ -129,7 +127,7 @@ export class Weekly extends React.Component {
                <h2>Weekly</h2>
                <div className="main-summary week-summary-box">
                   <p id="week-summary">{weatherData.summary}</p>
-               </div>
+               </div>             
                <div className="scrollables" ref={this.weeklyDiv}>
                   {this.handleDaily(weatherData.data)}
                </div>

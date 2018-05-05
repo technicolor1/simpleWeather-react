@@ -168,9 +168,9 @@ class App extends React.Component {
 
             <Minutely weatherData={this.state.weatherData.minutely} />
 
-            <Weekly weatherData={this.state.weatherData.daily} />
-
             <Hourly weatherData={this.state.weatherData.hourly} />
+            
+            <Weekly weatherData={this.state.weatherData.daily} />
 
          </div>
       )

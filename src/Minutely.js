@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { percent } from './logic.js';
 import './style/Minutely.css';
 
@@ -7,11 +6,6 @@ import './style/Minutely.css';
 let Chart = window.Chart;
 
 export class Minutely extends React.Component {
-   constructor(props) {
-      super(props)
-
-   }
-
    render() {
       const {
          weatherData
