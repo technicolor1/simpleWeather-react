@@ -2,8 +2,8 @@
    width: 85%;
    display: flex;
    flex-direction: column;
-   margin-top: 5em;
    position: relative;
+   margin: 0 0 5vh 0;
 }
 
 @media (min-width: 600px) {
@@ -43,7 +43,7 @@
 
 #infobox > span:last-child {
    margin-left: auto;
-   transition: all 0.4s ease-in-out;
+   transition: all 0.3s ease-in-out;
 }
 
 .rotateChevron {

@@ -4,6 +4,7 @@
    --bodyFontColor: #444;
 }
 
+
 /*  */
 /* top-level component styling */
 /*  */
@@ -30,9 +31,42 @@ body {
    flex: 1;
 }
 
+.searchbox {
+   width: 60vw;
+   font-size: 22px;
+   padding: 1vh;
+   border-radius: 10px;
+}
+
+   @media (min-width: 500px) {
+      .searchbox {
+         width: 40vw;
+      }
+   }
+
 .header {
-   font-size: 1.75em;
-   text-align: center;
+   margin: 1em 0 0 0;   
+}
+
+   .header * {
+      font-size: 10vw;
+      text-align: center;
+      margin: 0;
+   }
+
+   @media (min-width: 600px) {
+      .header * {
+         font-size: 4em;         
+      }
+   }
+
+/* Time */
+
+.currentTime h5 {
+   color: #757575;
+   font-size: 1.5em;
+   font-style: italic;
+   margin: 1em 0;
 }
 
 /* all weekly and hourly cells */

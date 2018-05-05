@@ -10,13 +10,13 @@ export class Header extends React.Component {
       if (location === undefined) {
          return (
             <div className="header">
-               <h1 id="header">Weather</h1>
+               <h1>Weather</h1>
             </div>
          )
       } else {
          return (
             <div className="header">
-               <h1 id="header">{location}</h1>
+               <h1>{location}</h1>
             </div>
          )
       }

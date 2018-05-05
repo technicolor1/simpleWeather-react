@@ -5,6 +5,7 @@ const Moment = window.moment;
 export class AlertsBox extends React.Component {
    constructor(props) {
       super(props)
+      
       this.state = {
          displayAlerts: false
       }

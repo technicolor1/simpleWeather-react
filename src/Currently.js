@@ -23,10 +23,6 @@ export class Currently extends React.Component {
 
          return (
             <div className="currently">
-               <div id="as-of">
-                  <h5>As of {Moment.unix(time).format("MMMM Do h:mm a")}</h5>
-               </div>
-
                <div id="sum">
                   <h2>{summary}</h2>
                </div>

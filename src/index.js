@@ -9,6 +9,8 @@ import { Hourly } from './Hourly.js';
 import { SearchBox } from './SearchBox.js';
 import { AlertsBox } from './AlertsBox.js';
 import { Minutely } from './Minutely.js';
+import { Time } from './Time.js';
+// weathersample for testing
 import { weatherSample } from './weatherSample.js';
 
 const jquery = window.jQuery;
@@ -153,19 +155,23 @@ class App extends React.Component {
    render() {
       return (
          <div className="main">
+            
+            <SearchBox locateCall={this.searchLocate} geoCall={this.handleGeo} />
+            
             <Header location={this.state.location} />
 
-            <SearchBox locateCall={this.searchLocate} geoCall={this.handleGeo} />
+            <Time time={this.state.weatherData.currently} />
 
             <AlertsBox alertData={this.state.weatherData.alerts} />
-            {/* weatherData = data > currently */}
+
             <Currently weatherData={this.state.weatherData.currently} />
 
             <Minutely weatherData={this.state.weatherData.minutely} />
-            {/* weatherData = data > daily > array */}
+
             <Weekly weatherData={this.state.weatherData.daily} />
-            {/* weatherData = data > hourly > array  */}
+
             <Hourly weatherData={this.state.weatherData.hourly} />
+
          </div>
       )
    }
