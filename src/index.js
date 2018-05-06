@@ -25,7 +25,7 @@ class App extends React.Component {
       }
 
       this.handleChange = this.handleChange.bind(this);
-      this.searchLocate = this.searchLocate.bind(this);
+      this.fetchLocation = this.fetchLocation.bind(this);
       this.handleGeo = this.handleGeo.bind(this);
    }
 
@@ -35,7 +35,7 @@ class App extends React.Component {
       })
    }
 
-   searchLocate(val) {
+   fetchLocation(val) {
       if (val === "") {
          console.log("Searchbox can't be empty");
          return;
@@ -55,7 +55,6 @@ class App extends React.Component {
    }
 
    // validate data from fetched google,
-   // output is the valid place or null
    validateGoogle(data) {
       // results must be a city or zipcode
       let validObj = {
@@ -100,6 +99,11 @@ class App extends React.Component {
       })
          .done(data => {
             console.log(data);
+
+            // cache fetched data, stringified
+            localStorage.setItem("weatherData", JSON.stringify(data));
+            localStorage.setItem("location", location);
+
             this.setState({
                location: location,
                weatherData: data
@@ -142,21 +146,30 @@ class App extends React.Component {
    }
 
    componentDidMount() {
-      // load sampledata
-      // testing
-      window.onload = () => {
-         this.setState({
-            weatherData: weatherSample,
-            location: 'Test'
-         })
-      }
+      // window.onload = () => {
+      //    // if cached data present, use it instead of placeholder
+      //    if (localStorage.getItem("weatherData") !== null) {
+      //       this.setState({
+      //          weatherData: JSON.parse(localStorage.getItem("weatherData")),
+      //          location: localStorage.getItem("location")
+      //       })
+      //       return;
+      //    }
+
+      //    // load sampledata
+      //    // testing
+      //    this.setState({
+      //       weatherData: weatherSample,
+      //       location: 'Test'
+      //    })
+      // }
    }
 
    render() {
       return (
          <div className="main">
             
-            <SearchBox locateCall={this.searchLocate} geoCall={this.handleGeo} />
+            <SearchBox locateCall={this.fetchLocation} geoCall={this.handleGeo} />
             
             <Header location={this.state.location} />
 

@@ -78,7 +78,7 @@ body {
 .weatherCells {
    border: 1px solid rgba(0, 0, 0, 0.2);
    text-align: center;
-   margin: 5px;
+   margin: 0 5px;
    padding: 10px;
    box-shadow: var(--shadow-level2);
 }
@@ -86,6 +86,10 @@ body {
    .weatherCells #other h5 {
       margin: 0;
       font-size: 4.25vw;
+   }
+
+   .weatherCells:last-child {
+      margin-bottom: 1em;
    }
 
    @media (min-width: 450px) {

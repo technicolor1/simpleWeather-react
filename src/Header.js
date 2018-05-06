@@ -7,7 +7,7 @@ export class Header extends React.Component {
          location
       } = this.props;
 
-      if (location === undefined) {
+      if (location === "") {
          return (
             <div className="header">
                <h1>Weather</h1>

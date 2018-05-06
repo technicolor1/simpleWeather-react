@@ -10,6 +10,13 @@ export class SearchBox extends React.Component {
 
       this.handleChange = this.handleChange.bind(this);
       this.handleKeyPress = this.handleKeyPress.bind(this);
+      this.highlightText = this.highlightText.bind(this);
+      this.handleSumbitLocation = this.handleSumbitLocation.bind(this);
+      this.handleSubmitGeolocation = this.handleSubmitGeolocation.bind(this);
+   }
+
+   highlightText(event) {
+      event.target.select();
    }
 
    handleChange(event) {
@@ -24,10 +31,18 @@ export class SearchBox extends React.Component {
       }
    }
 
+   handleSumbitLocation() {
+      this.props.locateCall(this.state.searchBoxInput);
+   }
+
+   handleSubmitGeolocation() {
+      this.props.geoCall();
+   }
+
    render() {
       return (
          <div className="controls">
-            <button name="locater" onClick={() => { this.props.geoCall() }}>
+            <button name="locater" onClick={this.handleSubmitGeolocation}>
                <i className="fas fa-location-arrow"></i>
             </button>
             
@@ -36,13 +51,14 @@ export class SearchBox extends React.Component {
                autoFocus
                onChange={this.handleChange}
                onKeyPress={this.handleKeyPress}
+               onFocus={this.highlightText}
                id="pac-input"
                className="searchbox"
                type="text"
                placeholder="City, Zip, Locale"
             />
 
-            <button name="submit-location" onClick={() => { this.props.locateCall(this.state.searchBoxInput) }}><i className="fas fa-chevron-right"></i></button>
+            <button name="submit-location" onClick={this.handleSumbitLocation}><i className="fas fa-chevron-right"></i></button>
          </div>
       )
    }
