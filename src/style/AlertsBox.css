@@ -17,6 +17,7 @@
    position: absolute;
    width: 100%;
    top: 100%;
+   z-index: 2;
 }
 
 #collapsed-alerts > * {
@@ -41,8 +42,10 @@
    margin-right: auto;
 }
 
+/* chevron */
 #infobox > span:last-child {
    margin-left: auto;
+   cursor: pointer;
    transition: all 0.3s ease-in-out;
 }
 

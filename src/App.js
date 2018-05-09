@@ -143,6 +143,13 @@ export class App extends React.Component {
       return true;
    }
 
+   componentWillMount() {
+      this.setState({
+         weatherData: weatherSample,
+         location: "test"
+      })
+   }
+
    componentDidMount() {
       // window.onload = () => {
       //    // if cached data present, use it instead of placeholder
@@ -167,9 +174,9 @@ export class App extends React.Component {
       return (
          <div className="main">
             
-            <SearchBox locateCall={this.fetchLocation} geoCall={this.handleGeo} />
-            
             <Header location={this.state.location} />
+
+            <SearchBox locateCall={this.fetchLocation} geoCall={this.handleGeo} />            
 
             <Time time={this.state.weatherData.currently} />
 

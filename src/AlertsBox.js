@@ -5,7 +5,7 @@ const Moment = window.moment;
 export class AlertsBox extends React.Component {
    constructor(props) {
       super(props)
-      
+
       this.state = {
          displayAlerts: false
       }
@@ -69,6 +69,13 @@ export class AlertsBox extends React.Component {
             style={this.handleColorSeverity(alert.severity)}
             className="alert">
             <h3>{alert.title} · Until {Moment.unix(alert.expires).format("dddd h:hh a")}</h3>
+            <p 
+            style={{ margin: "1em" }}
+            >{alert.description}
+            <br />
+            <br />
+               <a target="_blank" href={alert.uri}>More information</a>
+            </p>
          </div>
       );
 
@@ -97,7 +104,7 @@ export class AlertsBox extends React.Component {
                      <i className="fas fa-chevron-down" />
                   </span>
                </div>
-               <div 
+               <div
                   id="collapsed-alerts"
                   style={this.state.displayAlerts ? { display: "flex" } : { display: "none" }}
                >

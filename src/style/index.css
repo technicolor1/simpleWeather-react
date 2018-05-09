@@ -15,7 +15,6 @@ body {
    height: 100%;
    color: var(--bodyFontColor);
    font: 14px "Open Sans", Futura, sans-serif;
-   background: #eeeeee;
 }
 
 #root {
@@ -70,7 +69,7 @@ body {
    color: #757575;
    font-size: 1.5em;
    font-style: italic;
-   margin: 1em 0;
+   margin: 1em 0 3.5em 0;
 }
 
 /* all weekly and hourly cells */
