@@ -143,31 +143,24 @@ export class App extends React.Component {
       return true;
    }
 
-   componentWillMount() {
-      this.setState({
-         weatherData: weatherSample,
-         location: "test"
-      })
-   }
-
    componentDidMount() {
-      // window.onload = () => {
-      //    // if cached data present, use it instead of placeholder
-      //    if (localStorage.getItem("weatherData") !== null) {
-      //       this.setState({
-      //          weatherData: JSON.parse(localStorage.getItem("weatherData")),
-      //          location: localStorage.getItem("location")
-      //       })
-      //       return;
-      //    }
+      window.onload = () => {
+         // if cached data present, use it instead of placeholder
+         if (localStorage.getItem("weatherData") !== null) {
+            this.setState({
+               weatherData: JSON.parse(localStorage.getItem("weatherData")),
+               location: localStorage.getItem("location")
+            })
+            return;
+         }
 
-      //    // load sampledata
-      //    // testing
-      //    this.setState({
-      //       weatherData: weatherSample,
-      //       location: 'Test'
-      //    })
-      // }
+         // load sampledata
+         // testing
+         this.setState({
+            weatherData: weatherSample,
+            location: 'Test'
+         })
+      }
    }
 
    render() {
