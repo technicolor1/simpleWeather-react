@@ -5,6 +5,7 @@
 .scrollables > .hourly-wrapper {
    display: grid;
    grid-template-columns: 1fr 2fr 1fr;
+   padding: 10px 5px;
 }
 
    .hourly-wrapper > h5 {

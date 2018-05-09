@@ -89,7 +89,6 @@ export class App extends React.Component {
    }
 
    fetchWeather(lat, long, location) {
-      let proxy = "https://cors-anywhere.herokuapp.com/";
       let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags&callback=?`;
 
       $.getJSON(darksky, (data) => {
@@ -143,40 +142,33 @@ export class App extends React.Component {
       return true;
    }
 
-   componentWillMount() {
-      this.setState({
-         weatherData: weatherSample,
-         location: "test"
-      })
-   }
-
    componentDidMount() {
-      // window.onload = () => {
-      //    // if cached data present, use it instead of placeholder
-      //    if (localStorage.getItem("weatherData") !== null) {
-      //       this.setState({
-      //          weatherData: JSON.parse(localStorage.getItem("weatherData")),
-      //          location: localStorage.getItem("location")
-      //       })
-      //       return;
-      //    }
+      window.onload = () => {
+         // if cached data present, use it instead of placeholder
+         if (localStorage.getItem("weatherData") !== null) {
+            this.setState({
+               weatherData: JSON.parse(localStorage.getItem("weatherData")),
+               location: localStorage.getItem("location")
+            })
+            return;
+         }
 
-      //    // load sampledata
-      //    // testing
-      //    this.setState({
-      //       weatherData: weatherSample,
-      //       location: 'Test'
-      //    })
-      // }
+         // load sampledata
+         // testing
+         this.setState({
+            weatherData: weatherSample,
+            location: 'Test'
+         })
+      }
    }
 
    render() {
       return (
          <div className="main">
             
-            <Header location={this.state.location} />
-
             <SearchBox locateCall={this.fetchLocation} geoCall={this.handleGeo} />            
+
+            <Header location={this.state.location} />
 
             <Time time={this.state.weatherData.currently} />
 
