@@ -1,5 +1,6 @@
 import React from 'react';
 import './style/AlertsBox.css';
+
 const Moment = window.moment;
 
 export class AlertsBox extends React.Component {
@@ -26,53 +27,6 @@ export class AlertsBox extends React.Component {
          })
       }
    }
-
-   // handleColorSeverity(severity) {
-   //    switch (severity) {
-   //       case "advisory":
-   //          return {
-   //             color: '#444',
-   //             backgroundColor: '#ffeb3b'
-   //          };
-
-   //       case "watch":
-   //          return {
-   //             color: '#444',
-   //             backgroundColor: '#ffeb3b'
-   //          };
-
-   //       case "warning":
-   //          return {
-   //             color: 'whitesmoke',
-   //             backgroundColor: "#f44336"
-   //          };
-
-   //       default:
-   //          return null;
-   //    }
-   // }
-
-   // handleAlerts(alerts) {
-   //    let id = 0;
-
-   //    let alertsArr = alerts.map(alert =>
-   //       <div key={`alert-${id++}`}
-   //          style={this.handleColorSeverity(alert.severity)}
-   //          className="alert"
-   //       >
-   //          <h3>{alert.title} · Until {Moment.unix(alert.expires).format("dddd h:hh a")}</h3>
-   //          <p 
-   //          style={{ margin: "1em" }}
-   //          >{alert.description}
-   //          <br />
-   //          <br />
-   //             <a target="_blank" href={alert.uri}>More information</a>
-   //          </p>
-   //       </div>
-   //    );
-
-   //    return alertsArr;
-   // }
 
    componentWillUpdate() {
       // hide all alerts at updates
@@ -105,8 +59,8 @@ export class AlertsBox extends React.Component {
                      <i className="fas fa-chevron-down" />
                   </span>
                </div>
-               
-               <AlertsCells onAlertCellClick={this.handleModal} alertData={alertData} displayAlerts={this.state.displayAlerts}/>
+
+               <AlertsCells onAlertCellClick={this.handleModal} alertData={alertData} displayAlerts={this.state.displayAlerts} />
             </div>
          )
       }
@@ -120,7 +74,7 @@ class AlertsCells extends React.Component {
       this.state = {
          isModalOpen: false
       }
-      
+
       this.handleAlertCellClick = this.handleAlertCellClick.bind(this);
    }
 
@@ -149,7 +103,6 @@ class AlertsCells extends React.Component {
       }
    }
 
-   // pass message to parent 
    handleAlertCellClick() {
       this.setState(prevState => ({
          isModalOpen: !prevState.isModalOpen
@@ -168,13 +121,13 @@ class AlertsCells extends React.Component {
             className="alert"
          >
             <h3>{alert.title} · Until {Moment.unix(alert.expires).format("dddd h:hh a")}</h3>
-            <p 
+            {/* <p 
             style={{ margin: "1em" }}
             >{alert.description}
             <br />
             <br />
                <a target="_blank" href={alert.uri}>More information</a>
-            </p>
+            </p> */}
          </div>
       );
 
@@ -183,14 +136,14 @@ class AlertsCells extends React.Component {
 
    render() {
       return (
-      <div
-         id="collapsed-alerts"
-         style={this.props.displayAlerts ? { display: "flex" } : { display: "none" }}
-      >
-         {this.handleAlerts(this.props.alertData)}
+         <div
+            id="collapsed-alerts"
+            style={this.props.displayAlerts ? { display: "flex" } : { display: "none" }}
+         >
+            {this.handleAlerts(this.props.alertData)}
 
-         <AlertsModal triggerModal={this.state.isModalOpen}/>
-      </div>
+            <AlertsModal onOutsideClick={this.handleAlertCellClick} triggerModal={this.state.isModalOpen} />
+         </div>
       )
    }
 }
@@ -200,32 +153,37 @@ class AlertsModal extends React.Component {
    constructor() {
       super()
 
-      this.handleClick = this.handleClick.bind(this);
-      this.handleOutsideClick = this.handleOutsideClick.bind(this);
    }
 
-   handleClick() {
-      if (!this.props.triggerModal) {
-         document.addEventListener("mousedown", this.handleOutsideClick, false);
-         console.log("added eventlistener");         
+   // modal trigger https://stackoverflow.com/a/42234988
+
+   componentWillReceiveProps(nextProps) {
+      if (nextProps.triggerModal) {
+         document.addEventListener('mousedown', this.handleClickOutside);         
       } else {
-         document.removeEventListener("mousedown", this.handleOutsideClick, false);    
-         console.log("Clicked outside");
+         document.removeEventListener('mousedown', this.handleClickOutside);    
       }
    }
 
-   handleOutsideClick(event) {
-      if (!this.node.contains(event.target)) {
-         this.handleClick();
+   componentWillUnmount() {
+      document.removeEventListener('mousedown', this.handleClickOutside);
+   }
+
+   setWrapperRef = (node) => {
+      this.wrapperRef = node;
+   }
+
+   handleClickOutside = (e) => {
+      if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
+         console.log("Clicked outside!");
+         this.props.onOutsideClick();
       }
    }
 
    render() {
       return (
          <div
-            onClick={this.handleClick}
-            ref={node => this.node = node}
-            style={this.props.triggerModal ? { 
+            style={this.props.triggerModal ? {
                position: "fixed",
                display: "flex",
                zIndex: "1",
@@ -236,16 +194,19 @@ class AlertsModal extends React.Component {
                width: "100%",
                height: "100%",
                background: "rgba(0,0,0,0.4)"
-            } : null} 
+            } : {
+                  display: "none"
+               }}
             className="alert-modal"
          >
-            <div className="modal-content" 
-            style={{
-               margin: "auto",
-               padding: "20px",
-               width: "80%",
-               background: "#fefefe"
-            }}
+            <div className="modal-content"
+               ref={this.setWrapperRef}
+               style={{
+                  margin: "auto",
+                  padding: "20px",
+                  width: "80%",
+                  background: "#fefefe"
+               }}
             >
                <p>Now this is pod racing!</p>
             </div>
