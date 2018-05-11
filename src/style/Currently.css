@@ -31,22 +31,23 @@
       justify-content: space-between;
    }
 
-   #other > span:first-child {
+   #other > #uvindex {
       float: left;
    }
 
-   #other > span:last-child {
+   #other > #uvindex > span {
+      padding: 0 3px;
+      border-radius: 3px;
+   }
+
+   #other > #wind {
       float: right;
    }
 
-   #other2 > span:first-child {
+   #other2 > #humidity {
       float: left;
    }
 
-      #other > span:nth-child(1) > span {
-         padding: 0 3px;
-         border-radius: 3px;
-      }
 
 /* everything else */
 @media (max-width: 500px) {

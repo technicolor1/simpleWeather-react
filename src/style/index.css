@@ -75,7 +75,6 @@ body {
 /* all weekly and hourly cells */
 
 .weatherCells {
-   border: 1px solid rgba(0, 0, 0, 0.2);
    text-align: center;
    margin: 0 5px;
    padding: 10px;

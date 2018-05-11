@@ -13,14 +13,8 @@ export class SearchBox extends React.Component {
       this.handleUserInputs = this.handleUserInputs.bind(this);
    }
 
-   // btn clicked or enter key pressed, all will be handled by one function 
-   // each will have a 'which' prop lifted up to determine the correct uri
-   // for Locatebtn and enter key, validate searchbox before uri 
-   // then lift uri up to parent App
-
    validateSearchboxInput() {    
       if (this.state.searchBoxValue === "") {
-         console.log("Searchbox can't be empty");
          return false;
       }
 
@@ -32,7 +26,6 @@ export class SearchBox extends React.Component {
 
       let uri = `json?address=${this.state.searchBoxValue}`;
       
-      console.log(uri);
       this.props.fetchLocation(uri);
    }
    
@@ -72,7 +65,6 @@ class InputField extends React.Component {
 
    handleKeyPress(event) {
       if (event.key === "Enter") {
-         console.log("Pressed enter");
 
          this.props.onKeyPressed();
       }
@@ -102,7 +94,6 @@ class LocateButton extends React.Component {
    }
 
    handleClick() {
-      console.log("Locate clicked");
       
       this.props.onBtnClicked();
    }
@@ -126,7 +117,6 @@ class GeoButton extends React.Component {
    handleClick() {
       let self = this;
 
-      console.log("Geo clicked")
       function success(pos) {
          let GeolocateUri = `json?latlng=${pos.coords.latitude},${pos.coords.longitude}`;
          self.props.onBtnClicked(GeolocateUri);

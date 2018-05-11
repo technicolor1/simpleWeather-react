@@ -32,12 +32,12 @@ export class Currently extends React.Component {
                </div>
 
                <div id="other">
-                  <span>UV Index <span style={uvIndexColor(uvIndex)}>{uvIndex}</span></span>
-                  <span>{rotateWindBearing(windBearing)} {round(windSpeed)} mph</span>
+                  <span id="uvindex">UV Index <span style={uvIndexColor(uvIndex)}>{uvIndex}</span></span>
+                  <span id="wind">{rotateWindBearing(windBearing)} {round(windSpeed)} mph</span>
                </div>
 
                <div id="other2">
-                  <span><i className="wi wi-humidity" title="humidity"/> {percent(humidity)}%</span>                  
+                  <span id="humidity"><i className="wi wi-humidity" title="humidity"/> {percent(humidity)}%</span>                  
                </div>
             </div>
          )

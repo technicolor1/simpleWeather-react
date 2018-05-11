@@ -12,6 +12,10 @@
    }
 }
 
+.modalOpen {
+   overflow: hidden;
+}
+
 #collapsed-alerts {
    flex-direction: column;
    position: absolute;

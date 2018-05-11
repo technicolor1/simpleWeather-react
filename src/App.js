@@ -104,21 +104,26 @@ export class App extends React.Component {
    
    componentDidMount() {
       window.onload = () => {
-         // if cached data present, use it instead of placeholder
-         if (localStorage.getItem("weatherData") !== null) {
-            this.setState({
-               weatherData: JSON.parse(localStorage.getItem("weatherData")),
-               location: localStorage.getItem("location")
-            })
-            return;
-         }
-
+         console.log("Onload ran")
          // load sampledata
          // testing
          this.setState({
             weatherData: weatherSample,
             location: 'Test'
          })
+
+         // this.loadLocalStorage();
+      }
+   }
+   
+   loadLocalStorage() {
+      // if cached data present, use it instead of placeholder
+      if (localStorage.getItem("weatherData") !== null) {
+         this.setState({
+            weatherData: JSON.parse(localStorage.getItem("weatherData")),
+            location: localStorage.getItem("location")
+         })
+         return;
       }
    }
 
