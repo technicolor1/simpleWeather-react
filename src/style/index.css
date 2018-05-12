@@ -111,6 +111,10 @@ body {
       box-shadow: var(--shadow-level1);
    }
 
+   .modal-content {
+      box-shadow: var(--shadow-level1);
+   }
+
 .minutely {
    box-shadow: var(--shadow-level1);
    background: white;   

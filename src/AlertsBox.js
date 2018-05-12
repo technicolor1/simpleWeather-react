@@ -76,6 +76,7 @@ class AlertsCells extends React.Component {
    }
 
    componentWillReceiveProps() {
+      // set to default
       this.setState({
          alertIndex: 0
       })
@@ -158,6 +159,7 @@ class AlertsCells extends React.Component {
                triggerModal={this.state.isModalOpen}
                alertIndex={this.state.alertIndex}
                alertData={this.props.alertData}
+               handleColorSeverity={this.handleColorSeverity}
             />
          </div>
       )
@@ -169,6 +171,8 @@ class AlertsModal extends React.Component {
    constructor() {
       super()
 
+      this.setWrapperRef = this.setWrapperRef.bind(this);
+      this.handleClickOutside = this.handleClickOutside.bind(this);
    }
 
    // modal trigger https://stackoverflow.com/a/42234988
@@ -185,11 +189,11 @@ class AlertsModal extends React.Component {
       document.removeEventListener('mousedown', this.handleClickOutside);
    }
 
-   setWrapperRef = (node) => {
+   setWrapperRef(node) {
       this.wrapperRef = node;
    }
 
-   handleClickOutside = (e) => {
+   handleClickOutside(e) {
       if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
          console.log("Clicked outside!");
          // hide the modal
@@ -201,37 +205,41 @@ class AlertsModal extends React.Component {
       if (typeof this.props.alertData === "undefined") {
          return null;
       }
+      const {
+         alertIndex,
+         alertData
+      } = this.props;
+
+      const alertIndexToInt = alertData[parseInt(alertIndex)];
+
       return (
          <div
-            style={this.props.triggerModal ? {
-               position: "fixed",
-               display: "flex",
-               zIndex: "1",
-               top: "0",
-               left: "0",
-               right: "0",
-               bottom: "0",
-               width: "100%",
-               height: "100%",
-               background: "rgba(0,0,0,0.4)"
-            } : {
-                  display: "none"
-               }}
+            style={{
+               display: !this.props.triggerModal ? "none" : "flex"
+            }}
             className="alert-modal"
          >
             <div className="modal-content"
                ref={this.setWrapperRef}
-               style={{
-                  margin: "auto",
-                  padding: "20px",
-                  width: "80%",
-                  background: "#fefefe"
-               }}
             >
-               {/* <p>Now this is pod racing!</p> */}
-               <h3>{this.props.alertData[parseInt(this.props.alertIndex)].title} · Until {Moment.unix(this.props.alertData[parseInt(this.props.alertIndex)].expires).format("dddd h:hh a")}</h3>               
-               <p>{this.props.alertData[parseInt(this.props.alertIndex)].description}</p>
-               <p><a target="_blank" href={this.props.alertData[parseInt(this.props.alertIndex)].uri}>More information</a></p>
+               <div 
+               style={this.props.handleColorSeverity(alertIndexToInt.severity)}
+               className="modal-header"
+               >
+                  <h3>
+                     {alertIndexToInt.title} · Until {Moment.unix(alertIndexToInt.expires).format("dddd h:hh a")}
+                  </h3>
+               </div>
+               <div className="modal-body">
+                  <p>
+                     {alertIndexToInt.description}
+                  </p>
+               </div>
+               <div className="modal-footer">
+                  <p>
+                     <a target="_blank" href={alertIndexToInt.uri}>More information</a>
+                  </p>
+               </div>
             </div>
          </div>
       )
