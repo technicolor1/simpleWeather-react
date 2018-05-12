@@ -123,6 +123,7 @@ export class App extends React.Component {
             weatherData: JSON.parse(localStorage.getItem("weatherData")),
             location: localStorage.getItem("location")
          })
+         console.log(this.state.weatherData);
          return;
       }
    }

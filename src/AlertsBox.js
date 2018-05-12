@@ -11,21 +11,14 @@ export class AlertsBox extends React.Component {
          displayAlerts: false
       }
 
-      this.handleDesc = this.handleDesc.bind(this);
+      this.handleClick = this.handleClick.bind(this);
    }
 
 
-   handleDesc(event) {
-      // rotate chevron 
-      if (this.state.displayAlerts === false) {
-         this.setState({
-            displayAlerts: true
-         })
-      } else {
-         this.setState({
-            displayAlerts: false
-         })
-      }
+   handleClick(event) {
+      this.setState(prevState => ({
+         displayAlerts: !prevState.displayAlerts
+      }))
    }
 
    componentWillUpdate() {
@@ -47,14 +40,16 @@ export class AlertsBox extends React.Component {
       } else {
          return (
             <div className="alerts">
-               <div id="infobox">
+               <div
+                  onClick={this.handleClick}
+                  id="infobox"
+               >
                   <span><i className="fas fa-exclamation-triangle"></i></span>
                   <h3>
                      There are warnings or advisories in your area
                   </h3>
                   <span
                      className={this.state.displayAlerts === true ? "rotateChevron" : null}
-                     onClick={this.handleDesc}
                   >
                      <i className="fas fa-chevron-down" />
                   </span>
@@ -72,10 +67,18 @@ class AlertsCells extends React.Component {
       super()
 
       this.state = {
-         isModalOpen: false
+         isModalOpen: false,
+         alertIndex: 0
       }
 
       this.handleAlertCellClick = this.handleAlertCellClick.bind(this);
+      this.handleClickOutsideModal = this.handleClickOutsideModal.bind(this);
+   }
+
+   componentWillReceiveProps() {
+      this.setState({
+         alertIndex: 0
+      })
    }
 
    handleColorSeverity(severity) {
@@ -103,33 +106,41 @@ class AlertsCells extends React.Component {
       }
    }
 
-   handleAlertCellClick() {
-      this.setState(prevState => ({
-         isModalOpen: !prevState.isModalOpen
-      }));
+   handleAlertCellClick(e) {
+      this.setState({
+         isModalOpen: true,
+         alertIndex: e.currentTarget.getAttribute("data-index")
+      })
+
+      // overflow hidden at body
+      document.querySelector("body").classList.toggle("modalOpen");
+   }
+
+   handleClickOutsideModal() {
+      this.setState({
+         isModalOpen: false
+      })
 
       document.querySelector("body").classList.toggle("modalOpen");
    }
 
    handleAlerts(alerts) {
       let id = 0;
+      let alertsArr = [];
 
-      let alertsArr = alerts.map(alert =>
-         <div key={`alert-${id++}`}
-            style={this.handleColorSeverity(alert.severity)}
-            onClick={this.handleAlertCellClick}
-            className="alert"
-         >
-            <h3>{alert.title} · Until {Moment.unix(alert.expires).format("dddd h:hh a")}</h3>
-            {/* <p 
-            style={{ margin: "1em" }}
-            >{alert.description}
-            <br />
-            <br />
-               <a target="_blank" href={alert.uri}>More information</a>
-            </p> */}
-         </div>
-      );
+      alerts.forEach(alert => {
+         alertsArr.push(
+            <div key={`alert-${id}`}
+               style={this.handleColorSeverity(alert.severity)}
+               onClick={this.handleAlertCellClick}
+               className="alert"
+               data-index={id}
+            >
+               <h3>{alert.title} · Until {Moment.unix(alert.expires).format("dddd h:hh a")}</h3>
+            </div>
+         )
+         id++;
+      })
 
       return alertsArr;
    }
@@ -142,13 +153,18 @@ class AlertsCells extends React.Component {
          >
             {this.handleAlerts(this.props.alertData)}
 
-            <AlertsModal onOutsideClick={this.handleAlertCellClick} triggerModal={this.state.isModalOpen} />
+            <AlertsModal
+               onOutsideClick={this.handleClickOutsideModal}
+               triggerModal={this.state.isModalOpen}
+               alertIndex={this.state.alertIndex}
+               alertData={this.props.alertData}
+            />
          </div>
       )
    }
 }
 
-// trigger modal when alert cell clicked
+
 class AlertsModal extends React.Component {
    constructor() {
       super()
@@ -159,9 +175,9 @@ class AlertsModal extends React.Component {
 
    componentWillReceiveProps(nextProps) {
       if (nextProps.triggerModal) {
-         document.addEventListener('mousedown', this.handleClickOutside);         
+         document.addEventListener('mousedown', this.handleClickOutside);
       } else {
-         document.removeEventListener('mousedown', this.handleClickOutside);    
+         document.removeEventListener('mousedown', this.handleClickOutside);
       }
    }
 
@@ -176,11 +192,15 @@ class AlertsModal extends React.Component {
    handleClickOutside = (e) => {
       if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
          console.log("Clicked outside!");
+         // hide the modal
          this.props.onOutsideClick();
       }
    }
 
    render() {
+      if (typeof this.props.alertData === "undefined") {
+         return null;
+      }
       return (
          <div
             style={this.props.triggerModal ? {
@@ -208,7 +228,10 @@ class AlertsModal extends React.Component {
                   background: "#fefefe"
                }}
             >
-               <p>Now this is pod racing!</p>
+               {/* <p>Now this is pod racing!</p> */}
+               <h3>{this.props.alertData[parseInt(this.props.alertIndex)].title} · Until {Moment.unix(this.props.alertData[parseInt(this.props.alertIndex)].expires).format("dddd h:hh a")}</h3>               
+               <p>{this.props.alertData[parseInt(this.props.alertIndex)].description}</p>
+               <p><a target="_blank" href={this.props.alertData[parseInt(this.props.alertIndex)].uri}>More information</a></p>
             </div>
          </div>
       )
