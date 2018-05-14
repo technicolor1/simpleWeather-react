@@ -13,8 +13,8 @@ export class AlertsBox extends React.Component {
 
       this.handleClick = this.handleClick.bind(this);
    }
-
-
+   
+   
    handleClick(event) {
       this.setState(prevState => ({
          displayAlerts: !prevState.displayAlerts

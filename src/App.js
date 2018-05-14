@@ -39,8 +39,17 @@ export class App extends React.Component {
          })
          .then(data => {
             console.log(data);
-            this.validateGoogle(data);
+            // this.validateGoogle(data);
+            this.processGoogle(data);
          })
+   }
+   
+   processGoogle = (data) => {
+      console.log("Processing google");
+      // 0th result is adequate, but there may be more than one result
+      const results = data.results[0];
+
+      this.fetchWeather(results.geometry.location.lat, results.geometry.location.lng, results.formatted_address);
    }
 
    
@@ -83,7 +92,6 @@ export class App extends React.Component {
       let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags&callback=?`;
 
       $.getJSON(darksky, (data) => {
-         console.log("obtained");
       })
          .done(data => {
             console.log("processing", data);
@@ -142,6 +150,8 @@ export class App extends React.Component {
 
             <Currently weatherData={this.state.weatherData.currently} />
 
+            {/* TODO: some locations do not have minutely data,
+            acknowledge user that there is none */}
             <Minutely weatherData={this.state.weatherData.minutely} />
 
             <Hourly weatherData={this.state.weatherData.hourly} />

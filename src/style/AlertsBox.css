@@ -108,7 +108,7 @@ h3 > span:first-child {
    }
    
    .modal-body {
-      max-height: 400px;
+      max-height: 50vh;
       overflow: scroll;
       text-indent: 5%;
       padding: 20px 20px;

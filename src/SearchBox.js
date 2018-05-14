@@ -1,5 +1,7 @@
 import React from 'react';
 
+const Google = window.google;
+
 export class SearchBox extends React.Component {
    constructor(props) {
       super(props)
@@ -13,28 +15,28 @@ export class SearchBox extends React.Component {
       this.handleUserInputs = this.handleUserInputs.bind(this);
    }
 
-   validateSearchboxInput() {    
+   validateSearchboxInput() {
       if (this.state.searchBoxValue === "") {
          return false;
       }
 
       return true;
    }
-   
+
    handleUserInputs() {
       if (!this.validateSearchboxInput()) { return; }
 
       let uri = `json?address=${this.state.searchBoxValue}`;
-      
+
       this.props.fetchLocation(uri);
    }
-   
+
    handleSearchBoxInputChange(input) {
       this.setState({
          searchBoxValue: input
       })
    }
-   
+
    // except for geoBtn, it doesn't need inputfield
    handleGeoBtnClicked(uri) {
       this.props.fetchLocation(uri);
@@ -43,9 +45,13 @@ export class SearchBox extends React.Component {
    render() {
       return (
          <div className="controls">
-            <GeoButton onBtnClicked={this.handleGeoBtnClicked}/>            
-            <InputField onSearchBoxInputChange={this.handleSearchBoxInputChange} onKeyPressed={this.handleUserInputs}/>            
-            <LocateButton onBtnClicked={this.handleUserInputs}/>
+            <GeoButton onBtnClicked={this.handleGeoBtnClicked} />
+            <InputField
+               onSearchBoxInputChange={this.handleSearchBoxInputChange}
+               onKeyPressed={this.handleUserInputs}
+               onAutocompletePlaceChanged={this.handleUserInputs}
+            />
+            <LocateButton onBtnClicked={this.handleUserInputs} />
          </div>
       )
    }
@@ -53,10 +59,31 @@ export class SearchBox extends React.Component {
 
 class InputField extends React.Component {
    constructor() {
-      super() 
+      super()
 
       this.handleChange = this.handleChange.bind(this);
       this.handleKeyPress = this.handleKeyPress.bind(this);
+      this.handlePlaceChanged = this.handlePlaceChanged.bind(this);
+   }
+
+   handlePlaceChanged() {
+      console.log("Placed changed");
+
+      this.props.onAutocompletePlaceChanged();
+   }
+
+   componentDidMount() {
+      // set autocomplete to only regions
+      var options = {
+         types: ['(regions)']
+      };
+
+      // for some reason google does not like react refs
+      var input = document.querySelector("#pac-input");
+      // autocomplete
+      var searchBox = new Google.maps.places.Autocomplete(input, options);
+      // eventlistener
+      searchBox.addListener("place_changed", this.handlePlaceChanged);
    }
 
    handleChange(event) {
@@ -88,13 +115,13 @@ class InputField extends React.Component {
 
 class LocateButton extends React.Component {
    constructor() {
-      super() 
+      super()
 
       this.handleClick = this.handleClick.bind(this);
    }
 
    handleClick() {
-      
+
       this.props.onBtnClicked();
    }
 
@@ -102,7 +129,7 @@ class LocateButton extends React.Component {
       return (
          <button name="submit-location" onClick={this.handleClick}>
             <i className="fas fa-chevron-right" />
-         </button>         
+         </button>
       )
    }
 }
@@ -135,9 +162,9 @@ class GeoButton extends React.Component {
 
    render() {
       return (
-      <button name="locater" onClick={this.handleClick}>
-         <i className="fas fa-location-arrow" />
-      </button>
+         <button name="locater" onClick={this.handleClick}>
+            <i className="fas fa-location-arrow" />
+         </button>
       )
    }
 }
