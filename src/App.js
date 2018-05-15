@@ -24,7 +24,6 @@ export class App extends React.Component {
 
       this.fetchLocation = this.fetchLocation.bind(this);
       this.fetchWeather = this.fetchWeather.bind(this);
-      this.validateGoogle = this.validateGoogle.bind(this);
    }
 
    fetchLocation(uri) {
@@ -39,7 +38,6 @@ export class App extends React.Component {
          })
          .then(data => {
             console.log(data);
-            // this.validateGoogle(data);
             this.processGoogle(data);
          })
    }
@@ -51,44 +49,14 @@ export class App extends React.Component {
 
       this.fetchWeather(results.geometry.location.lat, results.geometry.location.lng, results.formatted_address);
    }
+   
+   fetchWeather(googledata) {
+      const {
+         location,
+         lat,
+         long
+      } = googledata;
 
-   
-   // validate data from fetched google,
-   validateGoogle(data) {
-      // results must be a city or zipcode
-      let validObj = {
-         locality: ["locality", "political"],
-         zip: ["postal_code"]
-      }
-      
-      let found = null;
-      
-      if (data.status === "ZERO_RESULTS") {
-         console.log("Location can't be found");
-         return;
-      }
-      
-      for (let i = 0; i < data.results.length; i++) {
-         if ((data.results[i].types).includes(validObj.locality[0]) && (data.results[i].types).includes(validObj.locality[1])) {
-            found = data.results[i];
-            break;
-            
-         } else if ((data.results[i].types).includes(validObj.zip[0])) {
-            found = data.results[i];
-            break;
-            
-         }
-      }
-      
-      if (found !== null) {
-         this.fetchWeather(found.geometry.location.lat, found.geometry.location.lng, found.formatted_address);
-      } else {
-         console.log("Doesn't match validObj (locality or zip)");
-         return;
-      }
-   }
-   
-   fetchWeather(lat, long, location) {
       let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags&callback=?`;
 
       $.getJSON(darksky, (data) => {
@@ -111,17 +79,15 @@ export class App extends React.Component {
    }
    
    componentDidMount() {
-      window.onload = () => {
-         console.log("Onload ran")
-         // load sampledata
-         // testing
-         this.setState({
-            weatherData: weatherSample,
-            location: 'Test'
-         })
-
-         // this.loadLocalStorage();
-      }
+      // window.onload = () => {
+      //    console.log("Onload ran")
+      //    // load sampledata
+      //    // testing
+      //    this.setState({
+      //       weatherData: weatherSample,
+      //       location: 'Test'
+      //    })
+      // }
    }
    
    loadLocalStorage() {
@@ -142,7 +108,7 @@ export class App extends React.Component {
             
             <Header location={this.state.location} />
 
-            <SearchBox fetchLocation={this.fetchLocation} />            
+            <SearchBox fetchLocation={this.fetchLocation} fetchWeather={this.fetchWeather}/>            
 
             <Time time={this.state.weatherData.currently} />
 

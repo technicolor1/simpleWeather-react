@@ -42,6 +42,10 @@ export class SearchBox extends React.Component {
       this.props.fetchLocation(uri);
    }
 
+   handleAutocompletePlaceChanged = (lat, long, location) => {
+      this.props.fetchWeather(lat, long, location);
+   }
+
    render() {
       return (
          <div className="controls">
@@ -49,7 +53,7 @@ export class SearchBox extends React.Component {
             <InputField
                onSearchBoxInputChange={this.handleSearchBoxInputChange}
                onKeyPressed={this.handleUserInputs}
-               onAutocompletePlaceChanged={this.handleUserInputs}
+               onAutocompletePlaceChanged={this.handleAutocompletePlaceChanged}
             />
             <LocateButton onBtnClicked={this.handleUserInputs} />
          </div>
@@ -61,27 +65,38 @@ class InputField extends React.Component {
    constructor() {
       super()
 
+      this.googlebox = null;
+
       this.handleChange = this.handleChange.bind(this);
       this.handleKeyPress = this.handleKeyPress.bind(this);
       this.handlePlaceChanged = this.handlePlaceChanged.bind(this);
    }
 
    handlePlaceChanged() {
-      console.log("Placed changed");
-
-      this.props.onAutocompletePlaceChanged();
+      // getplace
+      var place = this.googlebox.getPlace();
+      console.log(place);
+      let googledata = {
+         location: place.formatted_address,
+         lat: place.geometry.location.lat(),
+         long: place.geometry.location.lng()
+      }
+      console.log(googledata);
+      this.props.onAutocompletePlaceChanged(googledata);
    }
 
+   // attach google autocomplete
    componentDidMount() {
       // set autocomplete to only regions
       var options = {
          types: ['(regions)']
       };
 
-      // for some reason google does not like react refs
+      // for some reason google does not like react refs ¯\_(ツ)_/¯
       var input = document.querySelector("#pac-input");
       // autocomplete
       var searchBox = new Google.maps.places.Autocomplete(input, options);
+      this.googlebox = searchBox;
       // eventlistener
       searchBox.addListener("place_changed", this.handlePlaceChanged);
    }
