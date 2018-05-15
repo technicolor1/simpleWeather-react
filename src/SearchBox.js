@@ -6,13 +6,7 @@ export class SearchBox extends React.Component {
    constructor(props) {
       super(props)
 
-      this.state = {
-         searchBoxValue: ''
-      }
-
-      this.handleSearchBoxInputChange = this.handleSearchBoxInputChange.bind(this);
       this.handleGeoBtnClicked = this.handleGeoBtnClicked.bind(this);
-      this.handleUserInputs = this.handleUserInputs.bind(this);
    }
 
    validateSearchboxInput() {
@@ -23,27 +17,13 @@ export class SearchBox extends React.Component {
       return true;
    }
 
-   handleUserInputs() {
-      if (!this.validateSearchboxInput()) { return; }
-
-      let uri = `json?address=${this.state.searchBoxValue}`;
-
-      this.props.fetchLocation(uri);
-   }
-
-   handleSearchBoxInputChange(input) {
-      this.setState({
-         searchBoxValue: input
-      })
-   }
-
    // except for geoBtn, it doesn't need inputfield
    handleGeoBtnClicked(uri) {
       this.props.fetchLocation(uri);
    }
 
-   handleAutocompletePlaceChanged = (lat, long, location) => {
-      this.props.fetchWeather(lat, long, location);
+   handleAutocompletePlaceChanged = (googledata) => {
+      this.props.fetchWeather(googledata);
    }
 
    render() {
@@ -51,8 +31,6 @@ export class SearchBox extends React.Component {
          <div className="controls">
             <GeoButton onBtnClicked={this.handleGeoBtnClicked} />
             <InputField
-               onSearchBoxInputChange={this.handleSearchBoxInputChange}
-               onKeyPressed={this.handleUserInputs}
                onAutocompletePlaceChanged={this.handleAutocompletePlaceChanged}
             />
             <LocateButton onBtnClicked={this.handleUserInputs} />
@@ -67,8 +45,6 @@ class InputField extends React.Component {
 
       this.googlebox = null;
 
-      this.handleChange = this.handleChange.bind(this);
-      this.handleKeyPress = this.handleKeyPress.bind(this);
       this.handlePlaceChanged = this.handlePlaceChanged.bind(this);
    }
 
@@ -101,23 +77,10 @@ class InputField extends React.Component {
       searchBox.addListener("place_changed", this.handlePlaceChanged);
    }
 
-   handleChange(event) {
-      this.props.onSearchBoxInputChange(event.target.value);
-   }
-
-   handleKeyPress(event) {
-      if (event.key === "Enter") {
-
-         this.props.onKeyPressed();
-      }
-   }
-
    render() {
       return (
          <input
             autoFocus
-            onChange={this.handleChange}
-            onKeyPress={this.handleKeyPress}
             onFocus={this.highlightText}
             id="pac-input"
             className="searchbox"
