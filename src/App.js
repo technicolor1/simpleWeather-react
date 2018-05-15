@@ -22,34 +22,9 @@ export class App extends React.Component {
          weatherData: ''
       }
 
-      this.fetchLocation = this.fetchLocation.bind(this);
       this.fetchWeather = this.fetchWeather.bind(this);
    }
 
-   fetchLocation(uri) {
-      let google = `https://maps.googleapis.com/maps/api/geocode/${uri}&key=${keys.google}`;
-      console.log(google);
-
-      fetch(google)
-         .then(response => {
-            if (response.ok) {
-               return response.json();
-            }
-         })
-         .then(data => {
-            console.log(data);
-            this.processGoogle(data);
-         })
-   }
-   
-   processGoogle = (data) => {
-      console.log("Processing google");
-      // 0th result is adequate, but there may be more than one result
-      const results = data.results[0];
-
-      this.fetchWeather(results.geometry.location.lat, results.geometry.location.lng, results.formatted_address);
-   }
-   
    fetchWeather(googledata) {
       const {
          location,
@@ -79,15 +54,15 @@ export class App extends React.Component {
    }
    
    componentDidMount() {
-      // window.onload = () => {
-      //    console.log("Onload ran")
-      //    // load sampledata
-      //    // testing
-      //    this.setState({
-      //       weatherData: weatherSample,
-      //       location: 'Test'
-      //    })
-      // }
+      window.onload = () => {
+         console.log("Onload ran")
+         // load sampledata
+         // testing
+         this.setState({
+            weatherData: weatherSample,
+            location: 'Test'
+         })
+      }
    }
    
    loadLocalStorage() {

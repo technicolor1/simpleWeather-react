@@ -59,6 +59,7 @@
       
       .daily #summary p {
          font-size: 4.5vw;
+         margin: 20px 15px;
       }
       
       @media (min-width: 450px) {
