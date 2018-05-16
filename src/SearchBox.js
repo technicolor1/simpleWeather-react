@@ -9,14 +9,6 @@ export class SearchBox extends React.Component {
       this.handleGeoBtnClicked = this.handleGeoBtnClicked.bind(this);
    }
 
-   validateSearchboxInput() {
-      if (this.state.searchBoxValue === "") {
-         return false;
-      }
-
-      return true;
-   }
-
    // except for geoBtn, it doesn't need inputfield
    handleGeoBtnClicked(uri) {
       this.props.fetchLocation(uri);
@@ -94,18 +86,11 @@ class InputField extends React.Component {
 class LocateButton extends React.Component {
    constructor() {
       super()
-
-      this.handleClick = this.handleClick.bind(this);
-   }
-
-   handleClick() {
-
-      this.props.onBtnClicked();
    }
 
    render() {
       return (
-         <button name="submit-location" onClick={this.handleClick}>
+         <button name="submit-location">
             <i className="fas fa-chevron-right" />
          </button>
       )

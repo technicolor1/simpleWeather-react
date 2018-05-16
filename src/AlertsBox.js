@@ -114,7 +114,7 @@ class AlertsCells extends React.Component {
       })
 
       // overflow hidden at body
-      document.querySelector("body").classList.toggle("modalOpen");
+      document.querySelector("#root").classList.toggle("modalOpen");
    }
 
    handleClickOutsideModal() {
@@ -122,7 +122,7 @@ class AlertsCells extends React.Component {
          isModalOpen: false
       })
 
-      document.querySelector("body").classList.toggle("modalOpen");
+      document.querySelector("#root").classList.toggle("modalOpen");
    }
 
    handleAlerts(alerts) {
@@ -179,13 +179,16 @@ class AlertsModal extends React.Component {
 
    componentWillReceiveProps(nextProps) {
       if (nextProps.triggerModal) {
+         document.addEventListener('touchstart', this.handleClickOutside);
          document.addEventListener('mousedown', this.handleClickOutside);
       } else {
+         document.removeEventListener('touchstart', this.handleClickOutside);
          document.removeEventListener('mousedown', this.handleClickOutside);
       }
    }
 
    componentWillUnmount() {
+      document.removeEventListener('touchstart', this.handleClickOutside);
       document.removeEventListener('mousedown', this.handleClickOutside);
    }
 

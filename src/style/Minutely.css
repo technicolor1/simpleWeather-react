@@ -12,9 +12,15 @@
    .chart-container {
       display: flex;
       width: 72vw;
-      height: 25vh;
+      height: 48vw;
       padding: 0.5em;
    }
+
+@media (max-width: 500px) {
+   .minutely {
+      width: 75%;
+   }
+}
 
 @media (min-width: 500px) {
    .chart-container {

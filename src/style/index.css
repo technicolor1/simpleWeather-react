@@ -17,6 +17,10 @@ body {
    font: 14px "Open Sans", Futura, sans-serif;
 }
 
+.modalOpen {
+   overflow: hidden;
+}
+
 #root {
    display: flex;
    flex-direction: column;
@@ -36,16 +40,11 @@ body {
 
    .searchbox {
       width: 60vw;
+      max-width: 500px;
       font-size: 22px;
-      padding: 1vh;
+      padding: 10px;
       border-radius: 10px;
    }
-
-      @media (min-width: 500px) {
-         .searchbox {
-            width: 40vw;
-         }
-      }
 
 .header {
    margin: 1em 0 0 0;   
@@ -97,11 +96,13 @@ body {
    }
 
 .currently {
+   border-radius: 17.5px;
    box-shadow: var(--shadow-level1);
    background: white;
 }
 
 .alerts {
+   border-radius: 10px 10px 0 0;
    box-shadow: var(--shadow-level1);
    background: white;
    position: relative;
@@ -116,11 +117,13 @@ body {
    }
 
 .minutely {
+   border-radius: 17.5px;
    box-shadow: var(--shadow-level1);
    background: white;   
 }
 
 .hourlies {
+   border-radius: 17.5px;
    width: 90%;
    box-shadow: var(--shadow-level1);
    background: white;
@@ -135,6 +138,7 @@ body {
    }
 
 .dailies {
+   border-radius: 17.5px;
    width: 90%;
    box-shadow: var(--shadow-level1);
    background: white;
@@ -204,4 +208,20 @@ button:hover {
 button:active {
    background-color: red;
    color: whitesmoke;
+}
+
+/*  */
+/* Google Autocomplete */
+/*  */
+
+.pac-item {
+   font-size: 15px;
+}
+
+.pac-item-query {
+   font-size: 15px;
+}
+
+.pac-item:hover {
+   background: rgb(179, 179, 179);
 }

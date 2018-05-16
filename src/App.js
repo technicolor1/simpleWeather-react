@@ -9,6 +9,7 @@ import { SearchBox } from './SearchBox.js';
 import { AlertsBox } from './AlertsBox.js';
 import { Minutely } from './Minutely.js';
 import { Time } from './Time.js';
+import { LoadingHero } from './LoadingHero.js';
 // weathersample for testing
 import { weatherSample } from './weatherSample.js';
 
@@ -19,7 +20,8 @@ export class App extends React.Component {
       super(props);
       this.state = {
          location: '',
-         weatherData: ''
+         weatherData: '',
+         isLoading: true
       }
 
       this.fetchWeather = this.fetchWeather.bind(this);
@@ -34,6 +36,10 @@ export class App extends React.Component {
 
       let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags&callback=?`;
 
+      this.setState({
+         isLoading: true
+      })
+
       $.getJSON(darksky, (data) => {
       })
          .done(data => {
@@ -45,7 +51,8 @@ export class App extends React.Component {
 
             this.setState({
                location: location,
-               weatherData: data
+               weatherData: data,
+               isLoading: false
             })
          })
          .fail((error) => {
@@ -58,10 +65,12 @@ export class App extends React.Component {
          console.log("Onload ran")
          // load sampledata
          // testing
-         this.setState({
-            weatherData: weatherSample,
-            location: 'Test'
-         })
+         this.loadLocalStorage();
+         // this.setState({
+         //    weatherData: weatherSample,
+         //    location: 'Test',
+         //    isLoading: false
+         // })
       }
    }
    
@@ -70,7 +79,8 @@ export class App extends React.Component {
       if (localStorage.getItem("weatherData") !== null) {
          this.setState({
             weatherData: JSON.parse(localStorage.getItem("weatherData")),
-            location: localStorage.getItem("location")
+            location: localStorage.getItem("location"),
+            isLoading: false
          })
          console.log(this.state.weatherData);
          return;
@@ -80,7 +90,7 @@ export class App extends React.Component {
    render() {
       return (
          <div className="main">
-            
+        
             <Header location={this.state.location} />
 
             <SearchBox fetchLocation={this.fetchLocation} fetchWeather={this.fetchWeather}/>            
@@ -98,6 +108,8 @@ export class App extends React.Component {
             <Hourly weatherData={this.state.weatherData.hourly} />
             
             <Weekly weatherData={this.state.weatherData.daily} />
+
+            <LoadingHero isLoading={this.state.isLoading} />
 
          </div>
       )
