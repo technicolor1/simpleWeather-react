@@ -84,9 +84,7 @@ export class App extends React.Component {
          })
          console.log(this.state.weatherData);
          return;
-
-   shouldComponentUpdate() {
-      return true;
+      }
    }
 
    render() {
@@ -96,9 +94,7 @@ export class App extends React.Component {
             <Header location={this.state.location} />
 
             <SearchBox fetchLocation={this.fetchLocation} fetchWeather={this.fetchWeather}/>
-
-            <Header location={this.state.location} />
-
+            
             <Time time={this.state.weatherData.currently} />
 
             <AlertsBox alertData={this.state.weatherData.alerts} />
