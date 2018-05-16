@@ -1,65 +1,133 @@
 import React from 'react';
 
+const Google = window.google;
+
 export class SearchBox extends React.Component {
    constructor(props) {
       super(props)
 
-      this.state = {
-         searchBoxInput: ''
-      }
-
-      this.handleChange = this.handleChange.bind(this);
-      this.handleKeyPress = this.handleKeyPress.bind(this);
-      this.highlightText = this.highlightText.bind(this);
-      this.handleSumbitLocation = this.handleSumbitLocation.bind(this);
-      this.handleSubmitGeolocation = this.handleSubmitGeolocation.bind(this);
+      this.handleGeoBtnClicked = this.handleGeoBtnClicked.bind(this);
    }
 
-   highlightText(event) {
-      event.target.select();
+   // except for geoBtn, it doesn't need inputfield
+   handleGeoBtnClicked(uri) {
+      this.props.fetchLocation(uri);
    }
 
-   handleChange(event) {
-      this.setState({
-         searchBoxInput: event.target.value
-      })
-   }
-
-   handleKeyPress(event) {
-      if (event.key === "Enter") {
-         this.props.locateCall(this.state.searchBoxInput);
-      }
-   }
-
-   handleSumbitLocation() {
-      this.props.locateCall(this.state.searchBoxInput);
-   }
-
-   handleSubmitGeolocation() {
-      this.props.geoCall();
+   handleAutocompletePlaceChanged = (googledata) => {
+      this.props.fetchWeather(googledata);
    }
 
    render() {
       return (
          <div className="controls">
-            <button name="locater" onClick={this.handleSubmitGeolocation}>
-               <i className="fas fa-location-arrow"></i>
-            </button>
-            
-            {/* // TODO: add google searchbox */}
-            <input
-               autoFocus
-               onChange={this.handleChange}
-               onKeyPress={this.handleKeyPress}
-               onFocus={this.highlightText}
-               id="pac-input"
-               className="searchbox"
-               type="text"
-               placeholder="City, Zip, Locale"
+            <GeoButton onBtnClicked={this.handleGeoBtnClicked} />
+            <InputField
+               onAutocompletePlaceChanged={this.handleAutocompletePlaceChanged}
             />
-
-            <button name="submit-location" onClick={this.handleSumbitLocation}><i className="fas fa-chevron-right"></i></button>
+            <LocateButton onBtnClicked={this.handleUserInputs} />
          </div>
+      )
+   }
+}
+
+class InputField extends React.Component {
+   constructor() {
+      super()
+
+      this.googlebox = null;
+
+      this.handlePlaceChanged = this.handlePlaceChanged.bind(this);
+   }
+
+   handlePlaceChanged() {
+      // getplace
+      var place = this.googlebox.getPlace();
+      console.log(place);
+      let googledata = {
+         location: place.formatted_address,
+         lat: place.geometry.location.lat(),
+         long: place.geometry.location.lng()
+      }
+      console.log(googledata);
+      this.props.onAutocompletePlaceChanged(googledata);
+   }
+
+   // attach google autocomplete
+   componentDidMount() {
+      // set autocomplete to only regions
+      var options = {
+         types: ['(regions)']
+      };
+
+      // for some reason google does not like react refs ¯\_(ツ)_/¯
+      var input = document.querySelector("#pac-input");
+      // autocomplete
+      var searchBox = new Google.maps.places.Autocomplete(input, options);
+      this.googlebox = searchBox;
+      // eventlistener
+      searchBox.addListener("place_changed", this.handlePlaceChanged);
+   }
+
+   render() {
+      return (
+         <input
+            autoFocus
+            onFocus={this.highlightText}
+            id="pac-input"
+            className="searchbox"
+            type="text"
+            placeholder="City, Zip, Locale"
+         />
+      )
+   }
+}
+
+class LocateButton extends React.Component {
+   constructor() {
+      super()
+   }
+
+   render() {
+      return (
+         <button name="submit-location">
+            <i className="fas fa-chevron-right" />
+         </button>
+      )
+   }
+}
+
+class GeoButton extends React.Component {
+   constructor() {
+      super()
+
+      this.handleClick = this.handleClick.bind(this);
+   }
+
+   handleClick() {
+      let self = this;
+
+      function success(pos) {
+         let GeolocateUri = `json?latlng=${pos.coords.latitude},${pos.coords.longitude}`;
+         self.props.onBtnClicked(GeolocateUri);
+      }
+
+      function fail(error) {
+         console.log(error);
+      }
+
+      let options = {
+         timeout: 7500
+      }
+
+      navigator.geolocation.getCurrentPosition(success, fail, options);
+   }
+
+   render() {
+      return (
+         <button name="locater" onClick={this.handleClick}>
+            <i className="fas fa-location-arrow" />
+         </button>
       )
    }
 }

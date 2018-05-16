@@ -9,6 +9,7 @@ import { SearchBox } from './SearchBox.js';
 import { AlertsBox } from './AlertsBox.js';
 import { Minutely } from './Minutely.js';
 import { Time } from './Time.js';
+import { LoadingHero } from './LoadingHero.js';
 // weathersample for testing
 import { weatherSample } from './weatherSample.js';
 
@@ -18,84 +19,31 @@ export class App extends React.Component {
    constructor(props) {
       super(props);
       this.state = {
-         searchBoxInput: '',
          location: '',
-         weatherData: ''
+         weatherData: '',
+         isLoading: true
       }
 
-      this.handleChange = this.handleChange.bind(this);
-      this.fetchLocation = this.fetchLocation.bind(this);
-      this.handleGeo = this.handleGeo.bind(this);
+      this.fetchWeather = this.fetchWeather.bind(this);
    }
 
-   handleChange(event) {
-      this.setState({
-         searchBoxInput: event.target.value
-      })
-   }
-
-   fetchLocation(val) {
-      if (val === "") {
-         console.log("Searchbox can't be empty");
-         return;
-      }
-      let google = `https://maps.googleapis.com/maps/api/geocode/json?address=${val}&key=${keys.google}`;
-
-      fetch(google)
-         .then(response => {
-            if (response.ok) {
-               return response.json();
-            }
-         })
-         .then(data => {
-            this.validateGoogle(data);
-         })
-
-   }
-
-   // validate data from fetched google,
-   validateGoogle(data) {
-      // results must be a city or zipcode
-      let validObj = {
-         locality: ["locality", "political"],
-         zip: ["postal_code"]
-      }
-
-      let found = null;
-
-      if (data.status === "ZERO_RESULTS") {
-         console.log("Location can't be found");
-         return;
-      }
-
-      for (let i = 0; i < data.results.length; i++) {
-         if ((data.results[i].types).includes(validObj.locality[0]) && (data.results[i].types).includes(validObj.locality[1])) {
-            found = data.results[i];
-            break;
-
-         } else if ((data.results[i].types).includes(validObj.zip[0])) {
-            found = data.results[i];
-            break;
-
-         }
-      }
-
-      if (found !== null) {
-         this.fetchWeather(found.geometry.location.lat, found.geometry.location.lng, found.formatted_address);
-      } else {
-         console.log("Try a different query");
-         return;
-      }
-   }
-
-   fetchWeather(lat, long, location) {
+   fetchWeather(googledata) {
+      const {
+         location,
+         lat,
+         long
+      } = googledata;
+   
       let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags&callback=?`;
 
+      this.setState({
+         isLoading: true
+      })
+
       $.getJSON(darksky, (data) => {
-         console.log("retrieving");
       })
          .done(data => {
-            console.log(data);
+            console.log("processing", data);
 
             // cache fetched data, stringified
             localStorage.setItem("weatherData", JSON.stringify(data));
@@ -103,70 +51,51 @@ export class App extends React.Component {
 
             this.setState({
                location: location,
-               weatherData: data
+               weatherData: data,
+               isLoading: false
             })
          })
          .fail((error) => {
             console.log(error);
          })
    }
-
-   handleGeo() {
-      let App = this;
-      function success(pos) {
-         let google = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${pos.coords.latitude},${pos.coords.longitude}&key=${keys.google}`;
-         fetch(google)
-            .then(response => {
-               if (response.ok) {
-                  return response.json();
-               }
-            })
-            .then(data => {
-               console.log(data);
-               App.validateGoogle(data);
-            })
+   
+   componentDidMount() {
+      window.onload = () => {
+         console.log("Onload ran")
+         // load sampledata
+         // testing
+         this.loadLocalStorage();
+         // this.setState({
+         //    weatherData: weatherSample,
+         //    location: 'Test',
+         //    isLoading: false
+         // })
       }
-
-      function fail(error) {
-         console.log(error);
-      }
-
-      let options = {
-         timeout: 7500
-      }
-
-      navigator.geolocation.getCurrentPosition(success, fail, options);
    }
+     
+   loadLocalStorage() {
+      // if cached data present, use it instead of placeholder
+      if (localStorage.getItem("weatherData") !== null) {
+         this.setState({
+            weatherData: JSON.parse(localStorage.getItem("weatherData")),
+            location: localStorage.getItem("location"),
+            isLoading: false
+         })
+         console.log(this.state.weatherData);
+         return;
 
    shouldComponentUpdate() {
       return true;
    }
 
-   componentDidMount() {
-      window.onload = () => {
-         // if cached data present, use it instead of placeholder
-         if (localStorage.getItem("weatherData") !== null) {
-            this.setState({
-               weatherData: JSON.parse(localStorage.getItem("weatherData")),
-               location: localStorage.getItem("location")
-            })
-            return;
-         }
-
-         // load sampledata
-         // testing
-         this.setState({
-            weatherData: weatherSample,
-            location: 'Test'
-         })
-      }
-   }
-
    render() {
       return (
          <div className="main">
-            
-            <SearchBox locateCall={this.fetchLocation} geoCall={this.handleGeo} />            
+        
+            <Header location={this.state.location} />
+
+            <SearchBox fetchLocation={this.fetchLocation} fetchWeather={this.fetchWeather}/>
 
             <Header location={this.state.location} />
 
@@ -176,11 +105,15 @@ export class App extends React.Component {
 
             <Currently weatherData={this.state.weatherData.currently} />
 
+            {/* TODO: some locations do not have minutely data,
+            acknowledge user that there is none */}
             <Minutely weatherData={this.state.weatherData.minutely} />
 
             <Hourly weatherData={this.state.weatherData.hourly} />
             
             <Weekly weatherData={this.state.weatherData.daily} />
+
+            <LoadingHero isLoading={this.state.isLoading} />
 
          </div>
       )

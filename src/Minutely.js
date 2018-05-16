@@ -1,5 +1,5 @@
 import React from 'react';
-import { percent } from './logic.js';
+import { percentForMinutely } from './logic.js';
 import './style/Minutely.css';
 
 // chartjs
@@ -51,7 +51,7 @@ class MinutelyChart extends React.Component {
          minutes = nextProps.weatherData.data;
       }
 
-      const precipProbArr = minutes.map(minute => percent(minute.precipProbability));
+      const precipProbArr = minutes.map(minute => percentForMinutely(minute.precipProbability));
       precipProbArr.splice(0, 1);
 
       let lineChart = new Chart('chart', {

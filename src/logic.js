@@ -1,6 +1,11 @@
 import React from 'react';
 
 function percent(val) {
+   val = Math.round(val * 10) / 10;
+   return val * 100;
+}
+
+function percentForMinutely(val) {
    return (val * 100).toFixed(0);
 }
 
@@ -100,6 +105,7 @@ function betterPrecipIntensity(val) {
 
 export {
    percent,
+   percentForMinutely,
    round,
    determineRain,
    weatherIcon,
