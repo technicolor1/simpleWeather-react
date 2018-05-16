@@ -33,7 +33,7 @@ export class App extends React.Component {
          lat,
          long
       } = googledata;
-
+   
       let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags&callback=?`;
 
       this.setState({
@@ -73,7 +73,7 @@ export class App extends React.Component {
          // })
       }
    }
-   
+     
    loadLocalStorage() {
       // if cached data present, use it instead of placeholder
       if (localStorage.getItem("weatherData") !== null) {
@@ -84,7 +84,9 @@ export class App extends React.Component {
          })
          console.log(this.state.weatherData);
          return;
-      }
+
+   shouldComponentUpdate() {
+      return true;
    }
 
    render() {
@@ -93,7 +95,9 @@ export class App extends React.Component {
         
             <Header location={this.state.location} />
 
-            <SearchBox fetchLocation={this.fetchLocation} fetchWeather={this.fetchWeather}/>            
+            <SearchBox fetchLocation={this.fetchLocation} fetchWeather={this.fetchWeather}/>
+
+            <Header location={this.state.location} />
 
             <Time time={this.state.weatherData.currently} />
 

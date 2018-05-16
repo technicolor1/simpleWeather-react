@@ -76,7 +76,6 @@ body {
 .weatherCells {
    text-align: center;
    margin: 0 5px;
-   padding: 10px;
    box-shadow: var(--shadow-level2);
 }
 
