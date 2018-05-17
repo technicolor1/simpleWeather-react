@@ -100,7 +100,7 @@ function betterPrecipIntensity(val) {
       return;
    }
 
-   return <h5>{val.toPrecision(2)}</h5>
+   return <h5>{val.toPrecision(2)} in</h5>
 }
 
 export {

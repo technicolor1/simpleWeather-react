@@ -17,7 +17,7 @@ export class Minutely extends React.Component {
       return (
          <div className="minutely">
             <div className="minutely-header">
-               <h2>Next 60 minutes</h2>
+               <h2>Next Hour</h2>
             </div>
             <div className="main-summary minute-summary-box">
                <p>{weatherData.summary}</p>
