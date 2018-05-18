@@ -44,7 +44,7 @@ export class Weekly extends React.Component {
             pressure
          } = day;
          
-         let timeFormatted = Moment.unix(time).format("ddd");
+         let timeFormatted = Moment.unix(time).format("dddd");
 
          // 0th day is today
          if (counter === 0) {

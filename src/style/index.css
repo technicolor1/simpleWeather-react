@@ -81,7 +81,7 @@ body {
 
    .weatherCells #other h5 {
       margin: 0;
-      font-size: 4.25vw;
+      font-size: 5vw;
    }
 
    .weatherCells:last-child {

@@ -6,6 +6,10 @@ export class SearchBox extends React.Component {
    constructor(props) {
       super(props)
 
+      this.state = {
+         recentGoogledata: null
+      }
+
       this.handleGeoBtnClicked = this.handleGeoBtnClicked.bind(this);
    }
 
@@ -15,7 +19,14 @@ export class SearchBox extends React.Component {
    }
 
    handleAutocompletePlaceChanged = (googledata) => {
+      this.setState({
+         recentGoogledata: googledata
+      })
       this.props.fetchWeather(googledata);
+   }
+
+   handleRefresh = () => {
+      console.log("Clicked refresh!")
    }
 
    render() {
@@ -25,7 +36,7 @@ export class SearchBox extends React.Component {
             <InputField
                onAutocompletePlaceChanged={this.handleAutocompletePlaceChanged}
             />
-            <LocateButton onBtnClicked={this.handleUserInputs} />
+            <RefreshButton onRefreshClicked={this.handleRefresh} />
          </div>
       )
    }
@@ -83,15 +94,22 @@ class InputField extends React.Component {
    }
 }
 
-class LocateButton extends React.Component {
+class RefreshButton extends React.Component {
    constructor() {
       super()
    }
 
+   handleClick = () => {
+      this.props.onRefreshClicked();
+   }
+
    render() {
       return (
-         <button name="submit-location">
-            <i className="fas fa-chevron-right" />
+         <button 
+            name="refresh"
+            onClick={this.handleClick}   
+         >
+            <i className="fas fa-sync-alt" />
          </button>
       )
    }

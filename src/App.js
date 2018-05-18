@@ -21,7 +21,7 @@ export class App extends React.Component {
       this.state = {
          location: '',
          weatherData: '',
-         isLoading: true
+         isLoading: false
       }
 
       this.fetchWeather = this.fetchWeather.bind(this);
@@ -45,15 +45,13 @@ export class App extends React.Component {
          .done(data => {
             console.log("processing", data);
 
-            // cache fetched data, stringified
-            localStorage.setItem("weatherData", JSON.stringify(data));
-            localStorage.setItem("location", location);
-
             this.setState({
                location: location,
                weatherData: data,
                isLoading: false
             })
+
+            this.saveLocalStorage(googledata);
          })
          .fail((error) => {
             console.log(error);
@@ -62,16 +60,17 @@ export class App extends React.Component {
    
    componentDidMount() {
       window.onload = () => {
-         console.log("Onload ran")
          // load sampledata
          // testing
          this.loadLocalStorage();
-         // this.setState({
-         //    weatherData: weatherSample,
-         //    location: 'Test',
-         //    isLoading: false
-         // })
       }
+   }
+
+   saveLocalStorage(googledata) {
+      // cache fetched data, stringified
+      localStorage.setItem("weatherData", JSON.stringify(this.state.weatherData));
+      // localStorage.setItem("location", this.state.location);
+      localStorage.setItem("googledata", JSON.stringify(googledata));
    }
      
    loadLocalStorage() {
@@ -79,7 +78,7 @@ export class App extends React.Component {
       if (localStorage.getItem("weatherData") !== null) {
          this.setState({
             weatherData: JSON.parse(localStorage.getItem("weatherData")),
-            location: localStorage.getItem("location"),
+            location: (JSON.parse(localStorage.getItem("googledata"))).location,
             isLoading: false
          })
          console.log(this.state.weatherData);

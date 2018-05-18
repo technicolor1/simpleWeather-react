@@ -2,7 +2,7 @@ import React from 'react';
 
 export class LoadingHero extends React.Component {
    render() {
-      let body = document.querySelector("#root");
+      let body = document.querySelector("body");
       if (this.props.isLoading) {
          body.classList.toggle("modalOpen");
          return (
