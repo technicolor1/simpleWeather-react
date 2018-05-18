@@ -6,26 +6,21 @@ export class SearchBox extends React.Component {
    constructor(props) {
       super(props)
 
-      this.handleGeoBtnClicked = this.handleGeoBtnClicked.bind(this);
+      this.handleAutocompletePlaceChanged = this.handleAutocompletePlaceChanged.bind(this);
+      this.handleRefresh = this.handleRefresh.bind(this);
    }
 
-   // except for geoBtn, it doesn't need inputfield
-   handleGeoBtnClicked(uri) {
-      this.props.fetchLocation(uri);
-   }
-
-   handleAutocompletePlaceChanged = (googledata) => {
+   handleAutocompletePlaceChanged(googledata) {
       this.props.fetchWeather(googledata);
    }
 
-   handleRefresh = () => {
+   handleRefresh() {
       this.props.onRefreshClicked();
    }
 
    render() {
       return (
          <div className="controls">
-            <GeoButton onBtnClicked={this.handleGeoBtnClicked} />
             <InputField
                onAutocompletePlaceChanged={this.handleAutocompletePlaceChanged}
             />
@@ -103,41 +98,6 @@ class RefreshButton extends React.Component {
             onClick={this.handleClick}   
          >
             <i className="fas fa-sync-alt" />
-         </button>
-      )
-   }
-}
-
-class GeoButton extends React.Component {
-   constructor() {
-      super()
-
-      this.handleClick = this.handleClick.bind(this);
-   }
-
-   handleClick() {
-      let self = this;
-
-      function success(pos) {
-         let GeolocateUri = `json?latlng=${pos.coords.latitude},${pos.coords.longitude}`;
-         self.props.onBtnClicked(GeolocateUri);
-      }
-
-      function fail(error) {
-         console.log(error);
-      }
-
-      let options = {
-         timeout: 7500
-      }
-
-      navigator.geolocation.getCurrentPosition(success, fail, options);
-   }
-
-   render() {
-      return (
-         <button name="locater" onClick={this.handleClick}>
-            <i className="fas fa-location-arrow" />
          </button>
       )
    }

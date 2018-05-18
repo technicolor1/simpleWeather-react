@@ -36,7 +36,7 @@ export class App extends React.Component {
       } = googledata;
    
       let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags&callback=?`;
-
+      // fetching, is loading
       this.setState({
          isLoading: true
       })
@@ -62,6 +62,7 @@ export class App extends React.Component {
    
    componentDidMount() {
       // not loading if the app is fresh
+      // check fresh in localstorage
       if (this.state.recentGoogledata === null) {
          this.setState({
             isLoading: false
