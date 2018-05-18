@@ -6,10 +6,6 @@ export class SearchBox extends React.Component {
    constructor(props) {
       super(props)
 
-      this.state = {
-         recentGoogledata: null
-      }
-
       this.handleGeoBtnClicked = this.handleGeoBtnClicked.bind(this);
    }
 
@@ -19,14 +15,11 @@ export class SearchBox extends React.Component {
    }
 
    handleAutocompletePlaceChanged = (googledata) => {
-      this.setState({
-         recentGoogledata: googledata
-      })
       this.props.fetchWeather(googledata);
    }
 
    handleRefresh = () => {
-      console.log("Clicked refresh!")
+      this.props.onRefreshClicked();
    }
 
    render() {

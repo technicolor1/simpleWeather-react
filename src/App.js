@@ -21,7 +21,8 @@ export class App extends React.Component {
       this.state = {
          location: '',
          weatherData: '',
-         isLoading: false
+         recentGoogledata: null,
+         isLoading: true
       }
 
       this.fetchWeather = this.fetchWeather.bind(this);
@@ -48,6 +49,7 @@ export class App extends React.Component {
             this.setState({
                location: location,
                weatherData: data,
+               recentGoogledata: googledata,
                isLoading: false
             })
 
@@ -59,18 +61,19 @@ export class App extends React.Component {
    }
    
    componentDidMount() {
-      window.onload = () => {
-         // load sampledata
-         // testing
-         this.loadLocalStorage();
+      // not loading if the app is fresh
+      if (this.state.recentGoogledata === null) {
+         this.setState({
+            isLoading: false
+         })
       }
+      this.loadLocalStorage();
    }
 
    saveLocalStorage(googledata) {
       // cache fetched data, stringified
       localStorage.setItem("weatherData", JSON.stringify(this.state.weatherData));
-      // localStorage.setItem("location", this.state.location);
-      localStorage.setItem("googledata", JSON.stringify(googledata));
+      localStorage.setItem("recentgoogledata", JSON.stringify(googledata));
    }
      
    loadLocalStorage() {
@@ -78,12 +81,18 @@ export class App extends React.Component {
       if (localStorage.getItem("weatherData") !== null) {
          this.setState({
             weatherData: JSON.parse(localStorage.getItem("weatherData")),
-            location: (JSON.parse(localStorage.getItem("googledata"))).location,
+            location: (JSON.parse(localStorage.getItem("recentgoogledata"))).location,
+            recentGoogledata: JSON.parse(localStorage.getItem("recentgoogledata")),
             isLoading: false
          })
-         console.log(this.state.weatherData);
          return;
       }
+   }
+
+   handleRefresh = () => {
+      console.log("refresh clicked at App level", this.state.recentGoogledata);
+      if (this.state.recentGoogledata === null) { return; }
+      this.fetchWeather(this.state.recentGoogledata);
    }
 
    render() {
@@ -92,7 +101,11 @@ export class App extends React.Component {
         
             <Header location={this.state.location} />
 
-            <SearchBox fetchLocation={this.fetchLocation} fetchWeather={this.fetchWeather}/>
+            <SearchBox 
+               fetchLocation={this.fetchLocation} 
+               fetchWeather={this.fetchWeather}
+               onRefreshClicked={this.handleRefresh}
+            />
             
             <Time time={this.state.weatherData.currently} />
 

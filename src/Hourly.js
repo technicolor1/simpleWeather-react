@@ -1,5 +1,5 @@
 import React from 'react';
-import { round, determineRain, weatherIcon } from './logic.js';
+import { round, weatherIcon } from './logic.js';
 import './style/Hourly.css';
 const Moment = window.moment;
 
@@ -13,9 +13,7 @@ export class Hourly extends React.Component {
             time,
             icon,
             summary,
-            apparentTemperature,
-            precipProbability,
-            precipType
+            apparentTemperature
          } = hour;
 
          // skip 0th hour
