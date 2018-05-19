@@ -164,7 +164,6 @@ body {
    padding: 5px;
    display: flex;
    flex-direction: column;
-   overflow-x: scroll;
    width: 97%;
 }
 

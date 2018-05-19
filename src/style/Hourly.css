@@ -2,6 +2,12 @@
 /* Grid template for hourly content */
 /*  */
 
+.nextday-wrapper {
+   position: sticky;
+   top: -1px;
+   background: white;
+}
+
 .scrollables > .hourly-wrapper {
    display: grid;
    grid-template-columns: 1fr 2fr 1fr;

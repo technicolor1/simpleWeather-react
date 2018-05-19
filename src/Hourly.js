@@ -7,6 +7,7 @@ export class Hourly extends React.Component {
    handleHour(data) {
       let main = [];
       for (let i = 0; i < data.length; i++) {
+         const timeFormatted = Moment.unix(data[i].time).format("h a");
          if (i === 13) {
             break;
          }
@@ -18,7 +19,7 @@ export class Hourly extends React.Component {
             </div>
 
             <div id="time">
-               <h5>{Moment.unix(data[i].time).format("h a")}</h5>
+               <h5>{timeFormatted}</h5>
                <p>{data[i].summary}</p>
             </div>
 
@@ -27,6 +28,21 @@ export class Hourly extends React.Component {
             </div>
          </div>
          )
+
+         if (timeFormatted === "12 am") {
+            main.splice(main.length-1, 0,
+               <div 
+                  className="nextday-wrapper weatherCells"
+                  key={`newDay-0${i}`}
+                  style={{
+                     margin: "20px",
+                     fontSize: "50px"
+                  }}   
+               >
+                  {(Moment.unix(data[i].time).format("MMMM Do"))}
+               </div>
+            )
+         }
       }
       return main;
    }
