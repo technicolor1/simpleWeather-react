@@ -1,4 +1,5 @@
 import React from 'react';
+import './style/weather-icons.min.css';
 
 function percent(val) {
    val = Math.round(val * 10) / 10;
