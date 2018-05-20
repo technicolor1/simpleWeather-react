@@ -61,8 +61,8 @@ export class App extends React.Component {
    }
    
    componentDidMount() {
-      // not loading if the app is fresh
       // check fresh in localstorage
+      // not loading if the app is fresh
       if (this.state.recentGoogledata === null) {
          this.setState({
             isLoading: false

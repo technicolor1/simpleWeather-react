@@ -29,7 +29,7 @@ export class LoadingHero extends React.Component {
                      fontSize: "50px"
                   }}   
                >
-                  Loading...
+                  Grabbing weather goodness...
                </div>
             </div>
          )
