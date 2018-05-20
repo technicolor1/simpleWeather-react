@@ -35,6 +35,7 @@ body {
 }
 
 .controls {
+   position: relative;
    margin: 1em 0 0 0;
 }
 
@@ -206,6 +207,10 @@ button:hover {
 button:active {
    background-color: red;
    color: whitesmoke;
+}
+
+button[name=clear]:hover {
+   color: black;
 }
 
 /*  */

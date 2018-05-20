@@ -21,11 +21,32 @@ export class SearchBox extends React.Component {
    render() {
       return (
          <div className="controls">
+            <RefreshButton onRefreshClicked={this.handleRefresh} />
             <InputField
                onAutocompletePlaceChanged={this.handleAutocompletePlaceChanged}
             />
-            <RefreshButton onRefreshClicked={this.handleRefresh} />
          </div>
+      )
+   }
+}
+
+class ClearButton extends React.Component {
+   handleClick = () => {
+      this.props.onClearClicked();
+   }
+
+   render() {
+      return (
+         <button 
+            name="clear"
+            onClick={this.handleClick}
+            style={{
+               background: "inherit",
+               border: "0"
+            }}
+         >
+            <i className="fas fa-times"></i>
+         </button>
       )
    }
 }
@@ -37,6 +58,7 @@ class InputField extends React.Component {
       this.googlebox = null;
 
       this.handlePlaceChanged = this.handlePlaceChanged.bind(this);
+      this.inputFieldRef = React.createRef();
    }
 
    handlePlaceChanged() {
@@ -68,9 +90,16 @@ class InputField extends React.Component {
       searchBox.addListener("place_changed", this.handlePlaceChanged);
    }
 
+   handleClearClicked = () => {
+      console.log(this.inputFieldRef);
+      this.inputFieldRef.current.value = "";
+   }
+
    render() {
       return (
+         <React.Fragment>
          <input
+            ref={this.inputFieldRef}
             autoFocus
             onFocus={this.highlightText}
             id="pac-input"
@@ -78,6 +107,8 @@ class InputField extends React.Component {
             type="text"
             placeholder="City, Zip, Locale"
          />
+         <ClearButton onClearClicked={this.handleClearClicked}/>
+         </React.Fragment>
       )
    }
 }
@@ -85,9 +116,11 @@ class InputField extends React.Component {
 class RefreshButton extends React.Component {
    constructor() {
       super()
+
+      this.handleClick = this.handleClick.bind(this);
    }
 
-   handleClick = () => {
+   handleClick() {
       this.props.onRefreshClicked();
    }
 
