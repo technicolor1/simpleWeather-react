@@ -2,12 +2,6 @@
 /* Grid template for hourly content */
 /*  */
 
-.nextday-wrapper {
-   position: sticky;
-   top: -1px;
-   background: white;
-}
-
 .scrollables > .hourly-wrapper {
    display: grid;
    grid-template-columns: 1fr 2fr 1fr;
@@ -64,4 +58,14 @@
    .hourly-wrapper > #time > * {
       margin-left: 7%;
    }
+}
+
+.nextday-wrapper {
+   position: sticky;
+   top: -1px;
+   background: white;
+   font-size: 45px;
+   font-style: italic;
+   margin: 30px 20px;
+   padding: 15px;
 }

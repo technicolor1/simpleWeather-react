@@ -8,10 +8,6 @@ export class Hourly extends React.Component {
       let main = [];
       for (let i = 0; i < data.length; i++) {
          const timeFormatted = Moment.unix(data[i].time).format("h a");
-         if (i === 13) {
-            break;
-         }
-
          main.push(
             <div key={`Hour-0${i}`} className="hourly-wrapper weatherCells">
             <div id="icon">
@@ -34,10 +30,6 @@ export class Hourly extends React.Component {
                <div 
                   className="nextday-wrapper weatherCells"
                   key={`newDay-0${i}`}
-                  style={{
-                     margin: "20px",
-                     fontSize: "50px"
-                  }}   
                >
                   {(Moment.unix(data[i].time).format("MMMM Do"))}
                </div>

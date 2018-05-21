@@ -26,6 +26,7 @@ export class App extends React.Component {
       }
 
       this.fetchWeather = this.fetchWeather.bind(this);
+      this.handleRefresh = this.handleRefresh.bind(this);
    }
 
    fetchWeather(googledata) {
@@ -90,7 +91,7 @@ export class App extends React.Component {
       }
    }
 
-   handleRefresh = () => {
+   handleRefresh() {
       console.log("refresh clicked at App level", this.state.recentGoogledata);
       if (this.state.recentGoogledata === null) { return; }
       this.fetchWeather(this.state.recentGoogledata);

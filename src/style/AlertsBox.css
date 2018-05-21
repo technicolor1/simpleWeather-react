@@ -7,12 +7,6 @@
    margin: 0 0 5vh 0;
 }
 
-/* @media (min-width: 600px) {
-   .alerts {
-      width: 550px;
-   }
-} */
-
 #collapsed-alerts {
    flex-direction: column;
    position: absolute;
