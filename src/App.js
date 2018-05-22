@@ -119,9 +119,9 @@ export class App extends React.Component {
             acknowledge user that there is none */}
             <Minutely weatherData={this.state.weatherData.minutely} />
 
-            <Hourly weatherData={this.state.weatherData.hourly} />
-            
             <Weekly weatherData={this.state.weatherData.daily} />
+            
+            <Hourly weatherData={this.state.weatherData.hourly} />
 
             <LoadingHero isLoading={this.state.isLoading} />
 

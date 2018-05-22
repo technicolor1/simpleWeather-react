@@ -31,7 +31,13 @@ export class SearchBox extends React.Component {
 }
 
 class ClearButton extends React.Component {
-   handleClick = () => {
+   constructor() {
+      super() 
+
+      this.handleClick = this.handleClick.bind(this);
+   }
+
+   handleClick() {
       this.props.onClearClicked();
    }
 
@@ -39,6 +45,7 @@ class ClearButton extends React.Component {
       return (
          <button 
             name="clear"
+            title="clear input"
             onClick={this.handleClick}
             style={{
                background: "inherit",
@@ -58,12 +65,13 @@ class InputField extends React.Component {
       this.googlebox = null;
 
       this.handlePlaceChanged = this.handlePlaceChanged.bind(this);
+      this.handleClearClicked = this.handleClearClicked.bind(this);
       this.inputFieldRef = React.createRef();
    }
 
    handlePlaceChanged() {
       // getplace
-      var place = this.googlebox.getPlace();
+      let place = this.googlebox.getPlace();
       console.log(place);
       let googledata = {
          location: place.formatted_address,
@@ -77,20 +85,20 @@ class InputField extends React.Component {
    // attach google autocomplete
    componentDidMount() {
       // set autocomplete to only regions
-      var options = {
+      let options = {
          types: ['(regions)']
       };
 
       // for some reason google does not like react refs ¯\_(ツ)_/¯
-      var input = document.querySelector("#pac-input");
+      let input = document.querySelector("#pac-input");
       // autocomplete
-      var searchBox = new Google.maps.places.Autocomplete(input, options);
+      let searchBox = new Google.maps.places.Autocomplete(input, options);
       this.googlebox = searchBox;
       // eventlistener
       searchBox.addListener("place_changed", this.handlePlaceChanged);
    }
 
-   handleClearClicked = () => {
+   handleClearClicked() {
       console.log(this.inputFieldRef);
       this.inputFieldRef.current.value = "";
    }
