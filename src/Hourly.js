@@ -10,28 +10,42 @@ export class Hourly extends React.Component {
          const timeFormatted = Moment.unix(data[i].time).format("h a");
          main.push(
             <div key={`Hour-0${i}`} className="hourly-wrapper weatherCells">
-            <div id="icon">
-               <span>{weatherIcon(data[i].icon)}</span>
-            </div>
+               <div id="icon">
+                  <span>{weatherIcon(data[i].icon)}</span>
+               </div>
 
-            <div id="time">
-               <h5>{timeFormatted}</h5>
-               <p>{data[i].summary}</p>
-            </div>
+               <div id="time">
+                  <h5>{timeFormatted}</h5>
+                  <p>{data[i].summary}</p>
+               </div>
 
-            <div id="other">
-               <h5>{round(data[i].apparentTemperature)}°</h5>
+               <div id="other">
+                  <h5>{round(data[i].apparentTemperature)}°</h5>
+               </div>
             </div>
-         </div>
          )
 
+         // insert nextday indicator
          if (timeFormatted === "12 am") {
-            main.splice(main.length-1, 0,
-               <div 
+            main.splice(main.length - 1, 0,
+               <div
                   className="nextday-wrapper weatherCells"
                   key={`newDay-0${i}`}
                >
-                  {(Moment.unix(data[i].time).format("MMMM Do"))}
+                  <div style={{
+                     fontSize: "40px"
+                  }}
+                  >
+                     {(Moment.unix(data[i].time).format("MMMM Do"))}
+                  </div>
+
+                  <div style={{
+                     fontSize: "20px",
+                     color: "dimgray"
+                  }}
+                  >
+                     {(Moment.unix(data[i].time).format("dddd"))}
+                  </div>
                </div>
             )
          }
@@ -42,7 +56,7 @@ export class Hourly extends React.Component {
       const {
          weatherData
       } = this.props;
-      
+
       if (typeof weatherData === 'undefined') {
          return null;
       } else {

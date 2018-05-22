@@ -72,13 +72,11 @@ class InputField extends React.Component {
    handlePlaceChanged() {
       // getplace
       let place = this.googlebox.getPlace();
-      console.log(place);
       let googledata = {
          location: place.formatted_address,
          lat: place.geometry.location.lat(),
          long: place.geometry.location.lng()
       }
-      console.log(googledata);
       this.props.onAutocompletePlaceChanged(googledata);
    }
 
@@ -99,7 +97,6 @@ class InputField extends React.Component {
    }
 
    handleClearClicked() {
-      console.log(this.inputFieldRef);
       this.inputFieldRef.current.value = "";
    }
 

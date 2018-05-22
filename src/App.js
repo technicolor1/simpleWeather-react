@@ -92,7 +92,6 @@ export class App extends React.Component {
    }
 
    handleRefresh() {
-      console.log("refresh clicked at App level", this.state.recentGoogledata);
       if (this.state.recentGoogledata === null) { return; }
       this.fetchWeather(this.state.recentGoogledata);
    }
@@ -115,13 +114,11 @@ export class App extends React.Component {
 
             <Currently weatherData={this.state.weatherData.currently} />
 
-            {/* TODO: some locations do not have minutely data,
-            acknowledge user that there is none */}
             <Minutely weatherData={this.state.weatherData.minutely} />
-
-            <Weekly weatherData={this.state.weatherData.daily} />
             
             <Hourly weatherData={this.state.weatherData.hourly} />
+
+            <Weekly weatherData={this.state.weatherData.daily} />            
 
             <LoadingHero isLoading={this.state.isLoading} />
 
