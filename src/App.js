@@ -10,8 +10,6 @@ import { AlertsBox } from './AlertsBox.js';
 import { Minutely } from './Minutely.js';
 import { Time } from './Time.js';
 import { LoadingHero } from './LoadingHero.js';
-// weathersample for testing
-import { weatherSample } from './weatherSample.js';
 
 const $ = window.jQuery;
 
