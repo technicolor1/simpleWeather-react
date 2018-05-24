@@ -15,3 +15,10 @@ This app uses Google Places API to lookup place and coordinates of that place.
 - The user can view a chart summarizing weather for next hour. 
 - The app is mobile-friendly as possible
 - When user returns to app, the last fetched weather will load automatically. 
+
+# Build Steps
+This app is built with create-react-app https://github.com/facebook/create-react-app
+
+Just ```npm start``` to start dev environment 
+
+However, note that API keys are not provided. See Notes section (assume keys are located in ```config``` folder)
