@@ -1,7 +1,7 @@
 {
    "homepage": "http://technicolor1.github.io/simpleWeather-react",
    "name": "simple-weather",
-   "version": "0.1.0",
+   "version": "1.0.0",
    "private": true,
    "dependencies": {
       "normalize.css": "^8.0.0",
