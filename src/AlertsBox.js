@@ -85,11 +85,6 @@ class AlertsCells extends React.Component {
    handleColorSeverity(severity) {
       switch (severity) {
          case "advisory":
-            return {
-               color: '#444',
-               backgroundColor: '#ffeb3b'
-            };
-
          case "watch":
             return {
                color: '#444',
@@ -140,7 +135,16 @@ class AlertsCells extends React.Component {
                className="alert"
                data-index={id}
             >
-               <h3>{alert.title} · Until {Moment.unix(alert.expires).format("dddd h:hh a")}</h3>
+               <h3>
+                  {alert.title} · Until {Moment.unix(alert.expires).format("dddd h:hh a")}
+                  <i 
+                     style={{
+                        fontSize: "25px",
+                        float: "right"
+                     }}
+                     className="fas fa-info-circle" 
+                  />
+               </h3>
             </div>
          )
          id++;
@@ -151,9 +155,11 @@ class AlertsCells extends React.Component {
 
    render() {
       return (
-         <div
+         <div         
             id="collapsed-alerts"
-            style={this.props.displayAlerts ? { display: "flex" } : { display: "none" }}
+            style={{
+               display: !this.props.displayAlerts ? "none" : "flex"
+            }}
          >
             {this.handleAlerts(this.props.alertData)}
 

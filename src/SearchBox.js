@@ -49,7 +49,8 @@ class ClearButton extends React.Component {
             onClick={this.handleClick}
             style={{
                background: "inherit",
-               border: "0"
+               border: "0",
+               color: "#444"
             }}
          >
             <i className="fas fa-times"></i>

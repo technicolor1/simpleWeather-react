@@ -1,7 +1,6 @@
 import React from 'react';
 import './style/index.css';
 import { Header } from './Header.js';
-import { keys } from './config/config.js';
 import { Currently } from './Currently.js';
 import { Weekly } from './Weekly.js';
 import { Hourly } from './Hourly.js';
@@ -10,6 +9,8 @@ import { AlertsBox } from './AlertsBox.js';
 import { Minutely } from './Minutely.js';
 import { Time } from './Time.js';
 import { LoadingHero } from './LoadingHero.js';
+
+import { weatherSample } from './weatherSample.js';
 
 const $ = window.jQuery;
 
@@ -20,7 +21,7 @@ export class App extends React.Component {
          location: '',
          weatherData: '',
          recentGoogledata: null,
-         isLoading: true
+         isLoading: false
       }
 
       this.fetchWeather = this.fetchWeather.bind(this);
@@ -34,13 +35,13 @@ export class App extends React.Component {
          long
       } = googledata;
    
-      let darksky = `https://api.darksky.net/forecast/${keys.opendarksky}/${lat},${long}?exclude=flags&callback=?`;
+      let darksky = `https://api.darksky.net/forecast/${process.env.REACT_APP_OPENDARKSKY_API_KEY}/${lat},${long}?exclude=flags&callback=?`;
       // fetching, is loading
       this.setState({
          isLoading: true
       })
 
-      $.getJSON(darksky, (data) => {
+      $.getJSON(darksky, data => {
       })
          .done(data => {
             console.log("processing", data);
@@ -60,14 +61,18 @@ export class App extends React.Component {
    }
    
    componentDidMount() {
-      // check fresh in localstorage
-      // not loading if the app is fresh
-      if (this.state.recentGoogledata === null) {
-         this.setState({
-            isLoading: false
-         })
-      }
-      this.loadLocalStorage();
+      this.loadWeatherSample();
+      // this.loadLocalStorage();
+   }
+
+   // 
+   // testing purposes!
+   // 
+   loadWeatherSample() {
+      this.setState({
+         location: "Test 123",
+         weatherData: weatherSample
+      })
    }
 
    saveLocalStorage(googledata) {
@@ -77,7 +82,7 @@ export class App extends React.Component {
    }
      
    loadLocalStorage() {
-      // if cached data present, use it instead of placeholder
+      // use cached data
       if (localStorage.getItem("weatherData") !== null) {
          this.setState({
             weatherData: JSON.parse(localStorage.getItem("weatherData")),
