@@ -13,8 +13,8 @@ export class AlertsBox extends React.Component {
 
       this.handleClick = this.handleClick.bind(this);
    }
-   
-   
+
+
    handleClick(event) {
       this.setState(prevState => ({
          displayAlerts: !prevState.displayAlerts
@@ -113,8 +113,10 @@ class AlertsCells extends React.Component {
          alertIndex: e.currentTarget.getAttribute("data-index")
       })
 
-      // overflow hidden at body
+      // ios safari
       document.querySelector("#root").classList.toggle("modalOpen");
+      // everything else
+      document.querySelector("body").classList.toggle("modalOpen");
    }
 
    handleClickOutsideModal() {
@@ -123,6 +125,7 @@ class AlertsCells extends React.Component {
       })
 
       document.querySelector("#root").classList.toggle("modalOpen");
+      document.querySelector("body").classList.toggle("modalOpen");
    }
 
    handleAlerts(alerts) {
@@ -179,7 +182,9 @@ class AlertsModal extends React.Component {
 
    componentWillReceiveProps(nextProps) {
       if (nextProps.triggerModal) {
+         // for touch
          document.addEventListener('touchstart', this.handleClickOutside);
+         // for mouse
          document.addEventListener('mousedown', this.handleClickOutside);
       } else {
          document.removeEventListener('touchstart', this.handleClickOutside);
@@ -198,7 +203,6 @@ class AlertsModal extends React.Component {
 
    handleClickOutside(e) {
       if (this.wrapperRef && !this.wrapperRef.contains(e.target)) {
-         console.log("Clicked outside!");
          // hide the modal
          this.props.onOutsideClick();
       }
@@ -225,9 +229,9 @@ class AlertsModal extends React.Component {
             <div className="modal-content"
                ref={this.setWrapperRef}
             >
-               <div 
-               style={this.props.handleColorSeverity(alertIndexToInt.severity)}
-               className="modal-header"
+               <div
+                  style={this.props.handleColorSeverity(alertIndexToInt.severity)}
+                  className="modal-header"
                >
                   <h3>
                      {alertIndexToInt.title} · Until {Moment.unix(alertIndexToInt.expires).format("dddd h:hh a")}
